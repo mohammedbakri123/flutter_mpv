@@ -23,6 +23,7 @@ export 'package:media_kit/src/models/video_params.dart';
 export 'package:media_kit/src/legacy.dart';
 
 export 'package:media_kit/src/player/platform_player.dart';
+export 'package:media_kit/src/player/video_performance_presets.dart';
 export 'package:media_kit/src/player/player.dart';
 
 export 'package:media_kit/src/player/native/player/player.dart';

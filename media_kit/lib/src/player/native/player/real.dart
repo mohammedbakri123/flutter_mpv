@@ -2391,7 +2391,7 @@ class NativePlayer extends PlatformPlayer {
         'pause': 'yes',
         'keep-open': 'yes',
         'audio-display': 'no',
-        'network-timeout': '5',
+        'network-timeout': '30',  // Longer timeout for large files
         // https://github.com/mpv-player/mpv/commit/703f1588803eaa428e09c0e5547b26c0fff476a7
         // https://github.com/mpv-android/mpv-android/commit/9e5c3d8a630290fc41edb8b03aeafa3bc4c45955
         'scale': 'bilinear',
@@ -2399,21 +2399,52 @@ class NativePlayer extends PlatformPlayer {
         'dither': 'no',
         'cache': 'yes',
         'cache-on-disk': 'yes',
-        'hr-seek': 'yes',
-        'hr-seek-framedrop': 'no',
+        // FAST SEEKING with smooth playback
+        'hr-seek': 'yes',  // Enable HR-seek for smooth playback
+        'hr-seek-framedrop': 'yes',  // Allow frame drop ONLY during seeking
+        'seek-to-file-pos': 'yes',  // Direct file position
         'correct-downscaling': 'no',
         'linear-downscaling': 'no',
         'sigmoid-upscaling': 'no',
         'hdr-compute-peak': 'no',
+        // MPX ULTRA: Maximum caching for instant seeking
+        'demuxer-readahead-secs': '0',  // No network readahead for local files
+        'demuxer-max-bytes': (configuration.bufferSize * 3).toString(),  // 3x buffer
+        'demuxer-max-back-bytes': (configuration.bufferSize * 2).toString(),  // 2x back
+        'demuxer-max-back-duration': '1200',  // 20 minutes back buffer
+        'cache-secs': '600',  // Cache 10 minutes ahead (ULTRA)
+        'cache-initial': '4M',  // Start with 4MB prebuffer
+        'cache-min': '16M',  // Minimum 16MB cache
+        'cache-back': '200M',  // 200MB back buffer for instant seeking
+        'cache-default': (configuration.bufferSize ~/ 1024 / 1024).toString() + 'M',
+        'seekable': 'yes',  // Explicitly enable seeking
+        'index': 'yes',  // Force index usage for fast seeking
+        'avindex': 'yes',  // Use AV index for fast seeks
+        // Keyframe seeking - FASTEST possible
+        'mf-fps': '1',  // Minimum fps for index
+        'index-mode': 'both',  // Use both index types
         if (AndroidHelper.isPhysicalDevice || AndroidHelper.APILevel > 25)
           'ao': 'opensles'
-        // Disable audio output on older Android emulators with API Level < 25.
-        // OpenSL ES audio output seems to be broken on some of these.
         else if (AndroidHelper.isEmulator && AndroidHelper.APILevel <= 25)
           'ao': 'null',
         'subs-fallback': 'yes',
         'subs-with-matching-audio': 'yes',
       };
+      
+      // Apply local file optimization if enabled
+      if (configuration.videoPerformance?.optimizeForLocalFiles != false) {
+        properties.addAll({
+          'demuxer-readahead-secs': '0',
+          'cache-on-disk': 'yes',
+          'cache-secs': '600',  // Cache 10 minutes ahead
+          'cache-back': '300M',  // 300MB back buffer for instant seeking
+          'demuxer-max-back-duration': '1200',  // 20 minutes back buffer
+          'hr-seek': 'yes',  // HR-seek for smooth playback
+          'hr-seek-framedrop': 'yes',  // Drop frames during seek only
+          'seek-to-file-pos': 'yes',  // Direct file position seeking
+          'index-mode': 'both',  // Use both index types
+        });
+      }
       // Other properties based on [PlayerConfiguration].
       properties.addAll(
         {
@@ -2436,6 +2467,33 @@ class NativePlayer extends PlatformPlayer {
           'secondary-sub-visibility': configuration.libass ? 'yes' : 'no',
         },
       );
+
+      // Apply video performance configuration if provided
+      if (configuration.videoPerformance != null) {
+        final video = configuration.videoPerformance!;
+        properties.addAll({
+          if (video.hardwareDecoding != null)
+            'hwdec': video.hardwareDecoding!,
+          if (video.decoderThreads != null)
+            'vd-lavc-threads': video.decoderThreads.toString(),
+          if (video.frameDropping != null)
+            'framedrop': video.frameDropping!,
+          if (video.videoSync != null)
+            'video-sync': video.videoSync!,
+          if (video.scaler != null)
+            'scale': video.scaler!,
+          if (video.downScaler != null)
+            'dscale': video.downScaler!,
+          if (video.interpolation)
+            'interpolation': 'yes',
+          if (video.temporalScaler != null)
+            'tscale': video.temporalScaler!,
+          if (video.deinterlacing != null)
+            'deinterlace': video.deinterlacing!,
+          if (video.gpuBackend != null)
+            'gpu-backend': video.gpuBackend!,
+        });
+      }
 
       if (test) {
         properties['vo'] = 'null';

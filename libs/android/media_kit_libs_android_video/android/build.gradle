@@ -47,10 +47,18 @@ android {
     }
 }
 
-task downloadDependencies(type: Exec) {   
-        // Delete previously created /output subdirectory.
-
+task downloadDependencies(type: Exec) {
+        // Use a persistent cache directory outside of build/
+        def userHome = System.getProperty("user.home")
+        def cacheDir = file("$userHome/.media_kit_cache/android_video/v1.1.7")
         def outputDir = file("$buildDir/output")
+        
+        // Create cache directory if it doesn't exist
+        if (!cacheDir.exists()) {
+            cacheDir.mkdirs()
+        }
+        
+        // Delete previously created /output subdirectory.
         if (outputDir.exists()) {
             outputDir.deleteDir()
         }
@@ -58,10 +66,10 @@ task downloadDependencies(type: Exec) {
 
         // Download all *.jar dependencies & verify their MD5 checksums.
         def filesToDownload = [
-            ["url": "https://github.com/media-kit/libmpv-android-video-build/releases/download/v1.1.7/default-arm64-v8a.jar", "md5": "83df25b61193af8fa815e373143ac9af", "destination": file("$buildDir/v1.1.7/default-arm64-v8a.jar")],
-            ["url": "https://github.com/media-kit/libmpv-android-video-build/releases/download/v1.1.7/default-armeabi-v7a.jar", "md5": "22e21526fefc0a2b8f17adbec9f57590", "destination": file("$buildDir/v1.1.7/default-armeabi-v7a.jar")],
-            ["url": "https://github.com/media-kit/libmpv-android-video-build/releases/download/v1.1.7/default-x86_64.jar", "md5": "6fa26bf0459b11f1c0b0dbc29e5b940d", "destination": file("$buildDir/v1.1.7/default-x86_64.jar")],
-            ["url": "https://github.com/media-kit/libmpv-android-video-build/releases/download/v1.1.7/default-x86.jar", "md5": "0d742b756dc9d1fcd84ea271d8b68f32", "destination": file("$buildDir/v1.1.7/default-x86.jar")]
+            ["url": "https://github.com/media-kit/libmpv-android-video-build/releases/download/v1.1.7/default-arm64-v8a.jar", "md5": "83df25b61193af8fa815e373143ac9af", "destination": file("$cacheDir/default-arm64-v8a.jar")],
+            ["url": "https://github.com/media-kit/libmpv-android-video-build/releases/download/v1.1.7/default-armeabi-v7a.jar", "md5": "22e21526fefc0a2b8f17adbec9f57590", "destination": file("$cacheDir/default-armeabi-v7a.jar")],
+            ["url": "https://github.com/media-kit/libmpv-android-video-build/releases/download/v1.1.7/default-x86_64.jar", "md5": "6fa26bf0459b11f1c0b0dbc29e5b940d", "destination": file("$cacheDir/default-x86_64.jar")],
+            ["url": "https://github.com/media-kit/libmpv-android-video-build/releases/download/v1.1.7/default-x86.jar", "md5": "0d742b756dc9d1fcd84ea271d8b68f32", "destination": file("$cacheDir/default-x86.jar")]
         ]
 
         filesToDownload.each { fileInfo ->
@@ -70,10 +78,9 @@ task downloadDependencies(type: Exec) {
                 def calculatedMD5 = MessageDigest.getInstance("MD5").digest(Files.readAllBytes(destFile.toPath())).encodeHex().toString()
 
                 if (calculatedMD5 != fileInfo.md5) {
+                    println "MD5 mismatch for cached file. Will re-download: ${destFile}"
                     destFile.delete()
-                    println "MD5 mismatch. File deleted: ${destFile}"
                 }
-
             }
 
             if (!destFile.exists()) {
@@ -87,8 +94,12 @@ task downloadDependencies(type: Exec) {
                 if (calculatedMD5 != fileInfo.md5) {
                     throw new GradleException("MD5 verification failed for ${destFile}")
                 }
+                println "Cached to: ${destFile}"
+            } else {
+                println "Using cached file: ${destFile}"
             }
 
+            // Copy from cache to output
             copy {
                 from destFile
                 into outputDir

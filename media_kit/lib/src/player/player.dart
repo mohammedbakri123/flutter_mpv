@@ -91,6 +91,27 @@ import 'package:media_kit/src/player/platform_player.dart';
 /// await player.setPlaylistMode(PlaylistMode.loop);
 /// await player.setAudioDevice(AudioDevice.auto());
 ///
+/// // Customize video performance and decoding (hardware acceleration, scaling, etc.)
+///
+/// final player = Player(
+///   configuration: PlayerConfiguration(
+///     bufferSize: 64 * 1024 * 1024, // 64MB buffer
+///     videoPerformance: VideoPerformanceConfiguration(
+///       hardwareDecoding: 'auto',    // Enable hardware decoding
+///       scaler: 'bicubic',           // Better quality scaling
+///       frameDropping: 'decoder',    // Balanced frame dropping
+///     ),
+///   ),
+/// );
+///
+/// // Or use pre-configured presets for common scenarios
+///
+/// final player = Player(
+///   configuration: PlayerConfiguration(
+///     videoPerformance: VideoPerformancePresets.balanced,
+///   ),
+/// );
+///
 /// // Release allocated resources back to the system.
 ///
 /// await player.dispose();

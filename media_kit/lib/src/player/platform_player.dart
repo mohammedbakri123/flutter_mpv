@@ -429,6 +429,175 @@ abstract class PlatformPlayer {
   final List<Future<void> Function()> release = [];
 }
 
+/// {@template video_performance_configuration}
+///
+/// VideoPerformanceConfiguration
+/// ------------------------------
+/// Configuration for video decoding and rendering performance.
+///
+/// {@endtemplate}
+class VideoPerformanceConfiguration {
+  /// Hardware decoding method.
+  ///
+  /// Controls how video is decoded:
+  /// - `null`: Auto-detect (mpv default)
+  /// - `'auto'`: Try hardware, fallback to software
+  /// - `'auto-copy'`: Auto with surface upload
+  /// - `'yes'`: Force hardware (fail if unavailable)
+  /// - `'no'`: Force software decoding
+  /// - Platform-specific: `'mediacodec'` (Android), `'videotoolbox'` (iOS/macOS),
+  ///   `'d3d11va'` (Windows), `'vaapi'` (Linux)
+  ///
+  /// Default: `null` (auto-detect)
+  ///
+  /// See: https://mpv.io/manual/master/#options-hwdec
+  final String? hardwareDecoding;
+
+  /// Number of threads for video decoding.
+  ///
+  /// - `null`: Auto-detect based on CPU cores
+  /// - `1-16`: Explicit thread count
+  ///
+  /// Higher values improve decoding speed but use more CPU.
+  /// Most videos decode fine with 2-4 threads.
+  ///
+  /// Default: `null` (auto)
+  ///
+  /// See: https://mpv.io/manual/master/#options-vd-lavc-threads
+  final int? decoderThreads;
+
+  /// Frame dropping strategy.
+  ///
+  /// Controls when frames can be dropped to maintain A/V sync:
+  /// - `'no'`: Never drop frames (may cause stuttering)
+  /// - `'decoder'`: Drop during decoding only (default)
+  /// - `'decoder+vo'`: Drop during decoding and video output
+  ///
+  /// Use `'no'` for quality-critical applications.
+  /// Use `'decoder+vo'` for smooth playback on slow devices.
+  ///
+  /// Default: `'decoder'`
+  ///
+  /// See: https://mpv.io/manual/master/#options-framedrop
+  final String? frameDropping;
+
+  /// Audio/video synchronization method.
+  ///
+  /// Controls how video syncs to audio:
+  /// - `'audio'`: Default, simple sync
+  /// - `'display-resample'`: Resample to display refresh rate (smoothest)
+  /// - `'display-resample-vdrop'`: Resample with frame dropping
+  /// - `'display-adrop'`: Drop/duplicate audio samples
+  ///
+  /// Use `'display-resample'` for high-end devices.
+  /// Use `'audio'` for compatibility.
+  ///
+  /// Default: `null` (uses mpv default: `'audio'`)
+  ///
+  /// See: https://mpv.io/manual/master/#options-video-sync
+  final String? videoSync;
+
+  /// Video scaling algorithm.
+  ///
+  /// Controls quality when upscaling video:
+  /// - `'bilinear'`: Fast, low quality (default)
+  /// - `'bicubic'`: Balanced quality/speed
+  /// - `'lanczos'`: High quality, slower
+  /// - `'spline36'`: Very high quality
+  ///
+  /// Use `'bilinear'` for low-end devices.
+  /// Use `'lanczos'` or `'spline36'` for high-quality playback.
+  ///
+  /// Default: `null` (uses current: `'bilinear'`)
+  ///
+  /// See: https://mpv.io/manual/master/#options-scale
+  final String? scaler;
+
+  /// Video downscaling algorithm.
+  ///
+  /// Same options as [scaler] but for downscaling.
+  ///
+  /// Default: `null` (uses current: `'bilinear'`)
+  ///
+  /// See: https://mpv.io/manual/master/#options-dscale
+  final String? downScaler;
+
+  /// Enable frame interpolation.
+  ///
+  /// Interpolates frames to match display refresh rate.
+  /// Creates smoother motion but increases CPU/GPU usage.
+  ///
+  /// Requires `video-sync` to be `'display-resample'` or similar.
+  ///
+  /// Default: `false`
+  ///
+  /// See: https://mpv.io/manual/master/#options-interpolation
+  final bool interpolation;
+
+  /// Interpolation algorithm.
+  ///
+  /// - `'linear'`: Simple interpolation
+  /// - `'cosine'`: Smooth interpolation
+  /// - `'oversample'`: High quality (default)
+  ///
+  /// Default: `'oversample'`
+  ///
+  /// See: https://mpv.io/manual/master/#options-tscale
+  final String? temporalScaler;
+
+  /// Enable deinterlacing.
+  ///
+  /// Controls how interlaced video is handled:
+  /// - `'no'`: Disable deinterlacing
+  /// - `'yes'`: Always deinterlace
+  /// - `'auto'`: Deinterlace only when needed
+  ///
+  /// Default: `'auto'`
+  ///
+  /// See: https://mpv.io/manual/master/#options-deinterlace
+  final String? deinterlacing;
+
+  /// GPU backend for rendering.
+  ///
+  /// - `null`: Auto-detect
+  /// - `'opengl'`: OpenGL (most compatible)
+  /// - `'vulkan'`: Vulkan (best performance on supported devices)
+  /// - `'direct3d'`: Direct3D (Windows only)
+  ///
+  /// Default: `null` (auto)
+  ///
+  /// See: https://mpv.io/manual/master/#options-gpu-backend
+  final String? gpuBackend;
+
+  /// Optimize for local file playback.
+  ///
+  /// When enabled, configures mpv for optimal local file seeking:
+  /// - Disables network readahead
+  /// - Increases back buffer for fast seeking
+  /// - Reduces initial buffering time
+  /// - Optimizes cache for local storage
+  ///
+  /// Default: `true` (optimized for local files)
+  ///
+  /// Set to `false` for network/streaming content.
+  final bool optimizeForLocalFiles;
+
+  /// {@macro video_performance_configuration}
+  const VideoPerformanceConfiguration({
+    this.hardwareDecoding,
+    this.decoderThreads,
+    this.frameDropping,
+    this.videoSync,
+    this.scaler,
+    this.downScaler,
+    this.interpolation = false,
+    this.temporalScaler,
+    this.deinterlacing,
+    this.gpuBackend,
+    this.optimizeForLocalFiles = true,
+  });
+}
+
 /// {@template player_configuration}
 ///
 /// PlayerConfiguration
@@ -514,6 +683,14 @@ class PlayerConfiguration {
   /// Learn more: https://ffmpeg.org/ffmpeg-protocols.html#Protocol-Options
   final List<String> protocolWhitelist;
 
+  /// Video performance and decoding configuration.
+  ///
+  /// Provides fine-grained control over video decoding, rendering, and performance.
+  /// Includes hardware acceleration, frame dropping, scaling algorithms, and more.
+  ///
+  /// Default: `null` (uses mpv defaults)
+  final VideoPerformanceConfiguration? videoPerformance;
+
   /// {@macro player_configuration}
   const PlayerConfiguration({
     this.vo = 'null',
@@ -539,6 +716,7 @@ class PlayerConfiguration {
       'https',
       'crypto',
     ],
+    this.videoPerformance,
   });
 }
 
