@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -10,9 +10,9 @@ import 'package:path/path.dart' as path;
 import 'package:safe_local_storage/safe_local_storage.dart';
 import 'package:synchronized/synchronized.dart';
 
-import 'package:media_kit/ffi/src/allocation.dart';
-import 'package:media_kit/src/player/native/utils/temp_file.dart';
-import 'package:media_kit/src/values.dart';
+import 'package:flutter_mpv/ffi/src/allocation.dart';
+import 'package:flutter_mpv/src/player/native/utils/temp_file.dart';
+import 'package:flutter_mpv/src/values.dart';
 
 /// Callback invoked to notify about the released references.
 typedef NativeReferenceHolderCallback = void Function(List<Pointer<Void>>);

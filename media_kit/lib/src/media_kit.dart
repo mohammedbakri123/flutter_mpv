@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -6,20 +6,20 @@
 
 import 'package:universal_platform/universal_platform.dart';
 
-import 'package:media_kit/src/player/native/player/player.dart';
-import 'package:media_kit/src/player/web/player/player.dart';
+import 'package:flutter_mpv/src/player/native/player/player.dart';
+import 'package:flutter_mpv/src/player/web/player/player.dart';
 
-/// {@template media_kit}
+/// {@template flutter_mpv}
 ///
-/// package:media_kit
+/// package:flutter_mpv
 /// -----------------
 /// A complete video & audio library for Flutter & Dart.
 ///
 /// {@endtemplate}
-abstract class MediaKit {
+abstract class FlutterMpv {
   static bool _initialized = false;
 
-  /// {@macro media_kit}
+  /// {@macro flutter_mpv}
   static void ensureInitialized({String? libmpv}) {
     if (_initialized) return;
 
@@ -42,12 +42,12 @@ abstract class MediaKit {
       print(
         '\n'
         '${'-' * 80}\n'
-        'media_kit: ERROR: MediaKit.ensureInitialized\n'
+        'flutter_mpv: ERROR: FlutterMpv.ensureInitialized\n'
         'This indicates that one or more required dependencies could not be located.\n'
         '\n'
         'Refer to "Installation" section of the README for further details:\n'
         'GitHub  : https://github.com/media-kit/media-kit#installation\n'
-        'pub.dev : https://pub.dev/packages/media_kit#installation\n'
+        'pub.dev : https://pub.dev/packages/flutter_mpv#installation\n'
         '\n'
         'TIP: Copy-paste required packages from the above link to your pubspec.yaml.\n'
         '\n'
@@ -58,3 +58,7 @@ abstract class MediaKit {
     }
   }
 }
+
+/// Backward compatibility alias for MediaKit
+@Deprecated('Use FlutterMpv instead. This will be removed in a future version.')
+typedef MediaKit = FlutterMpv;

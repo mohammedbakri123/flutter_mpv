@@ -1,25 +1,25 @@
-name: media_kit
-description: A cross-platform video player & audio player for Flutter & Dart. Performant, stable, feature-proof & modular.
+name: flutter_mpv
+description: A cross-platform video player & audio player for Flutter & Dart with advanced performance controls. Fork of media_kit.
 homepage: https://github.com/media-kit/media-kit
 repository: https://github.com/media-kit/media-kit
 version: 1.2.6
 
 screenshots:
-  - description: "package:media_kit running on Android (visible controls)"
+  - description: "flutter_mpv running on Android (visible controls)"
     path: screenshots/android_0.jpg
-  - description: "package:media_kit running on Android"
+  - description: "flutter_mpv running on Android"
     path: screenshots/android_1.jpg
-  - description: "package:media_kit running on iOS (visible controls)"
+  - description: "flutter_mpv running on iOS (visible controls)"
     path: screenshots/ios_0.jpg
-  - description: "package:media_kit running on iOS"
+  - description: "flutter_mpv running on iOS"
     path: screenshots/ios_1.jpg
-  - description: "package:media_kit running on macOS"
+  - description: "flutter_mpv running on macOS"
     path: screenshots/macos.jpg
-  - description: "package:media_kit running on Microsoft Windows"
+  - description: "flutter_mpv running on Microsoft Windows"
     path: screenshots/windows.jpg
-  - description: "package:media_kit running on GNU/Linux"
+  - description: "flutter_mpv running on GNU/Linux"
     path: screenshots/linux.jpg
-  - description: "package:media_kit running on web"
+  - description: "flutter_mpv running on web"
     path: screenshots/web.jpg
 topics:
   - video

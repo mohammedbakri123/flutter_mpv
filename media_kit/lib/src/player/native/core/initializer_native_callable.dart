@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -6,8 +6,8 @@
 import 'dart:collection';
 import 'dart:ffi';
 
-import 'package:media_kit/ffi/ffi.dart';
-import 'package:media_kit/generated/libmpv/bindings.dart' as generated;
+import 'package:flutter_mpv/ffi/ffi.dart';
+import 'package:flutter_mpv/generated/libmpv/bindings.dart' as generated;
 import 'package:synchronized/synchronized.dart';
 
 /// {@template initializer_native_callable}

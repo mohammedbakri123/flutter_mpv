@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -15,29 +15,29 @@ import 'package:safe_local_storage/safe_local_storage.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:uri_parser/uri_parser.dart';
 
-import 'package:media_kit/ffi/ffi.dart';
+import 'package:flutter_mpv/ffi/ffi.dart';
 
-import 'package:media_kit/src/models/audio_device.dart';
-import 'package:media_kit/src/models/audio_params.dart';
-import 'package:media_kit/src/models/media/media.dart';
-import 'package:media_kit/src/models/playable.dart';
-import 'package:media_kit/src/models/player_log.dart';
-import 'package:media_kit/src/models/player_state.dart';
-import 'package:media_kit/src/models/playlist_mode.dart';
-import 'package:media_kit/src/models/playlist.dart';
-import 'package:media_kit/src/models/track.dart';
-import 'package:media_kit/src/models/video_params.dart';
-import 'package:media_kit/src/player/native/core/fallback_bitrate_handler.dart';
-import 'package:media_kit/src/player/native/core/initializer.dart';
-import 'package:media_kit/src/player/native/core/native_library.dart';
-import 'package:media_kit/src/player/native/utils/android_asset_loader.dart';
-import 'package:media_kit/src/player/native/utils/android_helper.dart';
-import 'package:media_kit/src/player/native/utils/isolates.dart';
-import 'package:media_kit/src/player/native/utils/native_reference_holder.dart';
-import 'package:media_kit/src/player/native/utils/temp_file.dart';
-import 'package:media_kit/src/player/platform_player.dart';
+import 'package:flutter_mpv/src/models/audio_device.dart';
+import 'package:flutter_mpv/src/models/audio_params.dart';
+import 'package:flutter_mpv/src/models/media/media.dart';
+import 'package:flutter_mpv/src/models/playable.dart';
+import 'package:flutter_mpv/src/models/player_log.dart';
+import 'package:flutter_mpv/src/models/player_state.dart';
+import 'package:flutter_mpv/src/models/playlist_mode.dart';
+import 'package:flutter_mpv/src/models/playlist.dart';
+import 'package:flutter_mpv/src/models/track.dart';
+import 'package:flutter_mpv/src/models/video_params.dart';
+import 'package:flutter_mpv/src/player/native/core/fallback_bitrate_handler.dart';
+import 'package:flutter_mpv/src/player/native/core/initializer.dart';
+import 'package:flutter_mpv/src/player/native/core/native_library.dart';
+import 'package:flutter_mpv/src/player/native/utils/android_asset_loader.dart';
+import 'package:flutter_mpv/src/player/native/utils/android_helper.dart';
+import 'package:flutter_mpv/src/player/native/utils/isolates.dart';
+import 'package:flutter_mpv/src/player/native/utils/native_reference_holder.dart';
+import 'package:flutter_mpv/src/player/native/utils/temp_file.dart';
+import 'package:flutter_mpv/src/player/platform_player.dart';
 
-import 'package:media_kit/generated/libmpv/bindings.dart' as generated;
+import 'package:flutter_mpv/generated/libmpv/bindings.dart' as generated;
 
 /// Initializes the native backend for package:media_kit.
 void nativeEnsureInitialized({String? libmpv}) {
@@ -1152,6 +1152,63 @@ class NativePlayer extends PlatformPlayer {
     }
   }
 
+  @override
+  Future<void> setOption(String option, dynamic value,
+      {bool synchronized = true}) {
+    Future<void> function() async {
+      if (disposed) {
+        throw AssertionError('[Player] has been disposed');
+      }
+      await waitForPlayerInitialization;
+      await waitForVideoControllerInitializationIfAttached;
+
+      final name = option.toNativeUtf8();
+      if (value is String) {
+        final data = value.toNativeUtf8();
+        mpv.mpv_set_option_string(
+          ctx,
+          name.cast(),
+          data.cast(),
+        );
+        calloc.free(data);
+      } else if (value is bool) {
+        final data = calloc<Int32>()..value = value ? 1 : 0;
+        mpv.mpv_set_option(
+          ctx,
+          name.cast(),
+          generated.mpv_format.MPV_FORMAT_FLAG,
+          data.cast(),
+        );
+        calloc.free(data);
+      } else if (value is int) {
+        final data = calloc<Int64>()..value = value;
+        mpv.mpv_set_option(
+          ctx,
+          name.cast(),
+          generated.mpv_format.MPV_FORMAT_INT64,
+          data.cast(),
+        );
+        calloc.free(data);
+      } else if (value is double) {
+        final data = calloc<Double>()..value = value;
+        mpv.mpv_set_option(
+          ctx,
+          name.cast(),
+          generated.mpv_format.MPV_FORMAT_DOUBLE,
+          data.cast(),
+        );
+        calloc.free(data);
+      }
+      calloc.free(name);
+    }
+
+    if (synchronized) {
+      return lock.synchronized(function);
+    } else {
+      return function();
+    }
+  }
+
   /// Takes the snapshot of the current video frame & returns encoded image bytes as [Uint8List].
   ///
   /// The [format] parameter specifies the format of the image to be returned. Supported values are:
@@ -1220,6 +1277,7 @@ class NativePlayer extends PlatformPlayer {
   /// * https://mpv.io/manual/master/#options
   /// * https://mpv.io/manual/master/#properties
   ///
+  @override
   Future<void> setProperty(
     String property,
     String value, {
@@ -2323,6 +2381,7 @@ class NativePlayer extends PlatformPlayer {
         // Set --vid=no by default to prevent redundant video decoding.
         // [VideoController] internally sets --vid=auto upon attachment to enable video rendering & decoding.
         if (!test) 'vid': 'no',
+        ...configuration.options,
       };
 
       if (Platform.isAndroid &&

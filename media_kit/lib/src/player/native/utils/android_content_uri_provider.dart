@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -6,9 +6,9 @@
 import 'dart:ffi';
 import 'dart:collection';
 
-import 'package:media_kit/ffi/ffi.dart';
+import 'package:flutter_mpv/ffi/ffi.dart';
 
-import 'package:media_kit/src/player/native/utils/isolates.dart';
+import 'package:flutter_mpv/src/player/native/utils/isolates.dart';
 
 /// {@template android_content_uri_provider}
 ///

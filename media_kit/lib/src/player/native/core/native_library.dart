@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -20,7 +20,7 @@ abstract class NativeLibrary {
   static String get path {
     if (_resolved == null) {
       throw Exception(
-        'MediaKit.ensureInitialized must be called before using any API from package:media_kit.',
+        'FlutterMpv.ensureInitialized must be called before using any API from package:media_kit.',
       );
     }
     return _resolved!;

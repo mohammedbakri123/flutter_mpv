@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright (c) 2021 & onwards, Domingo Montesdeoca González <DomingoMG97@gmail.com>.
 /// All rights reserved.

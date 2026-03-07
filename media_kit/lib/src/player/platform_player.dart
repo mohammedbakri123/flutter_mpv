@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -9,17 +9,17 @@ import 'dart:typed_data';
 import 'package:meta/meta.dart';
 import 'package:collection/collection.dart';
 
-import 'package:media_kit/src/models/track.dart';
-import 'package:media_kit/src/models/playable.dart';
-import 'package:media_kit/src/models/playlist.dart';
-import 'package:media_kit/src/models/player_log.dart';
-import 'package:media_kit/src/models/media/media.dart';
-import 'package:media_kit/src/models/audio_device.dart';
-import 'package:media_kit/src/models/audio_params.dart';
-import 'package:media_kit/src/models/video_params.dart';
-import 'package:media_kit/src/models/player_state.dart';
-import 'package:media_kit/src/models/playlist_mode.dart';
-import 'package:media_kit/src/models/player_stream.dart';
+import 'package:flutter_mpv/src/models/track.dart';
+import 'package:flutter_mpv/src/models/playable.dart';
+import 'package:flutter_mpv/src/models/playlist.dart';
+import 'package:flutter_mpv/src/models/player_log.dart';
+import 'package:flutter_mpv/src/models/media/media.dart';
+import 'package:flutter_mpv/src/models/audio_device.dart';
+import 'package:flutter_mpv/src/models/audio_params.dart';
+import 'package:flutter_mpv/src/models/video_params.dart';
+import 'package:flutter_mpv/src/models/player_state.dart';
+import 'package:flutter_mpv/src/models/playlist_mode.dart';
+import 'package:flutter_mpv/src/models/player_stream.dart';
 
 /// {@template platform_player}
 /// PlatformPlayer
@@ -284,6 +284,18 @@ abstract class PlatformPlayer {
   Future<void> setSubtitleTrack(SubtitleTrack track) {
     throw UnimplementedError(
       '[PlatformPlayer.setSubtitleTrack] is not implemented',
+    );
+  }
+
+  Future<void> setOption(String option, dynamic value) {
+    throw UnimplementedError(
+      '[PlatformPlayer.setOption] is not implemented',
+    );
+  }
+
+  Future<void> setProperty(String property, String value) {
+    throw UnimplementedError(
+      '[PlatformPlayer.setProperty] is not implemented',
     );
   }
 
@@ -881,7 +893,13 @@ class PlayerConfiguration {
       'crypto',
     ],
     this.videoPerformance,
+    this.options = const {},
   });
+
+  /// Additional options for the underlying player backend.
+  ///
+  /// These are set before initialization.
+  final Map<String, String> options;
 }
 
 /// {@template mpv_log_level}

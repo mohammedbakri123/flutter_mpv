@@ -1,14 +1,14 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
 /// Use of this source code is governed by MIT license that can be found in the LICENSE file.
 import 'dart:ffi';
 
-import 'package:media_kit/generated/libmpv/bindings.dart' as generated;
-import 'package:media_kit/src/player/native/core/execmem_restriction.dart';
-import 'package:media_kit/src/player/native/core/initializer_isolate.dart';
-import 'package:media_kit/src/player/native/core/initializer_native_callable.dart';
+import 'package:flutter_mpv/generated/libmpv/bindings.dart' as generated;
+import 'package:flutter_mpv/src/player/native/core/execmem_restriction.dart';
+import 'package:flutter_mpv/src/player/native/core/initializer_isolate.dart';
+import 'package:flutter_mpv/src/player/native/core/initializer_native_callable.dart';
 
 /// {@template initializer}
 ///

@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -10,11 +10,11 @@ import 'dart:typed_data';
 import 'package:uri_parser/uri_parser.dart';
 import 'package:safe_local_storage/safe_local_storage.dart';
 
-import 'package:media_kit/src/models/playable.dart';
+import 'package:flutter_mpv/src/models/playable.dart';
 
-import 'package:media_kit/src/player/native/utils/temp_file.dart';
-import 'package:media_kit/src/player/native/utils/asset_loader.dart';
-import 'package:media_kit/src/player/native/utils/android_content_uri_provider.dart';
+import 'package:flutter_mpv/src/player/native/utils/temp_file.dart';
+import 'package:flutter_mpv/src/player/native/utils/asset_loader.dart';
+import 'package:flutter_mpv/src/player/native/utils/android_content_uri_provider.dart';
 
 /// {@template media}
 ///

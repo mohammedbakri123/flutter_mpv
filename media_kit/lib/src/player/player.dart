@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -6,18 +6,18 @@
 import 'dart:typed_data';
 import 'package:universal_platform/universal_platform.dart';
 
-import 'package:media_kit/src/models/track.dart';
-import 'package:media_kit/src/models/playable.dart';
-import 'package:media_kit/src/models/playlist.dart';
-import 'package:media_kit/src/models/media/media.dart';
-import 'package:media_kit/src/models/audio_device.dart';
-import 'package:media_kit/src/models/player_state.dart';
-import 'package:media_kit/src/models/playlist_mode.dart';
-import 'package:media_kit/src/models/player_stream.dart';
+import 'package:flutter_mpv/src/models/track.dart';
+import 'package:flutter_mpv/src/models/playable.dart';
+import 'package:flutter_mpv/src/models/playlist.dart';
+import 'package:flutter_mpv/src/models/media/media.dart';
+import 'package:flutter_mpv/src/models/audio_device.dart';
+import 'package:flutter_mpv/src/models/player_state.dart';
+import 'package:flutter_mpv/src/models/playlist_mode.dart';
+import 'package:flutter_mpv/src/models/player_stream.dart';
 
-import 'package:media_kit/src/player/native/player/player.dart';
-import 'package:media_kit/src/player/web/player/player.dart';
-import 'package:media_kit/src/player/platform_player.dart';
+import 'package:flutter_mpv/src/player/native/player/player.dart';
+import 'package:flutter_mpv/src/player/web/player/player.dart';
+import 'package:flutter_mpv/src/player/platform_player.dart';
 
 /// {@template player}
 ///
@@ -32,9 +32,9 @@ import 'package:media_kit/src/player/platform_player.dart';
 /// Call [dispose] to free the allocated resources back to the system.
 ///
 /// ```dart
-/// import 'package:media_kit/media_kit.dart';
+/// import 'package:flutter_mpv/media_kit.dart';
 ///
-/// MediaKit.ensureInitialized();
+/// FlutterMpv.ensureInitialized();
 ///
 /// // Create a [Player] instance for audio or video playback.
 ///
@@ -327,6 +327,18 @@ class Player {
   ///
   Future<void> setSubtitleTrack(SubtitleTrack track) async {
     return platform?.setSubtitleTrack(track);
+  }
+
+  Future<void> setOption(String option, dynamic value) async {
+    return platform?.setOption(option, value);
+  }
+
+  /// Sets a property on the underlying player backend.
+  ///
+  /// This can be used to set properties that are not exposed by the [Player] class.
+  /// See: https://mpv.io/manual/master/#properties
+  Future<void> setProperty(String property, String value) async {
+    return platform?.setProperty(property, value);
   }
 
   /// Takes the snapshot of the current video frame & returns encoded image bytes as [Uint8List].

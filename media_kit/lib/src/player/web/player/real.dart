@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -13,20 +13,20 @@ import 'package:web/web.dart' as web;
 import 'package:meta/meta.dart';
 import 'package:synchronized/synchronized.dart';
 
-import 'package:media_kit/src/player/platform_player.dart';
+import 'package:flutter_mpv/src/player/platform_player.dart';
 
-import 'package:media_kit/src/player/web/utils/hls.dart';
-import 'package:media_kit/src/player/web/utils/duration.dart';
+import 'package:flutter_mpv/src/player/web/utils/hls.dart';
+import 'package:flutter_mpv/src/player/web/utils/duration.dart';
 
-import 'package:media_kit/src/models/track.dart';
-import 'package:media_kit/src/models/playable.dart';
-import 'package:media_kit/src/models/playlist.dart';
-import 'package:media_kit/src/models/media/media.dart';
-import 'package:media_kit/src/models/audio_device.dart';
-import 'package:media_kit/src/models/player_state.dart';
-import 'package:media_kit/src/models/audio_params.dart';
-import 'package:media_kit/src/models/video_params.dart';
-import 'package:media_kit/src/models/playlist_mode.dart';
+import 'package:flutter_mpv/src/models/track.dart';
+import 'package:flutter_mpv/src/models/playable.dart';
+import 'package:flutter_mpv/src/models/playlist.dart';
+import 'package:flutter_mpv/src/models/media/media.dart';
+import 'package:flutter_mpv/src/models/audio_device.dart';
+import 'package:flutter_mpv/src/models/player_state.dart';
+import 'package:flutter_mpv/src/models/audio_params.dart';
+import 'package:flutter_mpv/src/models/video_params.dart';
+import 'package:flutter_mpv/src/models/playlist_mode.dart';
 
 /// Initializes the web backend for package:media_kit.
 void webEnsureInitialized({String? libmpv}) {}

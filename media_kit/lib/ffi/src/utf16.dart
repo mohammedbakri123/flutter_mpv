@@ -5,7 +5,7 @@
 import 'dart:ffi';
 import 'dart:typed_data';
 
-import 'package:media_kit/ffi/src/allocation.dart';
+import 'package:flutter_mpv/ffi/src/allocation.dart';
 
 /// The contents of a native zero-terminated array of UTF-16 code units.
 ///

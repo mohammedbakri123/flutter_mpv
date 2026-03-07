@@ -7,7 +7,7 @@
 import 'dart:ffi';
 import 'dart:async';
 
-import 'package:media_kit/ffi/src/allocation.dart';
+import 'package:flutter_mpv/ffi/src/allocation.dart';
 
 /// An [Allocator] which frees all allocations at the same time.
 ///
