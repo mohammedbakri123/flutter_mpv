@@ -1,27 +1,37 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
+import 'package:flutter_mpv/media_kit.dart';
+import 'package:flutter_mpv_video/media_kit_video.dart';
 
 import '../common/globals.dart';
 import '../common/sources/sources.dart';
 import '../common/widgets.dart';
 
-class Screenshot extends StatefulWidget {
-  const Screenshot({super.key});
+class VideoViewParametersScreen extends StatefulWidget {
+  const VideoViewParametersScreen({super.key});
 
   @override
-  State<Screenshot> createState() => _ScreenshotState();
+  State<VideoViewParametersScreen> createState() =>
+      _VideoViewParametersScreenState();
 }
 
-class _ScreenshotState extends State<Screenshot> {
+class _VideoViewParametersScreenState extends State<VideoViewParametersScreen> {
   late final Player player = Player();
   late final VideoController controller = VideoController(
     player,
     configuration: configuration.value,
   );
 
-  Image? image;
+  // A [GlobalKey<VideoState>] is required to access the programmatic video view parameters interface.
+  late final GlobalKey<VideoState> key = GlobalKey<VideoState>();
 
+  BoxFit fit = BoxFit.contain;
+
+  int fitTick = 0;
+  int fontSizeTick = 0;
+  Timer? fitTimer;
+  Timer? fontSizeTimer;
   @override
   void initState() {
     super.initState();
@@ -32,6 +42,9 @@ class _ScreenshotState extends State<Screenshot> {
   @override
   void dispose() {
     player.dispose();
+
+    fitTimer?.cancel();
+    fontSizeTimer?.cancel();
     super.dispose();
   }
 
@@ -39,24 +52,77 @@ class _ScreenshotState extends State<Screenshot> {
         const SizedBox(height: 16.0),
         Center(
           child: ElevatedButton(
-            onPressed: () async {
-              final screenshot = await player.screenshot();
-              if (screenshot != null) {
-                setState(() {
-                  image = Image.memory(screenshot);
-                });
+            onPressed: () {
+              if (fitTimer == null) {
+                fitTimer = Timer.periodic(
+                  const Duration(seconds: 1),
+                  (timer) {
+                    if (timer.tick % 3 == 0 /* Every 3 seconds. */) {
+                      fit =
+                          fit == BoxFit.contain ? BoxFit.none : BoxFit.contain;
+                      setState(() {});
+                    }
+                    if (mounted) {
+                      setState(() {
+                        fitTick = timer.tick;
+                      });
+                    }
+                  },
+                );
+              } else {
+                fitTimer?.cancel();
+                fitTimer = null;
               }
+              setState(() {});
             },
-            child: const Text('Screenshot'),
+            child: Text(
+              fitTimer == null
+                  ? 'Cycle BoxFit'
+                  : 'BoxFit: $fit (${3 - fitTick % 3})',
+            ),
           ),
         ),
         const SizedBox(height: 16.0),
-        if (image != null)
-          Center(
-            child: image!,
+        Center(
+          child: ElevatedButton(
+            onPressed: () {
+              if (fontSizeTimer == null) {
+                fontSizeTimer = Timer.periodic(
+                  const Duration(seconds: 1),
+                  (timer) {
+                    if (timer.tick % 3 == 0 /* Every 3 seconds. */) {
+                      key.currentState?.update(
+                        subtitleViewConfiguration: SubtitleViewConfiguration(
+                            style: TextStyle(
+                          // font size increases every 3 seconds
+                          fontSize: fontSizeFromTick(timer.tick),
+                        )),
+                      );
+                    }
+                    if (mounted) {
+                      setState(() {
+                        fontSizeTick = timer.tick;
+                      });
+                    }
+                  },
+                );
+              } else {
+                fontSizeTimer?.cancel();
+                fontSizeTimer = null;
+              }
+              setState(() {});
+            },
+            child: Text(
+              fontSizeTimer == null
+                  ? 'Cycle Font'
+                  : 'Font: ${fontSizeFromTick(fontSizeTick)}',
+            ),
           ),
-        const SizedBox(height: 16.0),
+        ),
       ];
+
+  double fontSizeFromTick(int tick) =>
+      20.0 + (tick % 6 < 3 ? tick % 6 : 6 - tick % 6) * 10.0;
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +169,8 @@ class _ScreenshotState extends State<Screenshot> {
                               clipBehavior: Clip.antiAlias,
                               margin: const EdgeInsets.all(32.0),
                               child: Video(
+                                key: key,
+                                fit: fit,
                                 controller: controller,
                               ),
                             ),
@@ -124,6 +192,8 @@ class _ScreenshotState extends State<Screenshot> {
             : ListView(
                 children: [
                   Video(
+                    key: key,
+                    fit: fit,
                     controller: controller,
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.width * 9.0 / 16.0,

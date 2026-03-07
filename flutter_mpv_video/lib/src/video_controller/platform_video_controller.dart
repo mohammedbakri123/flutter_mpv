@@ -6,7 +6,7 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 
-import 'package:flutter_mpv/media_kit.dart';
+import 'package:flutter_mpv/flutter_mpv.dart';
 
 import 'package:flutter_mpv_video/src/video_controller/video_controller.dart';
 

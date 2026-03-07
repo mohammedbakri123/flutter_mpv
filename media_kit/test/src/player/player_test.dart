@@ -7,19 +7,19 @@ import 'package:test/test.dart';
 import 'package:collection/collection.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-import 'package:media_kit/src/models/track.dart';
-import 'package:media_kit/src/models/playlist.dart';
-import 'package:media_kit/src/models/media/media.dart';
-import 'package:media_kit/src/models/audio_device.dart';
-import 'package:media_kit/src/models/audio_params.dart';
-import 'package:media_kit/src/models/video_params.dart';
-import 'package:media_kit/src/models/playlist_mode.dart';
+import 'package:flutter_mpv/src/models/track.dart';
+import 'package:flutter_mpv/src/models/playlist.dart';
+import 'package:flutter_mpv/src/models/media/media.dart';
+import 'package:flutter_mpv/src/models/audio_device.dart';
+import 'package:flutter_mpv/src/models/audio_params.dart';
+import 'package:flutter_mpv/src/models/video_params.dart';
+import 'package:flutter_mpv/src/models/playlist_mode.dart';
 
-import 'package:media_kit/src/media_kit.dart';
-import 'package:media_kit/src/player/player.dart';
-import 'package:media_kit/src/player/platform_player.dart';
-import 'package:media_kit/src/player/web/player/player.dart';
-import 'package:media_kit/src/player/native/player/player.dart';
+import 'package:flutter_mpv/src/media_kit.dart';
+import 'package:flutter_mpv/src/player/player.dart';
+import 'package:flutter_mpv/src/player/platform_player.dart';
+import 'package:flutter_mpv/src/player/web/player/player.dart';
+import 'package:flutter_mpv/src/player/native/player/player.dart';
 
 import '../../common/sources.dart';
 

@@ -7,8 +7,8 @@ import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
+import 'package:flutter_mpv/media_kit.dart';
+import 'package:flutter_mpv_video/media_kit_video.dart';
 import 'package:video_player_platform_interface/video_player_platform_interface.dart';
 
 // https://github.com/dart-lang/linter/issues/1381

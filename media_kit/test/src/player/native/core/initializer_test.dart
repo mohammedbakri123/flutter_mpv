@@ -10,12 +10,12 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:test/test.dart';
 
-import 'package:media_kit/ffi/ffi.dart';
+import 'package:flutter_mpv/ffi/ffi.dart';
 
-import 'package:media_kit/src/player/native/core/initializer.dart';
-import 'package:media_kit/src/player/native/core/native_library.dart';
+import 'package:flutter_mpv/src/player/native/core/initializer.dart';
+import 'package:flutter_mpv/src/player/native/core/native_library.dart';
 
-import 'package:media_kit/generated/libmpv/bindings.dart';
+import 'package:flutter_mpv/generated/libmpv/bindings.dart';
 
 MPV? _mpv;
 MPV get mpv => _mpv!;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:media_kit/media_kit.dart';
+import 'package:flutter_mpv/media_kit.dart';
 import 'package:media_kit_test/tests/09.seamless.dart';
-import 'package:media_kit_video/media_kit_video.dart';
+import 'package:flutter_mpv_video/media_kit_video.dart';
 
 import '../common/globals.dart';
 import '../common/sources/sources.dart';

@@ -12,7 +12,7 @@ import 'package:web/web.dart' as web;
 import 'dart:ui_web';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_mpv/media_kit.dart';
+import 'package:flutter_mpv/flutter_mpv.dart';
 
 import 'package:flutter_mpv_video/src/video_controller/platform_video_controller.dart';
 

@@ -7,11 +7,11 @@
 import 'package:test/test.dart';
 import 'package:collection/collection.dart';
 
-import 'package:media_kit/src/models/track.dart';
-import 'package:media_kit/src/models/playlist.dart';
-import 'package:media_kit/src/models/audio_device.dart';
-import 'package:media_kit/src/models/player_state.dart';
-import 'package:media_kit/src/models/playlist_mode.dart';
+import 'package:flutter_mpv/src/models/track.dart';
+import 'package:flutter_mpv/src/models/playlist.dart';
+import 'package:flutter_mpv/src/models/audio_device.dart';
+import 'package:flutter_mpv/src/models/player_state.dart';
+import 'package:flutter_mpv/src/models/playlist_mode.dart';
 
 void main() {
   test(

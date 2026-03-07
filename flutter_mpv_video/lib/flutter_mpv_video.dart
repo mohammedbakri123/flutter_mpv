@@ -15,4 +15,4 @@ export 'package:flutter_mpv_video/flutter_mpv_video_controls/flutter_mpv_video_c
 
 /// Backward compatibility export
 @Deprecated('Use flutter_mpv_video instead. This will be removed in a future version.')
-export 'package:flutter_mpv_video/flutter_mpv_video.dart' show Video, VideoController, VideoControllerProvider, SubtitleView;
+export 'package:flutter_mpv_video/flutter_mpv_video.dart' show Video, VideoController, SubtitleView;

@@ -1,5 +1,5 @@
-name: media_kit_test
-description: A minimal application for demonstrating & testing package:media_kit
+name: flutter_mpv_test
+description: A minimal application for demonstrating & testing flutter_mpv
 homepage: https://github.com/media-kit/media-kit
 repository: https://github.com/media-kit/media-kit
 version: 1.0.0
@@ -12,10 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  media_kit:
+  flutter_mpv:
     path: ../media_kit
-  media_kit_video:
-    path: ../media_kit_video
+  flutter_mpv_video:
+    path: ../flutter_mpv_video
   media_kit_libs_video:
     path: ../libs/universal/media_kit_libs_video
 

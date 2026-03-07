@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 import 'package:collection/collection.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-import 'package:media_kit/src/models/media/media.dart';
+import 'package:flutter_mpv/src/models/media/media.dart';
 
 import '../../../common/sources.dart';
 

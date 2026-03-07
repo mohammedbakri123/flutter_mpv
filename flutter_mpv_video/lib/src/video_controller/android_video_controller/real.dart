@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:synchronized/synchronized.dart';
 
-import 'package:flutter_mpv/media_kit.dart';
+import 'package:flutter_mpv/flutter_mpv.dart';
 
 import 'package:flutter_mpv_video/src/utils/query_decoders.dart';
 import 'package:flutter_mpv_video/src/video_controller/platform_video_controller.dart';
