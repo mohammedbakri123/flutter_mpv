@@ -1,6 +1,6 @@
-# melos_managed_dependency_overrides: media_kit,media_kit_video
+# melos_managed_dependency_overrides: flutter_mpv,flutter_mpv_video
 dependency_overrides:
-  media_kit:
+  flutter_mpv:
     path: ../../media_kit
-  media_kit_video:
+  flutter_mpv_video:
     path: ..

@@ -1,4 +1,4 @@
-name: media_kit_video_example
+name: flutter_mpv_video_example
 publish_to: "none"
 
 environment:
@@ -8,7 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  media_kit_video:
+  flutter_mpv_video:
     path: ../
 
   cupertino_icons: ^1.0.2

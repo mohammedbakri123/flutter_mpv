@@ -26,5 +26,5 @@ export 'package:flutter_mpv/src/player/platform_player.dart';
 export 'package:flutter_mpv/src/player/video_performance_presets.dart';
 export 'package:flutter_mpv/src/player/player.dart';
 
-export 'package:flutter_mpv/src/player/native/player/player.dart';
-export 'package:flutter_mpv/src/player/web/player/player.dart';
+export 'package:flutter_mpv/src/player/native/player/player.dart' show NativePlayer;
+export 'package:flutter_mpv/src/player/web/player/player.dart' show WebPlayer;
