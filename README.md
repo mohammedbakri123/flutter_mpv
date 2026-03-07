@@ -12,8 +12,8 @@ flutter_mpv is split into multiple packages to improve modularity & reduce bundl
 
 ```yaml
 dependencies:
-  media_kit: ^1.2.6 # Primary package.
-  media_kit_video: ^2.0.1 # For video rendering.
+  flutter_mpv: ^1.2.6 # Primary package.
+  flutter_mpv_video: ^2.0.1 # For video rendering.
   media_kit_libs_video: ^1.0.7 # Native video dependencies.
 ```
 
@@ -21,7 +21,7 @@ dependencies:
 
 ```yaml
 dependencies:
-  media_kit: ^1.2.6 # Primary package.
+  flutter_mpv: ^1.2.6 # Primary package.
   media_kit_libs_audio: ^1.0.7 # Native audio dependencies.
 ```
 
@@ -65,16 +65,16 @@ A quick usage example.
 import 'package:flutter/material.dart';
 
 // Make sure to add following packages to pubspec.yaml:
-// * media_kit
-// * media_kit_video
+// * flutter_mpv
+// * flutter_mpv_video
 // * media_kit_libs_video
-import 'package:media_kit/media_kit.dart';                      // Provides [Player], [Media], [Playlist] etc.
-import 'package:media_kit_video/media_kit_video.dart';          // Provides [VideoController] & [Video] etc.
+import 'package:flutter_mpv/flutter_mpv.dart';                      // Provides [Player], [Media], [Playlist] etc.
+import 'package:flutter_mpv_video/flutter_mpv_video.dart';          // Provides [VideoController] & [Video] etc.
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // Necessary initialization for flutter_mpv.
-  MediaKit.ensureInitialized();
+  FlutterMpv.ensureInitialized();
   runApp(
     const MaterialApp(
       home: MyScreen(),
@@ -161,19 +161,21 @@ A usage guide for flutter_mpv.
 
 ### Initialization
 
-`MediaKit.ensureInitialized` must be called before using the package:
+`FlutterMpv.ensureInitialized` must be called before using the package:
 
 ```dart
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // Make sure to add the required packages to pubspec.yaml:
   // * See Installation section
-  MediaKit.ensureInitialized();
+  FlutterMpv.ensureInitialized();
   runApp(const MyApp());
 }
 ```
 
 The method also has some optional arguments to customize the global behavior. To handle any initialization errors, this may be surrounded by `try`/`catch`.
+
+**Note:** For backward compatibility, `MediaKit.ensureInitialized()` still works but is deprecated. Use `FlutterMpv.ensureInitialized()` instead.
 
 ### Create a `Player`
 
@@ -648,7 +650,7 @@ The video playback uses [hardware acceleration](https://en.wikipedia.org/wiki/Ha
 Additional options may be provided using the `configuration` argument in the constructor. In general situations, you will never require this.
 
 ```dart
-final VideoController player = VideoController(
+final VideoController controller = VideoController(
   player,
   configuration: const VideoControllerConfiguration(
     // Supply your options:
@@ -656,7 +658,7 @@ final VideoController player = VideoController(
     width: 640,                            // default: null
     height: 480,                           // default: null
     // The in-code comments is best place to know more about these options:
-    // https://github.com/media-kit/media-kit/blob/main/media_kit_video/lib/src/video_controller/video_controller.dart
+    // See: flutter_mpv_video package source code
   ),
 );
 ```
@@ -777,7 +779,7 @@ await player.setAudioTrack(
 
 ### Video controls
 
-[`package:media_kit`](https://github.com/media-kit/media-kit) provides highly-customizable pre-built video controls for usage.
+`flutter_mpv` provides highly-customizable pre-built video controls for usage.
 
 Apart from theming, layout can be customized, position of buttons can be modified, custom buttons can be created etc. Necessary features like fullscreen, keyboard shortcuts & swipe-based controls are also supported by default.
 
@@ -1025,9 +1027,53 @@ CupertinoVideoControlsTheme(
 
 flutter_mpv provides extensive control over video decoding and rendering performance through the `VideoPerformanceConfiguration` class. This allows you to fine-tune playback for specific use cases, device capabilities, or quality requirements.
 
+### Quick Start: Using Presets (Recommended)
+
+For most use cases, **using predefined presets is the easiest and recommended approach**. Presets are optimized configurations tested for common scenarios:
+
+```dart
+import 'package:flutter_mpv/flutter_mpv.dart';
+import 'package:flutter_mpv_video/flutter_mpv_video.dart';
+
+void main() {
+  FlutterMpv.ensureInitialized();
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Use a preset for common scenarios
+    final player = Player(
+      configuration: PlayerConfiguration(
+        videoPerformance: VideoPerformancePresets.balanced, // Best for most cases
+        bufferSize: 64 * 1024 * 1024,
+      ),
+    );
+    
+    final controller = VideoController(player);
+    // ... rest of your code
+  }
+}
+```
+
+### Available Presets
+
+| Preset | Best For | Performance | Quality | Battery Impact |
+|--------|----------|-------------|---------|----------------|
+| `VideoPerformancePresets.balanced` | General purpose, most apps | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | Medium |
+| `VideoPerformancePresets.highQuality` | High-end devices, quality-focused apps | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | High |
+| `VideoPerformancePresets.lowEndDevice` | Older devices, budget phones | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | Low |
+| `VideoPerformancePresets.fastSeeking` | Apps with frequent seeking | ⭐⭐⭐⭐ | ⭐⭐⭐ | Medium |
+| `VideoPerformancePresets.streaming` | Online video streaming | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | Medium |
+| `VideoPerformancePresets.smoothMotion` | Sports, action videos | ⭐⭐⭐ | ⭐⭐⭐⭐ | High |
+| `VideoPerformancePresets.softwareDecoding` | Debugging, compatibility issues | ⭐⭐ | ⭐⭐⭐ | High |
+| `VideoPerformancePresets.qualityFirst` | Professional video apps | ⭐⭐ | ⭐⭐⭐⭐⭐ | Very High |
+| `VideoPerformancePresets.animation` | Anime, cartoons, animated content | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | Medium |
+
 ### Video Performance Configuration
 
-The `VideoPerformanceConfiguration` class provides fine-grained control over video decoding, rendering, and performance. It can be passed to the `PlayerConfiguration` when creating a `Player` instance.
+For advanced users who need fine-grained control, `VideoPerformanceConfiguration` provides detailed options for video decoding, rendering, and performance tuning.
 
 #### Basic Usage
 
@@ -1035,253 +1081,572 @@ The `VideoPerformanceConfiguration` class provides fine-grained control over vid
 final player = Player(
   configuration: PlayerConfiguration(
     videoPerformance: VideoPerformanceConfiguration(
+      // Decoding
       hardwareDecoding: 'auto',
       frameDropping: 'decoder',
+      fastDecoding: 'no',
+      
+      // Synchronization
       videoSync: 'audio',
+      hrSeek: 'yes',
+      fastSeek: 'no',
+      
+      // Scaling
       scaler: 'bicubic',
       downScaler: 'bicubic',
       interpolation: false,
+      
+      // Rendering
       deinterlacing: 'auto',
+      gpuApi: 'auto',
+      
+      // Cache
       optimizeForLocalFiles: true,
       cacheSecs: 60,
-      hrSeek: 'yes',
-      softwareDecodingDirectRendering: 'yes',
-      fastDecoding: 'no',
-      openglPbo: 'yes',
-      videoLatencyHacks: 'no',
-      gpuApi: 'auto',
-      decoderOptions: '',
-      hwdecCodecs: 'all',
-      hrSeekFramedrop: 'yes',
-      fastSeek: 'no',
     ),
     bufferSize: 64 * 1024 * 1024,
   ),
 );
 ```
 
-#### Configuration Options
+#### Configuration Options Reference
 
-##### Decoding Settings
+##### 🔓 Decoding Settings
 
 **`hardwareDecoding`** (String?)
-- Controls how video is decoded
-- Options: `'auto'`, `'auto-copy'`, `'yes'`, `'no'`, `'mediacodec'` (Android), `'videotoolbox'` (iOS/macOS), `'d3d11va'` (Windows), `'vaapi'` (Linux)
-- Default: `null` (auto-detect)
-- Use `'auto'` to try hardware decoding with fallback to software
-- Use `'no'` to force software decoding (useful for debugging)
 
-**`decoderThreads`** (int?)
-- Number of threads for video decoding
-- Default: `null` (auto-detect based on CPU cores)
-- Higher values improve decoding speed but use more CPU
-- Most videos decode fine with 2-4 threads
+Controls the hardware acceleration method for video decoding.
 
-**`frameDropping`** (String?)
-- Controls when frames can be dropped to maintain A/V sync
-- Options: `'no'`, `'decoder'`, `'vo'`, `'decoder+vo'`
-- Default: `'decoder'`
-- Use `'no'` for quality-critical applications (may cause stuttering)
-- Use `'decoder+vo'` for smooth playback on slow devices
+| Value | Description | When to Use |
+|-------|-------------|-------------|
+| `'auto'` | Try hardware, fallback to software | **Recommended for most cases** |
+| `'auto-copy'` | Auto with surface upload | When using custom video rendering |
+| `'yes'` | Force hardware decoding | When you're sure HW is available |
+| `'no'` | Force software decoding | Debugging, compatibility issues |
+| `'mediacodec'` | Android MediaCodec | Android-specific optimization |
+| `'videotoolbox'` | iOS/macOS VideoToolbox | Apple devices |
+| `'d3d11va'` | Windows Direct3D 11 | Windows devices |
+| `'vaapi'` | Linux VAAPI | Linux devices |
 
-**`fastDecoding`** (String?)
-- Enable faster, lower-quality decoding for software decoders
-- Options: `'yes'`, `'no'`
-- Default: `'no'`
-- Can improve performance on slower devices
+**Default:** `null` (auto-detect)
 
-**`decoderOptions`** (String?)
-- Provide specific options to ffmpeg decoder
-- Format: Key/value pairs separated by commas (e.g., `'threads=4'`)
-- Default: `null`
-
-**`hwdecCodecs`** (String?)
-- Restrict hardware decoding to specific codecs
-- Options: `'all'`, `'h264,hevc'`, `'h264,hevc,vp9'`, etc.
-- Default: `'all'`
-
-##### Synchronization Settings
-
-**`videoSync`** (String?)
-- Controls how video syncs to audio
-- Options: `'audio'`, `'display'`, `'display-resample'`, `'display-vdrop'`, `'mem-sync'`
-- Default: `'audio'`
-- Use `'display-resample'` for high-end devices (smoothest)
-- Use `'audio'` for compatibility
-
-**`hrSeek`** (String?)
-- Enable high-resolution seeking
-- Options: `'no'`, `'yes'`, `'absolute'`
-- Default: `'yes'`
-- Allows for more precise seeking
-
-**`hrSeekFramedrop`** (String?)
-- Allow frame dropping during high-resolution seeking
-- Options: `'yes'`, `'no'`
-- Default: `'yes'`
-- Significantly speeds up seeking when enabled
-
-**`fastSeek`** (String?)
-- Allow jumping to keyframes when seeking
-- Options: `'yes'`, `'no'`
-- Default: `'no'`
-- Improves seeking speed tremendously when enabled
-
-##### Scaling Settings
-
-**`scaler`** (String?)
-- Video scaling algorithm for upscaling
-- Options: `'bilinear'`, `'bicubic'`, `'lanczos'`, `'spline36'`, `'ewa_lanczos'`
-- Default: `'bicubic'`
-- Use `'bilinear'` for low-end devices (fastest)
-- Use `'lanczos'` or `'spline36'` for high-quality playback
-
-**`downScaler`** (String?)
-- Video scaling algorithm for downscaling
-- Same options as `scaler`
-- Default: `'bicubic'`
-
-**`interpolation`** (bool)
-- Enable frame interpolation to match display refresh rate
-- Default: `false`
-- Creates smoother motion but increases CPU/GPU usage
-- Requires `videoSync` to be `'display-resample'` or similar
-
-##### Rendering Settings
-
-**`deinterlacing`** (String?)
-- Controls how interlaced video is handled
-- Options: `'no'`, `'yes'`, `'auto'`
-- Default: `'auto'` (deinterlace only when needed)
-
-**`gpuApi`** (String?)
-- Force a specific graphics API
-- Options: `'auto'`, `'opengl'`, `'vulkan'`, `'d3d11'`
-- Default: `'auto'` (auto-detect)
-
-**`openglPbo`** (String?)
-- Allow OpenGL to use PBOs (Pixel Buffer Objects) for faster texture uploads
-- Options: `'yes'`, `'no'`
-- Default: `'yes'`
-- Can improve performance when using OpenGL
-
-**`softwareDecodingDirectRendering`** (String?)
-- Direct rendering for software decoding
-- Options: `'yes'`, `'no'`
-- Default: `'yes'`
-- Can significantly improve performance by decoding directly to video memory
-
-**`videoLatencyHacks`** (String?)
-- Enable latency hacks to reduce video latency
-- Options: `'yes'`, `'no'`
-- Default: `'no'`
-
-##### Cache Settings
-
-**`optimizeForLocalFiles`** (bool)
-- Optimize for local file playback
-- Default: `true`
-- When enabled:
-  - Disables network readahead
-  - Increases back buffer for fast seeking
-  - Reduces initial buffering time
-  - Optimizes cache for local storage
-- Set to `false` for network/streaming content
-
-**`cacheSecs`** (int)
-- Cache duration in seconds
-- Default: `60`
-- Specifies how many seconds of content to cache
-
-### Video Performance Presets
-
-For convenience, flutter_mpv provides pre-configured presets for common use cases through the `VideoPerformancePresets` class.
-
-#### Available Presets
-
-**`VideoPerformancePresets.lowEndDevice`**
-- Optimized for low-end or older devices
-- Uses software decoding with reduced quality
-- Minimal frame dropping
-- Basic scaling algorithms
-
-**`VideoPerformancePresets.highQuality`**
-- Maximum quality settings
-- Hardware decoding enabled
-- High-quality scaling algorithms (lanczos)
-- Display-resample sync for smooth playback
-
-**`VideoPerformancePresets.balanced`**
-- Balanced quality and performance
-- Auto hardware decoding
-- Bicubic scaling
-- Standard sync settings
-
-**`VideoPerformancePresets.fastSeeking`**
-- Optimized for quick seeking
-- Fast seek enabled
-- HR seek with frame drop
-- Optimized cache settings
-
-**`VideoPerformancePresets.softwareDecoding`**
-- Forces software decoding
-- Useful for debugging or compatibility
-- Direct rendering enabled
-
-**`VideoPerformancePresets.smoothMotion`**
-- Optimized for smooth motion
-- Frame interpolation enabled
-- Display-resample sync
-- Temporal smoothing
-
-**`VideoPerformancePresets.streaming`**
-- Optimized for network streaming
-- Larger cache buffers
-- Optimized for network conditions
-- Reduced initial buffering
-
-**`VideoPerformancePresets.qualityFirst`**
-- Prioritizes quality over performance
-- Best scaling algorithms
-- No frame dropping
-- High-quality rendering
-
-**`VideoPerformancePresets.animation`**
-- Optimized for animated content
-- Sharp scaling algorithms
-- Appropriate color handling
-
-#### Using Presets
+**Performance Impact:** Hardware decoding can reduce CPU usage by 50-80% and improve battery life.
 
 ```dart
-// Use a preset
+// Example: Force software decoding for debugging
+VideoPerformanceConfiguration(
+  hardwareDecoding: 'no',
+)
+```
+
+---
+
+**`decoderThreads`** (int?)
+
+Number of threads used for video decoding.
+
+- **Range:** 1-16
+- **Default:** `null` (auto-detect based on CPU cores)
+
+**Guidelines:**
+- `1-2`: Low-end devices, audio-only playback
+- `2-4`: Most devices, standard HD playback (recommended)
+- `4-8`: High-end devices, 4K playback
+- `8+`: Professional workstations, 8K playback
+
+```dart
+// Example: Limit threads for battery saving
+VideoPerformanceConfiguration(
+  decoderThreads: 2,
+)
+```
+
+---
+
+**`frameDropping`** (String?)
+
+Controls when frames can be dropped to maintain audio/video synchronization.
+
+| Value | Description | Use Case |
+|-------|-------------|----------|
+| `'no'` | Never drop frames | Quality-critical, may stutter |
+| `'decoder'` | Drop during decoding only | **Default, balanced** |
+| `'vo'` | Drop during video output only | Rarely used |
+| `'decoder+vo'` | Drop in both stages | Smooth playback on slow devices |
+
+**Default:** `'decoder'`
+
+```dart
+// Example: Maximum quality (may stutter on slow devices)
+VideoPerformanceConfiguration(
+  frameDropping: 'no',
+)
+
+// Example: Maximum smoothness (may drop frames)
+VideoPerformanceConfiguration(
+  frameDropping: 'decoder+vo',
+)
+```
+
+---
+
+**`fastDecoding`** (String?)
+
+Enables faster, lower-quality decoding for software decoders.
+
+- `'yes'`: Faster decoding, lower quality
+- `'no'`: Standard quality (**default**)
+
+**Use Case:** Enable on low-end devices when experiencing playback issues.
+
+```dart
+VideoPerformanceConfiguration(
+  fastDecoding: 'yes', // For low-end devices
+)
+```
+
+---
+
+**`decoderOptions`** (String?)
+
+Advanced FFmpeg decoder options as comma-separated key/value pairs.
+
+**Common Options:**
+- `'threads=4'`: Set thread count
+- `'flags=low_delay'`: Low delay mode
+- `'skip_loop_filter=all'`: Skip loop filter (faster, lower quality)
+
+```dart
+// Example: Custom FFmpeg options
+VideoPerformanceConfiguration(
+  decoderOptions: 'threads=4,flags=low_delay',
+)
+```
+
+---
+
+**`hwdecCodecs`** (String?)
+
+Restricts hardware decoding to specific codecs.
+
+**Options:**
+- `'all'`: All codecs (**default**)
+- `'h264,hevc'`: H.264 and HEVC/H.265 only
+- `'h264'`: H.264 only
+- `'vp9'`: VP9 only
+
+```dart
+// Example: Only use HW decoding for H.264 and HEVC
+VideoPerformanceConfiguration(
+  hwdecCodecs: 'h264,hevc',
+)
+```
+
+---
+
+##### 🔄 Synchronization Settings
+
+**`videoSync`** (String?)
+
+Controls how video frames are synchronized to audio.
+
+| Value | Description | Quality | Performance | Best For |
+|-------|-------------|---------|-------------|----------|
+| `'audio'` | Sync to audio clock | Good | ⭐⭐⭐⭐⭐ | **Default, most compatible** |
+| `'display'` | Sync to display refresh | Better | ⭐⭐⭐⭐ | Standard displays |
+| `'display-resample'` | Resample to display rate | Best | ⭐⭐⭐ | High-end devices, smooth motion |
+| `'display-vdrop'` | Display with frame drop | Good | ⭐⭐⭐⭐ | When frames need dropping |
+| `'mem-sync'` | Memory-based sync | Good | ⭐⭐⭐⭐ | Specialized use cases |
+
+**Default:** `'audio'`
+
+```dart
+// Example: Smoothest playback for high-end devices
+VideoPerformanceConfiguration(
+  videoSync: 'display-resample',
+  interpolation: true, // Works best with interpolation
+)
+```
+
+---
+
+**`hrSeek`** (String?)
+
+Enables high-resolution seeking for precise position control.
+
+| Value | Description |
+|-------|-------------|
+| `'no'` | Fast, less accurate seeking |
+| `'yes'` | **Default**, precise seeking |
+| `'absolute'` | Absolute timestamp seeking |
+
+**Default:** `'yes'`
+
+**Tip:** Set to `'no'` for faster seeking in long videos where frame-perfect accuracy isn't needed.
+
+```dart
+VideoPerformanceConfiguration(
+  hrSeek: 'yes', // Default, precise
+)
+```
+
+---
+
+**`hrSeekFramedrop`** (String?)
+
+Allows frame dropping during high-resolution seeking.
+
+- `'yes'`: Faster seeking (**default**)
+- `'no'`: Slower but smoother seeking
+
+**Default:** `'yes'`
+
+```dart
+// Enable for much faster seeking (recommended)
+VideoPerformanceConfiguration(
+  hrSeekFramedrop: 'yes',
+)
+```
+
+---
+
+**`fastSeek`** (String?)
+
+Enables keyframe-based seeking for dramatically faster seek operations.
+
+- `'yes'`: Jump to nearest keyframe (very fast)
+- `'no'`: Exact frame seeking (**default**, slower)
+
+**Default:** `'no'`
+
+**Performance:** Can improve seeking speed by 10x or more, but may not land on exact frame.
+
+```dart
+// Example: Enable for apps with frequent seeking
+VideoPerformanceConfiguration(
+  fastSeek: 'yes',
+  hrSeek: 'yes',
+  hrSeekFramedrop: 'yes',
+)
+```
+
+---
+
+##### 📐 Scaling Settings
+
+**`scaler`** (String?)
+
+Video scaling algorithm used for **upscaling** (making video larger).
+
+| Algorithm | Quality | Speed | Best For |
+|-----------|---------|-------|----------|
+| `'bilinear'` | Low | ⭐⭐⭐⭐⭐ | Low-end devices, fastest |
+| `'bicubic'` | Medium | ⭐⭐⭐⭐ | **Default, balanced** |
+| `'lanczos'` | High | ⭐⭐⭐ | High-quality playback |
+| `'spline36'` | Very High | ⭐⭐ | Professional quality |
+| `'ewa_lanczos'` | Highest | ⭐ | Best quality, slowest |
+
+**Default:** `'bicubic'`
+
+```dart
+// Example: High quality upscaling
+VideoPerformanceConfiguration(
+  scaler: 'lanczos',
+)
+
+// Example: Maximum performance
+VideoPerformanceConfiguration(
+  scaler: 'bilinear',
+)
+```
+
+---
+
+**`downScaler`** (String?)
+
+Video scaling algorithm used for **downscaling** (making video smaller).
+
+Same options as `scaler`.
+
+**Default:** `'bicubic'`
+
+```dart
+// Example: Match upscaling algorithm
+VideoPerformanceConfiguration(
+  scaler: 'lanczos',
+  downScaler: 'lanczos',
+)
+```
+
+---
+
+**`interpolation`** (bool)
+
+Enables frame interpolation to match video framerate to display refresh rate.
+
+- `true`: Creates intermediate frames for smoother motion
+- `false`: **Default**, no interpolation
+
+**Requirements:**
+- Requires `videoSync: 'display-resample'` or similar
+- Increases CPU/GPU usage significantly
+- May cause artifacts in fast-motion scenes
+
+**Default:** `false`
+
+```dart
+// Example: Enable for ultra-smooth motion
+VideoPerformanceConfiguration(
+  interpolation: true,
+  videoSync: 'display-resample',
+)
+```
+
+---
+
+##### 🎨 Rendering Settings
+
+**`deinterlacing`** (String?)
+
+Controls how interlaced video content is handled.
+
+| Value | Description |
+|-------|-------------|
+| `'no'` | Disable deinterlacing |
+| `'yes'` | Always deinterlace |
+| `'auto'` | Deinterlace only when needed (**default**) |
+
+**Default:** `'auto'`
+
+**Note:** Most modern video is progressive (not interlaced), so `'auto'` is recommended.
+
+```dart
+VideoPerformanceConfiguration(
+  deinterlacing: 'auto', // Default, recommended
+)
+```
+
+---
+
+**`gpuApi`** (String?)
+
+Forces a specific graphics API for rendering.
+
+| Value | Platform | Description |
+|-------|----------|-------------|
+| `'auto'` | All | Auto-detect (**default**) |
+| `'opengl'` | All | Most compatible |
+| `'vulkan'` | Modern devices | Best performance on supported devices |
+| `'d3d11'` | Windows | Direct3D 11 |
+
+**Default:** `'auto'`
+
+```dart
+// Example: Force Vulkan for better performance
+VideoPerformanceConfiguration(
+  gpuApi: 'vulkan',
+)
+```
+
+---
+
+**`openglPbo`** (String?)
+
+Enables OpenGL Pixel Buffer Objects for faster texture uploads.
+
+- `'yes'`: **Default**, improved performance
+- `'no'`: Disable (debugging only)
+
+**Default:** `'yes'`
+
+```dart
+VideoPerformanceConfiguration(
+  openglPbo: 'yes', // Default, recommended
+)
+```
+
+---
+
+**`softwareDecodingDirectRendering`** (String?)
+
+Enables direct rendering for software decoding.
+
+- `'yes'`: **Default**, better performance
+- `'no'`: Disable (debugging only)
+
+**Default:** `'yes'`
+
+```dart
+VideoPerformanceConfiguration(
+  softwareDecodingDirectRendering: 'yes', // Default
+)
+```
+
+---
+
+**`videoLatencyHacks`** (String?)
+
+Enables various optimizations to reduce video latency.
+
+- `'yes'`: Lower latency, may reduce quality
+- `'no'`: **Default**, standard quality
+
+**Default:** `'no'`
+
+**Use Case:** Enable for live streaming or video calls where latency matters.
+
+```dart
+VideoPerformanceConfiguration(
+  videoLatencyHacks: 'yes', // For low-latency scenarios
+)
+```
+
+---
+
+##### 💾 Cache Settings
+
+**`optimizeForLocalFiles`** (bool)
+
+Optimizes playback for local file access vs. network streaming.
+
+When `true` (**default**):
+- ✅ Disables network readahead
+- ✅ Increases back buffer for fast seeking
+- ✅ Reduces initial buffering time
+- ✅ Optimizes cache for local storage
+
+When `false`:
+- Better for network/streaming content
+- Larger network buffers
+
+**Default:** `true`
+
+```dart
+// For local video player apps
+VideoPerformanceConfiguration(
+  optimizeForLocalFiles: true, // Default
+)
+
+// For streaming apps
+VideoPerformanceConfiguration(
+  optimizeForLocalFiles: false,
+)
+```
+
+---
+
+**`cacheSecs`** (int)
+
+Duration of content to cache in seconds.
+
+- **Range:** 10-300 seconds
+- **Default:** `60`
+
+**Guidelines:**
+- `10-30`: Short videos, low memory devices
+- `60`: **Default**, balanced
+- `120-300`: Long videos, good network, frequent seeking
+
+```dart
+// Example: Increase cache for better seeking
+VideoPerformanceConfiguration(
+  cacheSecs: 120,
+)
+```
+
+---
+
+### Complete Configuration Examples
+
+#### Example 1: High-Quality Local Video Player
+
+```dart
 final player = Player(
   configuration: PlayerConfiguration(
-    videoPerformance: VideoPerformancePresets.highQuality,
-    bufferSize: 64 * 1024 * 1024,
+    videoPerformance: VideoPerformanceConfiguration(
+      // Best quality decoding
+      hardwareDecoding: 'auto',
+      frameDropping: 'no',
+      
+      // Smooth synchronization
+      videoSync: 'display-resample',
+      hrSeek: 'yes',
+      fastSeek: 'no',
+      
+      // High-quality scaling
+      scaler: 'lanczos',
+      downScaler: 'lanczos',
+      
+      // Optimized for local files
+      optimizeForLocalFiles: true,
+      cacheSecs: 120,
+    ),
+    bufferSize: 128 * 1024 * 1024, // Larger buffer
   ),
 );
+```
 
-// Or create a custom configuration
+#### Example 2: Streaming App (Low Latency)
+
+```dart
 final player = Player(
   configuration: PlayerConfiguration(
-    videoPerformance: const VideoPerformanceConfiguration(
+    videoPerformance: VideoPerformanceConfiguration(
+      // Balanced decoding
       hardwareDecoding: 'auto',
-      scaler: 'lanczos',
-      videoSync: 'display-resample',
-      optimizeForLocalFiles: true,
+      frameDropping: 'decoder',
+      
+      // Fast seeking for scrubbing
+      hrSeek: 'yes',
+      hrSeekFramedrop: 'yes',
+      fastSeek: 'yes',
+      
+      // Optimized for streaming
+      optimizeForLocalFiles: false,
+      cacheSecs: 30,
+      
+      // Lower latency
+      videoLatencyHacks: 'yes',
     ),
-    bufferSize: 64 * 1024 * 1024,
+    bufferSize: 32 * 1024 * 1024, // Smaller buffer for lower latency
+  ),
+);
+```
+
+#### Example 3: Low-End Device Optimization
+
+```dart
+final player = Player(
+  configuration: PlayerConfiguration(
+    videoPerformance: VideoPerformanceConfiguration(
+      // Performance-focused
+      hardwareDecoding: 'auto',
+      frameDropping: 'decoder+vo',
+      fastDecoding: 'yes',
+      decoderThreads: 2,
+      
+      // Fast scaling
+      scaler: 'bilinear',
+      downScaler: 'bilinear',
+      
+      // Standard sync
+      videoSync: 'audio',
+      
+      // Minimal cache
+      cacheSecs: 30,
+    ),
+    bufferSize: 16 * 1024 * 1024,
   ),
 );
 ```
 
 ### Persisting Settings
 
-You can persist advanced settings using `SharedPreferences` or similar storage solutions. Here's an example pattern:
+You can persist advanced settings using `SharedPreferences` or similar storage solutions. Here's a complete example:
 
 ```dart
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_mpv/flutter_mpv.dart';
 
 class AppSettings {
   static late final SharedPreferences prefs;
@@ -1290,20 +1655,33 @@ class AppSettings {
     prefs = await SharedPreferences.getInstance();
   }
 
+  // Hardware decoding setting
   static String get hwdec => prefs.getString('hwdec') ?? 'auto';
   static set hwdec(String value) => prefs.setString('hwdec', value);
 
+  // Scaler setting
   static String get scaler => prefs.getString('scaler') ?? 'bicubic';
   static set scaler(String value) => prefs.setString('scaler', value);
 
-  // Add more settings as needed...
+  // Video sync setting
+  static String get videoSync => prefs.getString('video_sync') ?? 'audio';
+  static set videoSync(String value) => prefs.setString('video_sync', value);
+
+  // Cache duration
+  static int get cacheSecs => prefs.getInt('cache_secs') ?? 60;
+  static set cacheSecs(int value) => prefs.setInt('cache_secs', value);
+
+  // Reset to defaults
+  static Future<void> reset() async {
+    await prefs.clear();
+  }
 }
 
 // Usage in your app initialization:
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppSettings.init();
-  MediaKit.ensureInitialized();
+  FlutterMpv.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -1313,17 +1691,83 @@ final player = Player(
     videoPerformance: VideoPerformanceConfiguration(
       hardwareDecoding: AppSettings.hwdec,
       scaler: AppSettings.scaler,
-      // ... other settings
+      videoSync: AppSettings.videoSync,
+      cacheSecs: AppSettings.cacheSecs,
     ),
+    bufferSize: 64 * 1024 * 1024,
   ),
 );
 ```
+
+### Troubleshooting Guide
+
+#### Common Issues and Solutions
+
+**Issue: Video stuttering or frame drops**
+```dart
+// Solution: Allow more frame dropping
+VideoPerformanceConfiguration(
+  frameDropping: 'decoder+vo',
+  fastDecoding: 'yes',
+)
+```
+
+**Issue: High battery consumption**
+```dart
+// Solution: Use more efficient settings
+VideoPerformanceConfiguration(
+  hardwareDecoding: 'auto', // Ensure HW decoding is enabled
+  scaler: 'bilinear',
+  decoderThreads: 2,
+  interpolation: false,
+)
+```
+
+**Issue: Seeking is too slow**
+```dart
+// Solution: Enable fast seeking
+VideoPerformanceConfiguration(
+  fastSeek: 'yes',
+  hrSeekFramedrop: 'yes',
+  cacheSecs: 120, // Increase cache for better seeking
+)
+```
+
+**Issue: Poor video quality**
+```dart
+// Solution: Prioritize quality over performance
+VideoPerformanceConfiguration(
+  frameDropping: 'no',
+  scaler: 'lanczos',
+  downScaler: 'lanczos',
+  videoSync: 'display-resample',
+)
+```
+
+**Issue: Compatibility problems on old devices**
+```dart
+// Solution: Use software decoding
+VideoPerformanceConfiguration(
+  hardwareDecoding: 'no',
+  fastDecoding: 'yes',
+  scaler: 'bilinear',
+)
+```
+
+### Performance Tips
+
+1. **Start with presets**: Use `VideoPerformancePresets.balanced` as a baseline
+2. **Test on target devices**: Performance varies significantly across devices
+3. **Monitor battery impact**: High-quality settings drain battery faster
+4. **Consider your use case**: Streaming vs. local playback need different optimizations
+5. **Provide user settings**: Allow users to adjust quality vs. performance
+6. **Profile before optimizing**: Use Flutter DevTools to identify bottlenecks
 
 ### Next steps
 
 This guide follows a tutorial-like structure & covers nearly all features that flutter_mpv offers. However, it is _not complete_ by any means. You are free to improve this page & add more documentation, which newcomers may find helpful. The following places can help you learn more:
 
-- [API reference](https://pub.dev/documentation/media_kit/latest/media_kit/media_kit-library.html) can be helpful for diving into deeper specifics.
+- [API reference](https://pub.dev/documentation/flutter_mpv/latest/flutter_mpv/flutter_mpv-library.html) can be helpful for diving into deeper specifics.
 - [source-code of the demo application](https://github.com/media-kit/media-kit/tree/main/media_kit_test/lib/tests) offers some complete code samples.
 - In-code comments & docstrings happen to be the most updated source of knowledge.
 
