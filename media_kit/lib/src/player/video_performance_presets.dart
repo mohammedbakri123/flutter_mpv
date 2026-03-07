@@ -122,6 +122,13 @@ class VideoPerformancePresets {
     interpolation: false,
     deinterlacing: 'auto',
     optimizeForLocalFiles: true,
+    demuxerMaxBytes: '64M',
+    demuxerMaxBackBytes: '64M',
+    profile: 'fast',
+    cache: 'yes',
+    cacheSecs: 30,
+    cacheBack: '200M',
+    hrSeek: 'yes',
   );
 
   /// Software decoding configuration for debugging or compatibility.
@@ -205,7 +212,7 @@ class VideoPerformancePresets {
     downScaler: 'bilinear',
     interpolation: false,
     deinterlacing: 'auto',
-    optimizeForLocalFiles: false,  // Streaming mode
+    optimizeForLocalFiles: false, // Streaming mode
   );
 
   /// Quality-first configuration for local high-bitrate content.

@@ -191,6 +191,30 @@ class AndroidVideoController extends PlatformVideoController {
       },
     );
 
+    // Wait for the surface to be created and wid to be available
+    // This is critical for video rendering on Android
+    if (controller.wid.value == null || controller.wid.value == 0) {
+      final completer = Completer<void>();
+      void widListener() {
+        if (controller.wid.value != null && controller.wid.value != 0) {
+          controller.wid.removeListener(widListener);
+          if (!completer.isCompleted) {
+            completer.complete();
+          }
+        }
+      }
+      controller.wid.addListener(widListener);
+      
+      // Timeout after 10 seconds
+      await completer.future.timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          debugPrint('media_kit: Timeout waiting for surface creation');
+          controller.wid.removeListener(widListener);
+        },
+      );
+    }
+
     await controller.setProperties(
       {
         // It is necessary to set vo=null here to avoid SIGSEGV, --wid must be assigned before vo=gpu is set.

@@ -582,6 +582,154 @@ class VideoPerformanceConfiguration {
   /// Set to `false` for network/streaming content.
   final bool optimizeForLocalFiles;
 
+  /// Maximum cache size for demuxer (in bytes).
+  ///
+  /// Controls the maximum amount of memory used for demuxing.
+  /// Accepts a string value (e.g., '150MB', '1GB').
+  ///
+  /// Default: `null` (uses mpv default)
+  ///
+  /// See: https://mpv.io/manual/master/#options-demuxer-max-bytes
+  final String? demuxerMaxBytes;
+
+  /// Maximum back buffer size for demuxer.
+  ///
+  /// Controls how much data is kept in the back buffer for seeking.
+  /// Accepts a string value (e.g., '150MB', '1GB').
+  ///
+  /// Default: `null` (uses mpv default)
+  ///
+  /// See: https://mpv.io/manual/master/#options-demuxer-max-back-bytes
+  final String? demuxerMaxBackBytes;
+
+  /// Hardware decoding profile.
+  ///
+  /// Specifies a profile for hardware decoding.
+  /// Accepts profile names like 'baseline', 'main', 'high', etc.
+  ///
+  /// Default: `null` (uses mpv default)
+  ///
+  /// See: https://mpv.io/manual/master/#options-profile
+  final String? profile;
+
+  /// Enable or disable caching.
+  ///
+  /// Controls whether caching is enabled.
+  /// Accepts 'yes' or 'no'.
+  ///
+  /// Default: `null` (uses mpv default)
+  ///
+  /// See: https://mpv.io/manual/master/#options-cache
+  final String? cache;
+
+  /// Cache duration in seconds.
+  ///
+  /// Specifies how many seconds of content to cache.
+  ///
+  /// Default: `null` (uses mpv default)
+  ///
+  /// See: https://mpv.io/manual/master/#options-cache-secs
+  final int? cacheSecs;
+
+  /// Cache back buffer duration.
+  ///
+  /// Controls how much cached data is kept for backward seeking.
+  /// Accepts a string value (e.g., '10s', '30s').
+  ///
+  /// Default: `null` (uses mpv default)
+  ///
+  /// See: https://mpv.io/manual/master/#options-cache-back
+  final String? cacheBack;
+
+  /// Enable high-resolution seeking.
+  ///
+  /// When enabled, allows for more precise seeking.
+  /// Accepts 'yes' or 'no'.
+  ///
+  /// Default: `null` (uses mpv default)
+  ///
+  /// See: https://mpv.io/manual/master/#options-hr-seek
+  final String? hrSeek;
+
+  /// Direct rendering for software decoding.
+  ///
+  /// Can significantly improve performance by decoding directly to video memory.
+  ///
+  /// Default: `null` (uses mpv default, usually 'yes')
+  ///
+  /// See: https://mpv.io/manual/master/#options-vd-lavc-dr
+  final String? softwareDecodingDirectRendering;
+
+  /// Enable faster, lower-quality decoding for software decoders.
+  ///
+  /// Set to 'yes' to drop some quality for speed.
+  ///
+  /// Default: `null` (uses mpv default, 'no')
+  ///
+  /// See: https://mpv.io/manual/master/#options-vd-lavc-fast
+  final String? fastDecoding;
+
+  /// Allow OpenGL to use PBOs (Pixel Buffer Objects) for faster texture uploads.
+  ///
+  /// Can improve performance when using OpenGL.
+  ///
+  /// Default: `null` (uses mpv default)
+  ///
+  /// See: https://mpv.io/manual/master/#options-opengl-pbo
+  final String? openglPbo;
+
+  /// Enable latency hacks to reduce video latency.
+  ///
+  /// Default: `null` (uses mpv default)
+  ///
+  /// See: https://mpv.io/manual/master/#options-video-latency-hacks
+  final String? videoLatencyHacks;
+
+  /// Force a specific graphics API.
+  ///
+  /// Options: 'opengl', 'vulkan', 'd3d11'
+  ///
+  /// Default: `null` (uses mpv default based on backend)
+  ///
+  /// See: https://mpv.io/manual/master/#options-gpu-api
+  final String? gpuApi;
+
+  /// Provide specific options to ffmpeg decoder.
+  ///
+  /// Key/value pairs separated by commas.
+  ///
+  /// Default: `null`
+  ///
+  /// See: https://mpv.io/manual/master/#options-vd-lavc-o
+  final String? decoderOptions;
+
+  /// Restrict hardware decoding to specific codecs.
+  ///
+  /// e.g. 'h264,hevc' or 'all'.
+  ///
+  /// Default: `null` (uses mpv default)
+  ///
+  /// See: https://mpv.io/manual/master/#options-hwdec-codecs
+  final String? hwdecCodecs;
+
+  /// Allow frame dropping during high-resolution seeking.
+  ///
+  /// Setting this to 'yes' significantly speeds up seeking locally and online.
+  ///
+  /// Default: `null`
+  ///
+  /// See: https://mpv.io/manual/master/#options-hr-seek-framedrop
+  final String? hrSeekFramedrop;
+
+  /// Whether to allow jumping to keyframes when seeking.
+  ///
+  /// Setting this to 'yes' improves seeking speed tremendously.
+  ///
+  /// Default: `null`
+  ///
+  /// See: https://mpv.io/manual/master/#options-hr-seek
+  final String? fastSeek;
+
   /// {@macro video_performance_configuration}
   const VideoPerformanceConfiguration({
     this.hardwareDecoding,
@@ -595,6 +743,22 @@ class VideoPerformanceConfiguration {
     this.deinterlacing,
     this.gpuBackend,
     this.optimizeForLocalFiles = true,
+    this.demuxerMaxBytes,
+    this.demuxerMaxBackBytes,
+    this.profile,
+    this.cache,
+    this.cacheSecs,
+    this.cacheBack,
+    this.hrSeek,
+    this.softwareDecodingDirectRendering,
+    this.fastDecoding,
+    this.openglPbo,
+    this.videoLatencyHacks,
+    this.gpuApi,
+    this.decoderOptions,
+    this.hwdecCodecs,
+    this.hrSeekFramedrop,
+    this.fastSeek,
   });
 }
 
