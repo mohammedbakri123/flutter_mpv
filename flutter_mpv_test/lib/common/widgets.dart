@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:file_picker/file_picker.dart';
 
-import 'package:flutter_mpv/media_kit.dart';
+import 'package:flutter_mpv/flutter_mpv.dart';
 
 import '../common/sources/sources.dart';
 

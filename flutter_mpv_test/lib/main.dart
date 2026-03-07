@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mpv/media_kit.dart';
-import 'package:flutter_mpv_video/media_kit_video.dart';
+import 'package:flutter_mpv/flutter_mpv.dart';
+import 'package:flutter_mpv_video/flutter_mpv_video.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 import 'common/globals.dart';
@@ -20,7 +20,7 @@ import 'tests/11.video_view_parameters.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MediaKit.ensureInitialized();
+  FlutterMpv.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,

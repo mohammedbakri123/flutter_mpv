@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_mpv/media_kit.dart';
-import 'package:flutter_mpv_video/media_kit_video.dart';
+import 'package:flutter_mpv/flutter_mpv.dart';
+import 'package:flutter_mpv_video/flutter_mpv_video.dart';
 
 import '../common/globals.dart';
 import '../common/sources/sources.dart';

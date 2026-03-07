@@ -1,9 +1,9 @@
-# melos_managed_dependency_overrides:
-  # Updated for flutter_mpv media_kit,media_kit_libs_android_video,media_kit_libs_ios_video,media_kit_libs_linux,media_kit_libs_macos_video,media_kit_libs_video,media_kit_libs_windows_video,media_kit_video
+# melos_managed_dependency_overrides: flutter_mpv,flutter_mpv_video
 dependency_overrides:
-  # Updated for flutter_mpv
-  media_kit:
+  flutter_mpv:
     path: ../media_kit
+  flutter_mpv_video:
+    path: ../flutter_mpv_video
   media_kit_libs_android_video:
     path: ../libs/android/media_kit_libs_android_video
   media_kit_libs_ios_video:
@@ -16,5 +16,3 @@ dependency_overrides:
     path: ../libs/universal/media_kit_libs_video
   media_kit_libs_windows_video:
     path: ../libs/windows/media_kit_libs_windows_video
-  media_kit_video:
-    path: ../media_kit_video
