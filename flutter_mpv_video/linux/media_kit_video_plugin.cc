@@ -178,7 +178,7 @@ static MediaKitVideoPlugin* media_kit_video_plugin_new(
       FL_METHOD_CODEC(fl_standard_method_codec_new());
   self->channel =
       fl_method_channel_new(fl_plugin_registrar_get_messenger(registrar),
-                            "com.alexmercerind/media_kit_video", codec);
+                            "com.alexmercerind/flutter_mpv_video", codec);
   fl_method_channel_set_method_call_handler(self->channel, method_call_cb, self,
                                             g_object_unref);
   FlTextureRegistrar* texture_registrar =

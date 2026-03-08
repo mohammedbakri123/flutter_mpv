@@ -26,7 +26,7 @@ public class MediaKitVideoPlugin implements FlutterPlugin, MethodCallHandler {
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "com.alexmercerind/media_kit_video");
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "com.alexmercerind/flutter_mpv_video");
         channel.setMethodCallHandler(this);
 
         videoOutputManager = new VideoOutputManager(flutterPluginBinding.getTextureRegistry());
