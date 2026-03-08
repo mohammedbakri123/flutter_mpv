@@ -17,6 +17,8 @@ import 'package:flutter_mpv/src/player/platform_player.dart';
 /// - High-quality playback on powerful devices
 /// - Balanced settings for most devices
 /// - Software decoding for debugging or compatibility
+/// - Maximum performance for slowest devices
+/// - Reference quality for critical viewing
 ///
 /// {@endtemplate}
 class VideoPerformancePresets {
@@ -31,6 +33,8 @@ class VideoPerformancePresets {
   /// - Aggressive frame dropping to maintain smoothness
   /// - Simple video sync
   /// - Fast bilinear scaling
+  /// - Fast decoding enabled
+  /// - Aggressive HR seek with framedrop
   static const VideoPerformanceConfiguration lowEndDevice =
       VideoPerformanceConfiguration(
     hardwareDecoding: 'auto',
@@ -41,6 +45,12 @@ class VideoPerformancePresets {
     downScaler: 'bilinear',
     interpolation: false,
     deinterlacing: 'auto',
+    fastDecoding: 'yes',
+    softwareDecodingDirectRendering: 'yes',
+    openglPbo: 'yes',
+    hrSeekFramedrop: 'yes',
+    fastSeek: 'yes',
+    cacheSecs: 30,
   );
 
   /// High-quality playback configuration for high-end devices.
@@ -56,10 +66,12 @@ class VideoPerformancePresets {
   /// - Lanczos scaling (high quality)
   /// - Frame interpolation for smooth motion
   /// - Vulkan GPU backend (if available)
+  /// - PBO enabled for faster texture uploads
+  /// - Large cache for high bitrate content
   static const VideoPerformanceConfiguration highQuality =
       VideoPerformanceConfiguration(
     hardwareDecoding: 'auto-copy',
-    decoderThreads: 4,
+    decoderThreads: 6,
     frameDropping: 'no',
     videoSync: 'display-resample',
     scaler: 'lanczos',
@@ -68,6 +80,12 @@ class VideoPerformancePresets {
     temporalScaler: 'oversample',
     deinterlacing: 'auto',
     gpuBackend: 'vulkan',
+    gpuApi: 'vulkan',
+    openglPbo: 'yes',
+    hrSeek: 'yes',
+    hrSeekFramedrop: 'no',
+    fastSeek: 'no',
+    cacheSecs: 120,
   );
 
   /// Balanced configuration for most devices (recommended default).
@@ -82,6 +100,7 @@ class VideoPerformancePresets {
   /// - Simple video sync
   /// - Bicubic scaling (better than bilinear)
   /// - Optimized for local files
+  /// - PBO enabled
   static const VideoPerformanceConfiguration balanced =
       VideoPerformanceConfiguration(
     hardwareDecoding: 'auto',
@@ -93,42 +112,49 @@ class VideoPerformancePresets {
     interpolation: false,
     deinterlacing: 'auto',
     optimizeForLocalFiles: true,
+    openglPbo: 'yes',
+    cacheSecs: 60,
   );
 
-  /// Fast seeking configuration for local file playback.
+  /// Ultra-fast seeking configuration for local file playback.
   ///
   /// Optimized specifically for quick seeking in local files.
   /// Maximizes cache and disables network-related buffering.
   ///
   /// Features:
   /// - Hardware decoding
-  /// - Large back buffer (20MB)
-  /// - No network readahead
-  /// - Disk caching enabled
-  /// - 60 second cache ahead
+  /// - Aggressive frame dropping during seek
+  /// - Fast seek to keyframes
+  /// - Large back buffer for quick backward seeks
+  /// - Minimal cache for responsiveness
+  /// - HR seek with framedrop enabled
   ///
   /// Best for:
   /// - Local video files
   /// - Frequently seeking
   /// - Scrubbing through videos
+  /// - Video editing preview
   static const VideoPerformanceConfiguration fastSeeking =
       VideoPerformanceConfiguration(
     hardwareDecoding: 'auto',
-    decoderThreads: null,
-    frameDropping: 'decoder',
+    decoderThreads: 4,
+    frameDropping: 'decoder+vo',
     videoSync: 'audio',
     scaler: 'bicubic',
     downScaler: 'bicubic',
     interpolation: false,
     deinterlacing: 'auto',
     optimizeForLocalFiles: true,
-    demuxerMaxBytes: '64M',
-    demuxerMaxBackBytes: '64M',
+    demuxerMaxBytes: '32M',
+    demuxerMaxBackBytes: '128M',
     profile: 'fast',
     cache: 'yes',
-    cacheSecs: 30,
-    cacheBack: '200M',
+    cacheSecs: 20,
+    cacheBack: '128M',
     hrSeek: 'yes',
+    hrSeekFramedrop: 'yes',
+    fastSeek: 'yes',
+    openglPbo: 'yes',
   );
 
   /// Software decoding configuration for debugging or compatibility.
@@ -142,18 +168,23 @@ class VideoPerformancePresets {
   /// Features:
   /// - Software decoding (no hardware)
   /// - More decoder threads (needed for SW)
-  /// - Standard frame dropping
-  /// - Simple video sync
+  /// - Direct rendering enabled
+  /// - Fast decoding for speed
+  /// - Simple bilinear scaling
   static const VideoPerformanceConfiguration softwareDecoding =
       VideoPerformanceConfiguration(
     hardwareDecoding: 'no',
-    decoderThreads: 4,
+    decoderThreads: 6,
     frameDropping: 'decoder',
     videoSync: 'audio',
     scaler: 'bilinear',
     downScaler: 'bilinear',
     interpolation: false,
     deinterlacing: 'auto',
+    softwareDecodingDirectRendering: 'yes',
+    fastDecoding: 'yes',
+    openglPbo: 'yes',
+    cacheSecs: 60,
   );
 
   /// Smooth motion configuration for 24fps content (movies, anime).
@@ -171,17 +202,22 @@ class VideoPerformancePresets {
   /// - Display-resample sync
   /// - Frame interpolation enabled
   /// - Oversample temporal scaling
+  /// - No frame dropping for smooth motion
+  /// - Vulkan backend
   static const VideoPerformanceConfiguration smoothMotion =
       VideoPerformanceConfiguration(
-    hardwareDecoding: 'auto',
-    decoderThreads: null,
-    frameDropping: 'decoder',
+    hardwareDecoding: 'auto-copy',
+    decoderThreads: 4,
+    frameDropping: 'no',
     videoSync: 'display-resample',
-    scaler: 'bicubic',
-    downScaler: 'bicubic',
+    scaler: 'lanczos',
+    downScaler: 'lanczos',
     interpolation: true,
     temporalScaler: 'oversample',
     deinterlacing: 'auto',
+    gpuBackend: 'vulkan',
+    openglPbo: 'yes',
+    cacheSecs: 90,
   );
 
   /// Streaming optimization for network playback.
@@ -194,6 +230,7 @@ class VideoPerformancePresets {
   /// - Aggressive frame dropping
   /// - Simple sync and scaling
   /// - Optimized for streaming (not local files)
+  /// - Large cache for network buffering
   ///
   /// Note: Use with larger buffer size in PlayerConfiguration:
   /// ```dart
@@ -213,6 +250,12 @@ class VideoPerformancePresets {
     interpolation: false,
     deinterlacing: 'auto',
     optimizeForLocalFiles: false, // Streaming mode
+    demuxerMaxBytes: '256M',
+    cache: 'yes',
+    cacheSecs: 120,
+    cacheBack: '64M',
+    hrSeekFramedrop: 'yes',
+    fastSeek: 'yes',
   );
 
   /// Quality-first configuration for local high-bitrate content.
@@ -223,18 +266,28 @@ class VideoPerformancePresets {
   /// Features:
   /// - Hardware decoding with surface upload
   /// - No frame dropping
-  /// - High-quality scaling
-  /// - Better sync method
+  /// - High-quality lanczos scaling
+  /// - Display-resample sync
+  /// - Large cache for high bitrate
+  /// - PBO enabled
+  /// - Vulkan backend
   static const VideoPerformanceConfiguration qualityFirst =
       VideoPerformanceConfiguration(
     hardwareDecoding: 'auto-copy',
-    decoderThreads: 4,
+    decoderThreads: 6,
     frameDropping: 'no',
     videoSync: 'display-resample',
     scaler: 'lanczos',
     downScaler: 'lanczos',
     interpolation: false,
     deinterlacing: 'auto',
+    gpuBackend: 'vulkan',
+    gpuApi: 'vulkan',
+    openglPbo: 'yes',
+    hrSeek: 'yes',
+    hrSeekFramedrop: 'no',
+    fastSeek: 'no',
+    cacheSecs: 150,
   );
 
   /// Animation/anime optimization.
@@ -245,17 +298,92 @@ class VideoPerformancePresets {
   /// Features:
   /// - Hardware decoding
   /// - Spline36 scaling (preserves sharp edges)
-  /// - Optional interpolation for smoothness
+  /// - No interpolation (preserves original frames)
+  /// - No frame dropping
+  /// - PBO enabled
   static const VideoPerformanceConfiguration animation =
       VideoPerformanceConfiguration(
     hardwareDecoding: 'auto',
-    decoderThreads: null,
-    frameDropping: 'decoder',
+    decoderThreads: 4,
+    frameDropping: 'no',
     videoSync: 'audio',
     scaler: 'spline36',
     downScaler: 'spline36',
     interpolation: false,
     deinterlacing: 'auto',
+    openglPbo: 'yes',
+    cacheSecs: 60,
+  );
+
+  /// Maximum performance preset for fastest playback.
+  ///
+  /// Sacrifices all quality for maximum speed and responsiveness.
+  /// Use only when absolutely necessary.
+  ///
+  /// Features:
+  /// - Hardware decoding
+  /// - Maximum frame dropping
+  /// - Fastest bilinear scaling
+  /// - Fast decoding enabled
+  /// - Minimal cache
+  /// - Aggressive HR seek with framedrop
+  /// - Video latency hacks enabled
+  static const VideoPerformanceConfiguration maximumPerformance =
+      VideoPerformanceConfiguration(
+    hardwareDecoding: 'auto',
+    decoderThreads: 2,
+    frameDropping: 'decoder+vo',
+    videoSync: 'audio',
+    scaler: 'bilinear',
+    downScaler: 'bilinear',
+    interpolation: false,
+    deinterlacing: 'no',
+    fastDecoding: 'yes',
+    softwareDecodingDirectRendering: 'yes',
+    openglPbo: 'yes',
+    videoLatencyHacks: 'yes',
+    hrSeek: 'yes',
+    hrSeekFramedrop: 'yes',
+    fastSeek: 'yes',
+    cacheSecs: 10,
+    profile: 'fast',
+  );
+
+  /// Reference quality preset for critical viewing.
+  ///
+  /// Maximum quality settings for critical viewing and analysis.
+  /// Requires high-end hardware.
+  ///
+  /// Features:
+  /// - Hardware decoding with copy
+  /// - No frame dropping whatsoever
+  /// - Highest quality lanczos scaling
+  /// - Display-resample sync
+  /// - Frame interpolation
+  /// - Vulkan backend
+  /// - Maximum cache
+  /// - Large demuxer buffers
+  static const VideoPerformanceConfiguration referenceQuality =
+      VideoPerformanceConfiguration(
+    hardwareDecoding: 'auto-copy',
+    decoderThreads: 8,
+    frameDropping: 'no',
+    videoSync: 'display-resample',
+    scaler: 'lanczos',
+    downScaler: 'lanczos',
+    interpolation: true,
+    temporalScaler: 'oversample',
+    deinterlacing: 'yes',
+    gpuBackend: 'vulkan',
+    gpuApi: 'vulkan',
+    openglPbo: 'yes',
+    videoLatencyHacks: 'no',
+    hrSeek: 'yes',
+    hrSeekFramedrop: 'no',
+    fastSeek: 'no',
+    cacheSecs: 300,
+    demuxerMaxBytes: '512M',
+    demuxerMaxBackBytes: '256M',
   );
 
   /// {@macro video_performance_presets}

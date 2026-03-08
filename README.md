@@ -157,6 +157,7 @@ A usage guide for flutter_mpv.
 - [Advanced Settings](#advanced-settings)
 - [Video Performance Configuration](#video-performance-configuration)
 - [Video Performance Presets](#video-performance-presets)
+- [Examples](#examples)
 - [Next steps](#next-steps)
 
 ### Initialization
@@ -2960,6 +2961,48 @@ On Flutter Linux, [both OpenGL (H/W) & pixel buffer (S/W) APIs](https://github.c
 #### Web
 
 Video & audio playback is handled by embedding [HTML `<video>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video).
+
+## Examples
+
+See the [`examples/`](examples) directory for complete working examples:
+
+| Example | Description | Complexity | Best For |
+|---------|-------------|------------|----------|
+| [**advanced_player_example**](examples/advanced_player_example) | Full player with 12 presets & advanced settings | ⭐⭐⭐⭐⭐ | Production apps, learning |
+| [**flutter_mpv_test**](flutter_mpv_test) | Minimal feature tests | ⭐⭐ | Quick testing, debugging |
+
+### Quick Start with Examples
+
+```bash
+# Navigate to example
+cd examples/advanced_player_example
+
+# Install dependencies
+flutter pub get
+
+# Run on your device
+flutter run
+```
+
+**Note:** The example uses `pubspec_overrides.yaml` to reference local packages during development. When copying to your own project, remove this file and use published versions from pub.dev.
+
+### advanced_player_example Features
+
+- 🎯 **3 Player Modes**: Basic, Presets, and Advanced
+- 🎨 **12 Performance Presets**: From "Low-End Device" to "Reference Quality"
+- ⚙️ **Advanced Settings**: Fine-tune 20+ video parameters
+- 💾 **Settings Persistence**: Saves preferences via SharedPreferences
+- 📱 **Material Design**: Beautiful, responsive UI
+
+### Learning Path
+
+1. **Start with `flutter_mpv_test`** - Understand basic API
+2. **Try `advanced_player_example`** - Learn advanced configuration
+3. **Build your own player** - Combine learnings
+
+For more details, see the [Examples README](examples/README.md).
+
+---
 
 ## License
 
