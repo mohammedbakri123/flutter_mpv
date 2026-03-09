@@ -1,4 +1,4 @@
-# This file is a part of media_kit (https://github.com/media-kit/media-kit).
+# This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 #
 # Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 # All rights reserved.
@@ -6,16 +6,16 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-set(PROJECT_NAME "media_kit_video")
+set(PROJECT_NAME "flutter_mpv_video")
 set(CMAKE_CXX_STANDARD 17)
 project(${PROJECT_NAME} LANGUAGES CXX)
 
-set(PLUGIN_NAME "media_kit_video_plugin")
+set(PLUGIN_NAME "flutter_mpv_video_plugin")
 
 if(MEDIA_KIT_LIBS_AVAILABLE)
   add_library(
     ${PLUGIN_NAME} SHARED
-    "media_kit_video_plugin.cc"
+    "flutter_mpv_video_plugin.cc"
     "texture_gl.cc"
     "texture_sw.cc"
     "video_output_manager.cc"
@@ -58,11 +58,11 @@ if(MEDIA_KIT_LIBS_AVAILABLE)
     PkgConfig::epoxy
   )
 else()
-  message(NOTICE "media_kit: WARNING: package:media_kit_libs_*** not found.")
+  message(NOTICE "flutter_mpv: WARNING: package:flutter_mpv_libs_*** not found.")
 
   add_library(
     ${PLUGIN_NAME} SHARED
-    "media_kit_video_plugin.cc"
+    "flutter_mpv_video_plugin.cc"
   )
 
   apply_standard_settings(${PLUGIN_NAME})
@@ -76,7 +76,7 @@ else()
     ${PLUGIN_NAME} PRIVATE
     FLUTTER_PLUGIN_IMPL
 
-    # Add macro to indicate that package:media_kit_libs_*** is not available.
+    # Add macro to indicate that package:flutter_mpv_libs_*** is not available.
     "MEDIA_KIT_LIBS_NOT_FOUND=1"
   )
 
@@ -93,7 +93,7 @@ else()
 endif()
 
 set(
-  media_kit_video_bundled_libraries
+  flutter_mpv_video_bundled_libraries
   ""
   PARENT_SCOPE
 )

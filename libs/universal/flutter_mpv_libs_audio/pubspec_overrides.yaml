@@ -1,0 +1,14 @@
+# melos_managed_dependency_overrides:
+  # Updated for flutter_mpv flutter_mpv_libs_android_audio,flutter_mpv_libs_ios_audio,flutter_mpv_libs_linux,flutter_mpv_libs_macos_audio,flutter_mpv_libs_windows_audio
+dependency_overrides:
+  # Updated for flutter_mpv
+  flutter_mpv_libs_android_audio:
+    path: ../../android/flutter_mpv_libs_android_audio
+  flutter_mpv_libs_ios_audio:
+    path: ../../ios/flutter_mpv_libs_ios_audio
+  flutter_mpv_libs_linux:
+    path: ../../linux/flutter_mpv_libs_linux
+  flutter_mpv_libs_macos_audio:
+    path: ../../macos/flutter_mpv_libs_macos_audio
+  flutter_mpv_libs_windows_audio:
+    path: ../../windows/flutter_mpv_libs_windows_audio

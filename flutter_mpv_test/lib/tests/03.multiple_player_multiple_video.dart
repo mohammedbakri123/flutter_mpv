@@ -81,7 +81,7 @@ class _MultiplePlayerMultipleVideoScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('package:media_kit'),
+        title: const Text('package:flutter_mpv'),
       ),
       body:
           MediaQuery.of(context).size.width > MediaQuery.of(context).size.height

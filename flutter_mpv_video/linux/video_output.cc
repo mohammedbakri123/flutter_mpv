@@ -1,4 +1,4 @@
-// This file is a part of media_kit
+// This file is a part of flutter_mpv
 // (https://github.com/media-kit/media-kit).
 //
 // Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
@@ -6,9 +6,9 @@
 // Use of this source code is governed by MIT license that can be found in the
 // LICENSE file.
 
-#include "include/media_kit_video/video_output.h"
-#include "include/media_kit_video/texture_gl.h"
-#include "include/media_kit_video/texture_sw.h"
+#include "include/flutter_mpv_video/video_output.h"
+#include "include/flutter_mpv_video/texture_gl.h"
+#include "include/flutter_mpv_video/texture_sw.h"
 
 #include <epoxy/egl.h>
 #include <epoxy/glx.h>
@@ -131,7 +131,7 @@ VideoOutput* video_output_new(FlTextureRegistrar* texture_registrar,
 #ifndef MPV_RENDER_API_TYPE_SW
   // MPV_RENDER_API_TYPE_SW must be available for S/W rendering.
   if (!self->configuration.enable_hardware_acceleration) {
-    g_printerr("media_kit: VideoOutput: S/W rendering is not supported.\n");
+    g_printerr("flutter_mpv: VideoOutput: S/W rendering is not supported.\n");
   }
   self->configuration.enable_hardware_acceleration = TRUE;
 #endif
@@ -157,20 +157,20 @@ VideoOutput* video_output_new(FlTextureRegistrar* texture_registrar,
       EGLint config_id = 0;
       
       if (eglQueryContext(self->egl_display, flutter_context, EGL_CONFIG_ID, &config_id)) {
-        g_print("media_kit: VideoOutput: Flutter's EGL config ID: %d\n", config_id);
+        g_print("flutter_mpv: VideoOutput: Flutter's EGL config ID: %d\n", config_id);
         
         // Get Flutter's exact config
         EGLint num_configs = 0;
         EGLint config_attribs[] = { EGL_CONFIG_ID, config_id, EGL_NONE };
         
         if (eglChooseConfig(self->egl_display, config_attribs, &config, 1, &num_configs) && num_configs > 0) {
-          g_print("media_kit: VideoOutput: Using Flutter's EGL config.\n");
+          g_print("flutter_mpv: VideoOutput: Using Flutter's EGL config.\n");
         } else {
-          g_printerr("media_kit: VideoOutput: Failed to get Flutter's EGL config by ID.\n");
+          g_printerr("flutter_mpv: VideoOutput: Failed to get Flutter's EGL config by ID.\n");
           config = NULL;
         }
       } else {
-        g_printerr("media_kit: VideoOutput: Failed to query Flutter's EGL config ID.\n");
+        g_printerr("flutter_mpv: VideoOutput: Failed to query Flutter's EGL config ID.\n");
       }
       
       if (config != NULL) {        
@@ -230,32 +230,32 @@ VideoOutput* video_output_new(FlTextureRegistrar* texture_registrar,
                     },
                     self);
                 hardware_acceleration_supported = TRUE;
-                g_print("media_kit: VideoOutput: H/W rendering with isolated EGL context.\n");
+                g_print("flutter_mpv: VideoOutput: H/W rendering with isolated EGL context.\n");
               } else {
-                g_printerr("media_kit: VideoOutput: Failed to create mpv_render_context.\n");
+                g_printerr("flutter_mpv: VideoOutput: Failed to create mpv_render_context.\n");
               }
             } else {
-              g_printerr("media_kit: VideoOutput: Failed to register texture.\n");
+              g_printerr("flutter_mpv: VideoOutput: Failed to register texture.\n");
             }
             
             // Restore Flutter's context
             eglMakeCurrent(flutter_display, flutter_draw_surface, flutter_read_surface, flutter_context);
           } else {
-            g_printerr("media_kit: VideoOutput: Failed to make isolated EGL context current. Error: 0x%x\n", eglGetError());
+            g_printerr("flutter_mpv: VideoOutput: Failed to make isolated EGL context current. Error: 0x%x\n", eglGetError());
           }
         } else {
-          g_printerr("media_kit: VideoOutput: Failed to create isolated EGL context. Error: 0x%x\n", eglGetError());
+          g_printerr("flutter_mpv: VideoOutput: Failed to create isolated EGL context. Error: 0x%x\n", eglGetError());
         }
       } else {
-        g_printerr("media_kit: VideoOutput: Could not obtain Flutter's EGL config.\n");
+        g_printerr("flutter_mpv: VideoOutput: Could not obtain Flutter's EGL config.\n");
       }
     } else {
-      g_printerr("media_kit: VideoOutput: EGL display or context is invalid.\n");
+      g_printerr("flutter_mpv: VideoOutput: EGL display or context is invalid.\n");
     }
   }
 #ifdef MPV_RENDER_API_TYPE_SW
   if (!hardware_acceleration_supported) {
-    g_printerr("media_kit: VideoOutput: S/W rendering.\n");
+    g_printerr("flutter_mpv: VideoOutput: S/W rendering.\n");
     // H/W rendering failed. Fallback to S/W rendering.
     self->pixel_buffer = g_new0(guint8, SW_RENDERING_PIXEL_BUFFER_SIZE);
     self->texture_gl = NULL;

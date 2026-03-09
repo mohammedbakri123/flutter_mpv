@@ -62,7 +62,7 @@ class PrimaryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('package:media_kit'),
+        title: const Text('package:flutter_mpv'),
         actions: [
           ValueListenableBuilder<VideoControllerConfiguration>(
             valueListenable: configuration,
@@ -259,7 +259,7 @@ class DownloadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('package:media_kit'),
+        title: const Text('package:flutter_mpv'),
       ),
       body: Center(
         child: ValueListenableBuilder<String>(

@@ -59,6 +59,6 @@ abstract class FlutterMpv {
   }
 }
 
-/// Backward compatibility alias for MediaKit
+/// Backward compatibility alias for FlutterMpv
 @Deprecated('Use FlutterMpv instead. This will be removed in a future version.')
 typedef MediaKit = FlutterMpv;

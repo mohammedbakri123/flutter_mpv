@@ -1,7 +1,7 @@
 name: flutter_mpv
-description: A cross-platform video player & audio player for Flutter & Dart with advanced performance controls. Fork of media_kit.
-homepage: https://github.com/media-kit/media-kit
-repository: https://github.com/media-kit/media-kit
+description: A cross-platform video player & audio player for Flutter & Dart with advanced performance controls. Fork of flutter_mpv.
+homepage: https://github.com/mohammed/flutter_mpv
+repository: https://github.com/mohammed/flutter_mpv
 version: 1.2.6
 
 screenshots:

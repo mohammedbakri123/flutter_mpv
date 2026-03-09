@@ -64,7 +64,7 @@ class _ScreenshotState extends State<Screenshot> {
         MediaQuery.of(context).size.width > MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('package:media_kit'),
+        title: const Text('package:flutter_mpv'),
       ),
       floatingActionButton: Row(
         mainAxisSize: MainAxisSize.min,

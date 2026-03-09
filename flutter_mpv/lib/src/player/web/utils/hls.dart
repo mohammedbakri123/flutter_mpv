@@ -65,7 +65,7 @@ abstract class HLS {
   }
 
   static const String kHLSAsset =
-      'assets/packages/media_kit/assets/web/hls1.4.10.js';
+      'assets/packages/flutter_mpv/assets/web/hls1.4.10.js';
   static const String kHLSCDN =
       'https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.10/hls.js';
 

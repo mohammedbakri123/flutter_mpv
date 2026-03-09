@@ -2,16 +2,16 @@
 import 'package:flutter/material.dart';
 
 // Make sure to add following packages to pubspec.yaml:
-// * media_kit
-// * media_kit_video
-// * media_kit_libs_video
+// * flutter_mpv
+// * flutter_mpv_video
+// * flutter_mpv_libs_video
 import 'package:flutter_mpv/flutter_mpv.dart';                  // Provides [Player], [Media], [Playlist] etc.
-import 'package:media_kit_video/media_kit_video.dart';          // Provides [VideoController] & [Video] etc.
+import 'package:flutter_mpv_video/flutter_mpv_video.dart';          // Provides [VideoController] & [Video] etc.
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // Necessary initialization for package:media_kit.
-  MediaKit.ensureInitialized();
+  // Necessary initialization for package:flutter_mpv.
+  FlutterMpv.ensureInitialized();
   runApp(
     const MaterialApp(
       home: MyScreen(),

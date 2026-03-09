@@ -86,7 +86,7 @@ class PaintFirstFrameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('package:media_kit'),
+        title: const Text('package:flutter_mpv'),
       ),
       body: ListView.separated(
         itemCount: controllers.length,

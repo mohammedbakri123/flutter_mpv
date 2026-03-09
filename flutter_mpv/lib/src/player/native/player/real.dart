@@ -39,7 +39,7 @@ import 'package:flutter_mpv/src/player/platform_player.dart';
 
 import 'package:flutter_mpv/generated/libmpv/bindings.dart' as generated;
 
-/// Initializes the native backend for package:media_kit.
+/// Initializes the native backend for package:flutter_mpv.
 void nativeEnsureInitialized({String? libmpv}) {
   AndroidHelper.ensureInitialized();
   NativeLibrary.ensureInitialized(libmpv: libmpv);
@@ -2399,7 +2399,7 @@ class NativePlayer extends PlatformPlayer {
           );
           if (subfont.isNotEmpty) {
             final directory = dirname(subfont);
-            // This asset is bundled as part of `package:media_kit_libs_android_video`.
+            // This asset is bundled as part of `package:flutter_mpv_libs_android_video`.
             // Use it if located inside the application bundle, otherwise no worries.
             options.addAll(
               {
@@ -2658,7 +2658,7 @@ class NativePlayer extends PlatformPlayer {
       final message = mpv.mpv_error_string(code).cast<Utf8>().toDartString();
       logController.add(
         PlayerLog(
-          prefix: 'media_kit',
+          prefix: 'flutter_mpv',
           level: 'error',
           text: 'error: $message $text',
         ),

@@ -1,6 +1,6 @@
 {
-    "name": "media_kit_test",
-    "short_name": "media_kit_test",
+    "name": "flutter_mpv_test",
+    "short_name": "flutter_mpv_test",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

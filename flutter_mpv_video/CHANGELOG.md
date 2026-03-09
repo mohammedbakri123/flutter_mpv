@@ -127,7 +127,7 @@
 - fix(linux): `GThread*` leak in S/W render & `video_output_get_(width|height)`
 - fix(linux): H/W support for multiple videos
 - build(darwin): bump `mpv` headers to `0.36.0`
-- build(darwin): use symlinks for `FRAMEWORK_SEARCH_PATHS`, `media_kit_libs_*** >= 1.1.0`
+- build(darwin): use symlinks for `FRAMEWORK_SEARCH_PATHS`, `flutter_mpv_libs_*** >= 1.1.0`
 - fix(darwin): remove black screen when switching videos ([#332](https://github.com/media-kit/media-kit/issues/332))
 - feat: `Video`: expose `onEnterFullscreen` & `onExitFullscreen`
 - feat: feat: `visibleOnMount` `MaterialVideoControls`/`MaterialDesktopVideoControls`

@@ -63,7 +63,7 @@ class _StressTestScreenState extends State<StressTestScreen> {
     ).toList();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('package:media_kit'),
+        title: const Text('package:flutter_mpv'),
       ),
       body: GridView.extent(
         maxCrossAxisExtent: 480.0,

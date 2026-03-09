@@ -1,4 +1,4 @@
-class MediaKitUtils
+class FlutterMpvUtils
   attr_accessor :libs_found, :libs_package
 
   module Platform
@@ -18,20 +18,20 @@ class MediaKitUtils
     # Find the nearest path to `pubspec.lock` using `PWD` env var set by
     # `cocoapods`
     current_dir       = ENV['PWD'] || '/'
-    pubspec_lock_path = MediaKitUtils::find_nearest_pubspec_lock(current_dir)
+    pubspec_lock_path = FlutterMpvUtils::find_nearest_pubspec_lock(current_dir)
 
     # If not found try again using `PWD_FALLBACK` env var manually set,
     # `PWD_FALLBACK` must point to app folder or any child folder
     if pubspec_lock_path == ''
       current_dir       = ENV['PWD_FALLBACK'] || '/'
-      pubspec_lock_path = MediaKitUtils::find_nearest_pubspec_lock(current_dir)
+      pubspec_lock_path = FlutterMpvUtils::find_nearest_pubspec_lock(current_dir)
     end
 
     # Abort if no `pubspec.lock` was found
     if pubspec_lock_path == ''
       abort(
         sprintf(
-          'media_kit: ERROR: No pubspec.lock was found: ENV["PWD"] = "%s"',
+          'flutter_mpv: ERROR: No pubspec.lock was found: ENV["PWD"] = "%s"',
           ENV["PWD"]
         )
       )
@@ -41,25 +41,25 @@ class MediaKitUtils
     pubspec_lock          = YAML.load_file(pubspec_lock_path)
     packages              = pubspec_lock['packages']
     
-    # Checks for `media_kit_libs_***` in `pubspec.lock`
+    # Checks for `flutter_mpv_libs_***` in `pubspec.lock`
     libs_count    = 0
     @libs_package = ''
     Type.constants.each do |constant|
       type    = Type.const_get(constant)
-      package = sprintf('media_kit_libs_%s_%s', platform, type)
+      package = sprintf('flutter_mpv_libs_%s_%s', platform, type)
       if packages.keys.include?(package)
         libs_count    += 1
         @libs_package = package
 
-        puts sprintf('media_kit: INFO: package:%s found', package)
+        puts sprintf('flutter_mpv: INFO: package:%s found', package)
       end
     end
 
-    # Abort if multiple `media_kit_libs_***` was found
+    # Abort if multiple `flutter_mpv_libs_***` was found
     if libs_count > 1
       abort(
         sprintf(
-          'media_kit: ERROR: package:media_kit_libs_%s_*** must be uniq',
+          'flutter_mpv: ERROR: package:flutter_mpv_libs_%s_*** must be uniq',
           platform,
         )
       )
@@ -67,11 +67,11 @@ class MediaKitUtils
 
     @libs_found = libs_count > 0
 
-    # Warn if no `media_kit_libs_*` was found
+    # Warn if no `flutter_mpv_libs_*` was found
     if !@libs_found
       warn(
         sprintf(
-          'media_kit: WARNING: package:media_kit_libs_%s_*** not found',
+          'flutter_mpv: WARNING: package:flutter_mpv_libs_%s_*** not found',
           platform
         )
       )

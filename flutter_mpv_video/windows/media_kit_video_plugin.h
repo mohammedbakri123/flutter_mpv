@@ -1,4 +1,4 @@
-// This file is a part of media_kit
+// This file is a part of flutter_mpv
 // (https://github.com/media-kit/media-kit).
 //
 // Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
@@ -17,18 +17,18 @@
 
 #include "video_output_manager.h"
 
-namespace media_kit_video {
+namespace flutter_mpv_video {
 
-class MediaKitVideoPlugin : public flutter::Plugin {
+class FlutterMpvVideoPlugin : public flutter::Plugin {
  public:
   static void RegisterWithRegistrar(flutter::PluginRegistrarWindows* registrar);
 
-  MediaKitVideoPlugin(flutter::PluginRegistrarWindows* registrar);
+  FlutterMpvVideoPlugin(flutter::PluginRegistrarWindows* registrar);
 
-  virtual ~MediaKitVideoPlugin();
+  virtual ~FlutterMpvVideoPlugin();
 
-  MediaKitVideoPlugin(const MediaKitVideoPlugin&) = delete;
-  MediaKitVideoPlugin& operator=(const MediaKitVideoPlugin&) = delete;
+  FlutterMpvVideoPlugin(const FlutterMpvVideoPlugin&) = delete;
+  FlutterMpvVideoPlugin& operator=(const FlutterMpvVideoPlugin&) = delete;
 
  private:
   static constexpr UINT kMainThreadTaskMessage = WM_USER + 1001;
@@ -49,9 +49,9 @@ class MediaKitVideoPlugin : public flutter::Plugin {
   WNDPROC original_window_proc_ = nullptr;
   std::queue<std::function<void()>> main_thread_tasks_;
   std::mutex main_thread_tasks_mutex_;
-  static MediaKitVideoPlugin* instance_;
+  static FlutterMpvVideoPlugin* instance_;
 };
 
-}  // namespace media_kit_video
+}  // namespace flutter_mpv_video
 
 #endif  // MEDIA_KIT_VIDEO_PLUGIN_H_

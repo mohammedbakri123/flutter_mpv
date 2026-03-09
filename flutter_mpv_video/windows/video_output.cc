@@ -1,4 +1,4 @@
-// This file is a part of media_kit
+// This file is a part of flutter_mpv
 // (https://github.com/media-kit/media-kit).
 //
 // Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
@@ -71,7 +71,7 @@ VideoOutput::VideoOutput(int64_t handle,
               reinterpret_cast<void*>(this));
           // Set flag to true, indicating that H/W rendering is supported.
           is_hardware_acceleration_enabled = true;
-          std::cout << "media_kit: VideoOutput: Using H/W rendering."
+          std::cout << "flutter_mpv: VideoOutput: Using H/W rendering."
                     << std::endl;
         }
       } catch (...) {
@@ -81,7 +81,7 @@ VideoOutput::VideoOutput(int64_t handle,
       }
     }
     if (!is_hardware_acceleration_enabled) {
-      std::cout << "media_kit: VideoOutput: Using S/W rendering." << std::endl;
+      std::cout << "flutter_mpv: VideoOutput: Using S/W rendering." << std::endl;
       // Allocate a "large enough" buffer ahead of time.
       pixel_buffer_ =
           std::make_unique<uint8_t[]>(SW_RENDERING_PIXEL_BUFFER_SIZE);
@@ -119,7 +119,7 @@ VideoOutput::~VideoOutput() {
           // executed (and won't reference the dead object anymore), most
           // notably |CheckAndResize| & |Render|.
           auto future = thread_pool_ref_->Post([&, id = texture_id]() {
-            std::cout << "media_kit: VideoOutput: Free Texture: " << id
+            std::cout << "flutter_mpv: VideoOutput: Free Texture: " << id
                       << std::endl;
             std::cout << "VideoOutput::~VideoOutput: "
                       << reinterpret_cast<int64_t>(handle_) << std::endl;
@@ -272,7 +272,7 @@ void VideoOutput::Resize(int64_t required_width, int64_t required_height) {
     registrar_->texture_registrar()->UnregisterTexture(
         texture_id_, [&, id = texture_id_]() {
           if (id) {
-            std::cout << "media_kit: VideoOutput: Free Texture: " << id
+            std::cout << "flutter_mpv: VideoOutput: Free Texture: " << id
                       << std::endl;
             std::lock_guard<std::mutex> lock(textures_mutex_);
             if (destroyed_) {
@@ -322,7 +322,7 @@ void VideoOutput::Resize(int64_t required_width, int64_t required_height) {
     // Register new texture.
     texture_id_ =
         registrar_->texture_registrar()->RegisterTexture(texture_variant.get());
-    std::cout << "media_kit: VideoOutput: Create Texture: " << texture_id_
+    std::cout << "flutter_mpv: VideoOutput: Create Texture: " << texture_id_
               << std::endl;
     std::lock_guard<std::mutex> lock(textures_mutex_);
     textures_.emplace(std::make_pair(texture_id_, std::move(texture)));
@@ -351,7 +351,7 @@ void VideoOutput::Resize(int64_t required_width, int64_t required_height) {
     // Register new texture.
     texture_id_ =
         registrar_->texture_registrar()->RegisterTexture(texture_variant.get());
-    std::cout << "media_kit: VideoOutput: Create Texture: " << texture_id_
+    std::cout << "flutter_mpv: VideoOutput: Create Texture: " << texture_id_
               << std::endl;
     std::lock_guard<std::mutex> lock(textures_mutex_);
     pixel_buffer_textures_.emplace(

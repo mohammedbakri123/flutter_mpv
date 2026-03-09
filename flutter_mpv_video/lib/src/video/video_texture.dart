@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -494,7 +494,7 @@ Future<void> defaultEnterNativeFullscreen() async {
         ],
       );
     } else if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
-      await const MethodChannel('com.alexmercerind/flutter_mpv_video')
+      await const MethodChannel('com.mohammed/flutter_mpv_video')
           .invokeMethod(
         'Utils.EnterNativeFullscreen',
       );
@@ -521,7 +521,7 @@ Future<void> defaultExitNativeFullscreen() async {
         ],
       );
     } else if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
-      await const MethodChannel('com.alexmercerind/flutter_mpv_video')
+      await const MethodChannel('com.mohammed/flutter_mpv_video')
           .invokeMethod(
         'Utils.ExitNativeFullscreen',
       );

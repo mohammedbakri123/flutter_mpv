@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -55,7 +55,7 @@ class WebVideoController extends PlatformVideoController {
     controller._element = element;
     // Register the [html.VideoElement] as platform view.
     platformViewRegistry.registerViewFactory(
-      'com.alexmercerind.flutter_mpv_video.$handle',
+      'com.mohammed.flutter_mpv_video.$handle',
       (int _) => controller._element!,
     );
 
@@ -67,7 +67,7 @@ class WebVideoController extends PlatformVideoController {
     controller._resizeStreamSubscription = controller._element?.onResize.listen(
       (event) {
         debugPrint(
-          'media_kit: WebVideoController: ${controller._element?.videoWidth}, ${controller._element?.videoHeight}',
+          'flutter_mpv: WebVideoController: ${controller._element?.videoWidth}, ${controller._element?.videoHeight}',
         );
         // Update the size of the [PlatformVideoController].
         controller.rect.value = Rect.fromLTWH(
@@ -128,5 +128,5 @@ class WebVideoController extends PlatformVideoController {
   StreamSubscription<web.Event>? _resizeStreamSubscription;
 
   /// JavaScript object attribute used to store various [VideoElement] instances in [js.context].
-  static const _kInstances = '\$com.alexmercerind.media_kit.instances';
+  static const _kInstances = '\$com.mohammed.flutter_mpv.instances';
 }

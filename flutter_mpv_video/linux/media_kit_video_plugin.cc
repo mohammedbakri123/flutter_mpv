@@ -1,4 +1,4 @@
-// This file is a part of media_kit
+// This file is a part of flutter_mpv
 // (https://github.com/media-kit/media-kit).
 //
 // Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
@@ -6,30 +6,30 @@
 // Use of this source code is governed by MIT license that can be found in the
 // LICENSE file.
 
-#include "include/media_kit_video/media_kit_video_plugin.h"
+#include "include/flutter_mpv_video/flutter_mpv_video_plugin.h"
 
 #ifndef MEDIA_KIT_LIBS_NOT_FOUND
 
 #include <gtk/gtk.h>
 
-#include "include/media_kit_video/utils.h"
-#include "include/media_kit_video/video_output_manager.h"
+#include "include/flutter_mpv_video/utils.h"
+#include "include/flutter_mpv_video/video_output_manager.h"
 
 #define MEDIA_KIT_VIDEO_PLUGIN(obj)                                     \
-  (G_TYPE_CHECK_INSTANCE_CAST((obj), media_kit_video_plugin_get_type(), \
-                              MediaKitVideoPlugin))
+  (G_TYPE_CHECK_INSTANCE_CAST((obj), flutter_mpv_video_plugin_get_type(), \
+                              FlutterMpvVideoPlugin))
 
-struct _MediaKitVideoPlugin {
+struct _FlutterMpvVideoPlugin {
   GObject parent_instance;
   FlMethodChannel* channel;
   FlView* view;
   VideoOutputManager* video_output_manager;
 };
 
-G_DEFINE_TYPE(MediaKitVideoPlugin, media_kit_video_plugin, g_object_get_type())
+G_DEFINE_TYPE(FlutterMpvVideoPlugin, flutter_mpv_video_plugin, g_object_get_type())
 
-static void media_kit_video_plugin_handle_method_call(
-    MediaKitVideoPlugin* self,
+static void flutter_mpv_video_plugin_handle_method_call(
+    FlutterMpvVideoPlugin* self,
     FlMethodCall* method_call) {
   g_autoptr(FlMethodResponse) response = NULL;
   const gchar* method = fl_method_call_get_name(method_call);
@@ -150,15 +150,15 @@ static void media_kit_video_plugin_handle_method_call(
   fl_method_call_respond(method_call, response, nullptr);
 }
 
-static void media_kit_video_plugin_dispose(GObject* object) {
-  G_OBJECT_CLASS(media_kit_video_plugin_parent_class)->dispose(object);
+static void flutter_mpv_video_plugin_dispose(GObject* object) {
+  G_OBJECT_CLASS(flutter_mpv_video_plugin_parent_class)->dispose(object);
 }
 
-static void media_kit_video_plugin_class_init(MediaKitVideoPluginClass* klass) {
-  G_OBJECT_CLASS(klass)->dispose = media_kit_video_plugin_dispose;
+static void flutter_mpv_video_plugin_class_init(FlutterMpvVideoPluginClass* klass) {
+  G_OBJECT_CLASS(klass)->dispose = flutter_mpv_video_plugin_dispose;
 }
 
-static void media_kit_video_plugin_init(MediaKitVideoPlugin* self) {
+static void flutter_mpv_video_plugin_init(FlutterMpvVideoPlugin* self) {
   self->channel = NULL;
   self->video_output_manager = NULL;
 }
@@ -166,19 +166,19 @@ static void media_kit_video_plugin_init(MediaKitVideoPlugin* self) {
 static void method_call_cb(FlMethodChannel* channel,
                            FlMethodCall* method_call,
                            gpointer user_data) {
-  MediaKitVideoPlugin* plugin = MEDIA_KIT_VIDEO_PLUGIN(user_data);
-  media_kit_video_plugin_handle_method_call(plugin, method_call);
+  FlutterMpvVideoPlugin* plugin = MEDIA_KIT_VIDEO_PLUGIN(user_data);
+  flutter_mpv_video_plugin_handle_method_call(plugin, method_call);
 }
 
-static MediaKitVideoPlugin* media_kit_video_plugin_new(
+static FlutterMpvVideoPlugin* flutter_mpv_video_plugin_new(
     FlPluginRegistrar* registrar) {
-  MediaKitVideoPlugin* self = MEDIA_KIT_VIDEO_PLUGIN(
-      g_object_new(media_kit_video_plugin_get_type(), nullptr));
+  FlutterMpvVideoPlugin* self = MEDIA_KIT_VIDEO_PLUGIN(
+      g_object_new(flutter_mpv_video_plugin_get_type(), nullptr));
   g_autoptr(FlMethodCodec) codec =
       FL_METHOD_CODEC(fl_standard_method_codec_new());
   self->channel =
       fl_method_channel_new(fl_plugin_registrar_get_messenger(registrar),
-                            "com.alexmercerind/flutter_mpv_video", codec);
+                            "com.mohammed/flutter_mpv_video", codec);
   fl_method_channel_set_method_call_handler(self->channel, method_call_cb, self,
                                             g_object_unref);
   FlTextureRegistrar* texture_registrar =
@@ -190,18 +190,18 @@ static MediaKitVideoPlugin* media_kit_video_plugin_new(
   return self;
 }
 
-void media_kit_video_plugin_register_with_registrar(
+void flutter_mpv_video_plugin_register_with_registrar(
     FlPluginRegistrar* registrar) {
-  media_kit_video_plugin_new(registrar);
+  flutter_mpv_video_plugin_new(registrar);
 }
 
 #else
 
 #include <iostream>
 
-void media_kit_video_plugin_register_with_registrar(
+void flutter_mpv_video_plugin_register_with_registrar(
     FlPluginRegistrar* registrar) {
-  std::cout << "media_kit: WARNING: package:media_kit_libs_*** not found."
+  std::cout << "flutter_mpv: WARNING: package:flutter_mpv_libs_*** not found."
             << std::endl;
 }
 

@@ -79,7 +79,7 @@ class _SeamlessState extends State<Seamless> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('package:media_kit'),
+        title: const Text('package:flutter_mpv'),
       ),
       body: Stack(
         children: [

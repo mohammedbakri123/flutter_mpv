@@ -21,7 +21,7 @@ Future<void> prepareSources() async {
     final file = File(
       path.join(
         directory.path,
-        'media_kit_test',
+        'flutter_mpv_test',
         'video$i.mp4',
       ),
     );

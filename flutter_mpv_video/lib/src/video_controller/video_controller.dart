@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -19,7 +19,7 @@ import 'package:flutter_mpv_video/src/video_controller/web_video_controller/web_
 /// ---------------
 ///
 /// [VideoController] is used to initialize & display video output.
-/// It takes reference to existing [Player] instance from `package:media_kit`.
+/// It takes reference to existing [Player] instance from `package:flutter_mpv`.
 ///
 /// Passing [VideoController] to [Video] widget will cause the video output to be displayed.
 ///

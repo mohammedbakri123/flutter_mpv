@@ -67,11 +67,11 @@
 
 ## 1.1.10+1
 
-- docs: document updated `media_kit_video`
+- docs: document updated `flutter_mpv_video`
 
 ## 1.1.10
 
-- feat: prevent multiple calls to `MediaKit.ensureInitialized`
+- feat: prevent multiple calls to `FlutterMpv.ensureInitialized`
 
 ## 1.1.9
 
@@ -83,11 +83,11 @@
 
 ## 1.1.8+2
 
-- docs: document updated `media_kit_video`
+- docs: document updated `flutter_mpv_video`
 
 ## 1.1.8+1
 
-- docs: document updated `media_kit_video`, `media_kit_libs_video` & `media_kit_libs_audio`
+- docs: document updated `flutter_mpv_video`, `flutter_mpv_libs_video` & `flutter_mpv_libs_audio`
 
 ## 1.1.8
 
@@ -120,7 +120,7 @@
 ## 1.1.4+1
 
 - docs: document updated
-  - `media_kit_video`
+  - `flutter_mpv_video`
 
 ## 1.1.4
 
@@ -134,10 +134,10 @@
 ## 1.1.3+1
 
 - docs: document updated
-  - `media_kit_libs_ios_audio`
-  - `media_kit_libs_ios_video`
-  - `media_kit_libs_macos_audio`
-  - `media_kit_libs_macos_video`
+  - `flutter_mpv_libs_ios_audio`
+  - `flutter_mpv_libs_ios_video`
+  - `flutter_mpv_libs_macos_audio`
+  - `flutter_mpv_libs_macos_video`
 
 ## 1.1.3
 
@@ -149,10 +149,10 @@
 ## 1.1.2+1
 
 - docs: document updated
-  - `media_kit_libs_ios_audio`
-  - `media_kit_libs_ios_video`
-  - `media_kit_libs_macos_audio`
-  - `media_kit_libs_macos_video`
+  - `flutter_mpv_libs_ios_audio`
+  - `flutter_mpv_libs_ios_video`
+  - `flutter_mpv_libs_macos_audio`
+  - `flutter_mpv_libs_macos_video`
 
 ## 1.1.2
 
@@ -224,7 +224,7 @@
 
 ## 0.0.9+1
 
-- docs: document updated `media_kit_video`
+- docs: document updated `flutter_mpv_video`
 
 ## 0.0.9
 
@@ -242,11 +242,11 @@
 
 ## 0.0.7+1
 
-- docs: document updated `media_kit_libs_android_video` and `media_kit_libs_android_audio`
+- docs: document updated `flutter_mpv_libs_android_video` and `flutter_mpv_libs_android_audio`
 
 ## 0.0.7
 
-- fix: `MediaKit.ensureInitialized` not passing optional `libmpv` argument
+- fix: `FlutterMpv.ensureInitialized` not passing optional `libmpv` argument
 
 ## 0.0.6
 
@@ -256,11 +256,11 @@
 
 ## 0.0.5+2
 
-- docs: document updated `media_kit_video` & `media_kit_libs_windows_audio`
+- docs: document updated `flutter_mpv_video` & `flutter_mpv_libs_windows_audio`
 
 ## 0.0.5+1
 
-- docs: document updated `media_kit_video`
+- docs: document updated `flutter_mpv_video`
 
 ## 0.0.5
 
@@ -271,7 +271,7 @@
   - `Player.state.height`: currently playing video's height as `int`
   - `Player.stream.height`: currently playing video's height as `Stream<int>`
 - feat(refactor): entry point
-  - `MediaKit.ensureInitialized`
+  - `FlutterMpv.ensureInitialized`
 - feat: media stream buffer state/event:
   - `Player.state.buffer`: currently buffered duration of the media stream as `Duration`
   - `Player.stream.buffer`: currently buffered duration of the media stream as `Stream<Duration>`
@@ -292,15 +292,15 @@
 
 ## 0.0.3+3
 
-- docs: document updated `media_kit_video`, `media_kit_libs_macos_video` and `media_kit_libs_ios_video`
+- docs: document updated `flutter_mpv_video`, `flutter_mpv_libs_macos_video` and `flutter_mpv_libs_ios_video`
 
 ## 0.0.3+2
 
-- docs: document updated `media_kit_video`
+- docs: document updated `flutter_mpv_video`
 
 ## 0.0.3+1
 
-- docs: document updated `media_kit_native_event_loop`
+- docs: document updated `flutter_mpv_native_event_loop`
 
 ## 0.0.3
 

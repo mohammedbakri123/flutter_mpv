@@ -123,12 +123,12 @@ class NativeReferenceHolder {
   final File _file = File(
     path.join(
       TempFile.directory,
-      'com.alexmercerind.media_kit.NativeReferenceHolder.$pid',
+      'com.mohammed.flutter_mpv.NativeReferenceHolder.$pid',
     ),
   );
 
   /// [Pointer] to the reference buffer.
   late final Pointer<IntPtr> _referenceBuffer;
 
-  static const String kTag = 'media_kit: NativeReferenceHolder:';
+  static const String kTag = 'flutter_mpv: NativeReferenceHolder:';
 }

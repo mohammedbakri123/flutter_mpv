@@ -1,4 +1,4 @@
-/// This file is a part of media_kit (https://github.com/media-kit/media-kit).
+/// This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 ///
 /// Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
@@ -128,7 +128,7 @@ class NativeVideoController extends PlatformVideoController {
       return _controllers[handle]!;
     }
 
-    // In case no video-decoders are found, this means media_kit_libs_***_audio is being used.
+    // In case no video-decoders are found, this means flutter_mpv_libs_***_audio is being used.
     // Thus, --vid=no is required to prevent libmpv from trying to decode video (otherwise bad things may happen).
     //
     // Search for common H264 decoder to check if video support is available.
@@ -137,7 +137,7 @@ class NativeVideoController extends PlatformVideoController {
       throw UnsupportedError(
         '[VideoController] is not available.'
         ' '
-        'Please use media_kit_libs_***_video instead of media_kit_libs_***_audio.',
+        'Please use flutter_mpv_libs_***_video instead of flutter_mpv_libs_***_audio.',
       );
     }
 
@@ -255,7 +255,7 @@ class NativeVideoController extends PlatformVideoController {
 
   /// [MethodChannel] for invoking platform specific native implementation.
   static final _channel =
-      const MethodChannel('com.alexmercerind/flutter_mpv_video')
+      const MethodChannel('com.mohammed/flutter_mpv_video')
         ..setMethodCallHandler(
           (MethodCall call) async {
             try {

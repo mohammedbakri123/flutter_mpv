@@ -1,7 +1,7 @@
 name: flutter_mpv_video
 description: Native implementation for video playback in flutter_mpv.
-homepage: https://github.com/media-kit/media-kit
-repository: https://github.com/media-kit/media-kit
+homepage: https://github.com/mohammed/flutter_mpv
+repository: https://github.com/mohammed/flutter_mpv
 version: 2.0.1
 topics:
   - video
@@ -19,7 +19,7 @@ dependencies:
     sdk: flutter
 
   flutter_mpv:
-    path: ../flutter_mpv
+    any
 
   synchronized: ^3.1.0
   wakelock_plus: ^1.1.6
@@ -36,14 +36,14 @@ flutter:
   plugin:
     platforms:
       windows:
-        pluginClass: MediaKitVideoPluginCApi
+        pluginClass: FlutterMpvVideoPluginCApi
       linux:
-        pluginClass: MediaKitVideoPlugin
+        pluginClass: FlutterMpvVideoPlugin
       macos:
-        pluginClass: MediaKitVideoPlugin
+        pluginClass: FlutterMpvVideoPlugin
       ios:
-        pluginClass: MediaKitVideoPlugin
+        pluginClass: FlutterMpvVideoPlugin
       android:
-        package: com.alexmercerind.media_kit_video
-        pluginClass: MediaKitVideoPlugin
+        package: com.mohammed.flutter_mpv_video
+        pluginClass: FlutterMpvVideoPlugin
       web:

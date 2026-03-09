@@ -27,7 +27,7 @@ class _Sources {
     for (int i = 0; i < network.length; i++) {
       final destination = path.join(
         Directory.systemTemp.path,
-        'media_kit',
+        'flutter_mpv',
         network[i].split('/').last,
       );
       if (!await File(destination).parent.exists()) {

@@ -2,7 +2,7 @@
 
 #### A cross-platform video player & audio player for Flutter & Dart with advanced performance controls.
 
-**This is a fork of [media_kit](https://github.com/media-kit/media-kit) with additional video performance configuration options.**
+**This is a fork of [flutter_mpv](https://github.com/media-kit/media-kit) with additional video performance configuration options.**
 
 ## Installation
 
@@ -14,7 +14,7 @@ flutter_mpv is split into multiple packages to improve modularity & reduce bundl
 dependencies:
   flutter_mpv: ^1.2.6 # Primary package.
   flutter_mpv_video: ^2.0.1 # For video rendering.
-  media_kit_libs_video: ^1.0.7 # Native video dependencies.
+  flutter_mpv_libs_video: ^1.0.7 # Native video dependencies.
 ```
 
 #### For apps that need audio playback:
@@ -22,13 +22,13 @@ dependencies:
 ```yaml
 dependencies:
   flutter_mpv: ^1.2.6 # Primary package.
-  media_kit_libs_audio: ^1.0.7 # Native audio dependencies.
+  flutter_mpv_libs_audio: ^1.0.7 # Native audio dependencies.
 ```
 
 **Notes:**
 
 - The video libraries should be selected if both video & audio support is needed.
-- The `media_kit_libs_video` & `media_kit_libs_audio` packages should not be mixed.
+- The `flutter_mpv_libs_video` & `flutter_mpv_libs_audio` packages should not be mixed.
 - The performance in ["Release" mode](https://docs.flutter.dev/testing/build-modes#release) is substantially higher than in ["Debug" mode](https://docs.flutter.dev/testing/build-modes#debug).
 - [Enable --split-per-abi](https://docs.flutter.dev/deployment/android#what-is-a-fat-apk) or [use app bundle (instead of APK)](https://docs.flutter.dev/deployment/android#when-should-i-build-app-bundles-versus-apks) on Android.
 
@@ -67,7 +67,7 @@ import 'package:flutter/material.dart';
 // Make sure to add following packages to pubspec.yaml:
 // * flutter_mpv
 // * flutter_mpv_video
-// * media_kit_libs_video
+// * flutter_mpv_libs_video
 import 'package:flutter_mpv/flutter_mpv.dart';                      // Provides [Player], [Media], [Playlist] etc.
 import 'package:flutter_mpv_video/flutter_mpv_video.dart';          // Provides [VideoController] & [Video] etc.
 
@@ -176,7 +176,7 @@ void main() {
 
 The method also has some optional arguments to customize the global behavior. To handle any initialization errors, this may be surrounded by `try`/`catch`.
 
-**Note:** For backward compatibility, `MediaKit.ensureInitialized()` still works but is deprecated. Use `FlutterMpv.ensureInitialized()` instead.
+**Note:** For backward compatibility, `FlutterMpv.ensureInitialized()` still works but is deprecated. Use `FlutterMpv.ensureInitialized()` instead.
 
 ### Create a `Player`
 
@@ -1767,7 +1767,7 @@ VideoPerformanceConfiguration(
 This guide follows a tutorial-like structure & covers nearly all features that flutter_mpv offers. However, it is _not complete_ by any means. You are free to improve this page & add more documentation, which newcomers may find helpful. The following places can help you learn more:
 
 - [API reference](https://pub.dev/documentation/flutter_mpv/latest/flutter_mpv/flutter_mpv-library.html) can be helpful for diving into deeper specifics.
-- [source-code of the demo application](https://github.com/media-kit/media-kit/tree/main/media_kit_test/lib/tests) offers some complete code samples.
+- [source-code of the demo application](https://github.com/media-kit/media-kit/tree/main/flutter_mpv_test/lib/tests) offers some complete code samples.
 - In-code comments & docstrings happen to be the most updated source of knowledge.
 
 ## Goals
@@ -2297,9 +2297,9 @@ N/A
 During the build phase, the following warnings are not critical and cannot be silenced:
 
 ```log
-#import "Headers/media_kit_video-Swift.h"
+#import "Headers/flutter_mpv_video-Swift.h"
         ^
-/path/to/media_kit/media_kit_test/build/macos/Build/Products/Debug/media_kit_video/media_kit_video.framework/Headers/media_kit_video-Swift.h:270:31: warning: 'objc_ownership' only applies to Objective-C object or block pointer types; type here is 'CVPixelBufferRef' (aka 'struct __CVBuffer *')
+/path/to/flutter_mpv/flutter_mpv_test/build/macos/Build/Products/Debug/flutter_mpv_video/flutter_mpv_video.framework/Headers/flutter_mpv_video-Swift.h:270:31: warning: 'objc_ownership' only applies to Objective-C object or block pointer types; type here is 'CVPixelBufferRef' (aka 'struct __CVBuffer *')
 - (CVPixelBufferRef _Nullable __unsafe_unretained)copyPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 ```
 
@@ -2336,7 +2336,7 @@ There are other ways to bundle these within your app package e.g. within Snap or
 
 You should consider replacing the default memory allocator with [mimalloc](https://github.com/microsoft/mimalloc) for [avoiding memory leaks](https://github.com/media-kit/media-kit/issues/68).
 
-This is as simple as [adding one line to `linux/CMakeLists.txt`](https://github.com/media-kit/media-kit/blob/d02a97ce70b316207db024401fb99e3f4509a250/media_kit_test/linux/CMakeLists.txt#L92-L94):
+This is as simple as [adding one line to `linux/CMakeLists.txt`](https://github.com/media-kit/media-kit/blob/d02a97ce70b316207db024401fb99e3f4509a250/flutter_mpv_test/linux/CMakeLists.txt#L92-L94):
 
 ```cmake
 target_link_libraries(${BINARY_NAME} PRIVATE ${MIMALLOC_LIB})
@@ -2363,7 +2363,7 @@ On the web, **libmpv is not used**. Video & audio playback is handled by embeddi
 
 ## Architecture
 
-### package:media_kit
+### package:flutter_mpv
 
 _Click on the zoom button on top-right or pinch inside._
 
@@ -2606,7 +2606,7 @@ classDiagram
   }
 ```
 
-### package:media_kit_video
+### package:flutter_mpv_video
 
 _Click on the zoom button on top-right or pinch inside._
 
@@ -2622,11 +2622,11 @@ _Click on the zoom button on top-right or pinch inside._
 }%%
 classDiagram
 
-  MediaKitVideoPlugin "1" *-- "1" VideoOutputManager: Create VideoOutput(s) with VideoOutputManager for handle passed through platform channel
+  FlutterMpvVideoPlugin "1" *-- "1" VideoOutputManager: Create VideoOutput(s) with VideoOutputManager for handle passed through platform channel
   VideoOutputManager "1" *-- "*" VideoOutput: Create VideoOutput(s) to send back id & wid for render. Dispose to release.
-  VideoOutput <.. MediaKitAndroidHelper: Create & dispose JNI global object reference to android.view.Surface (for --wid)
+  VideoOutput <.. FlutterMpvAndroidHelper: Create & dispose JNI global object reference to android.view.Surface (for --wid)
 
-  class MediaKitVideoPlugin {
+  class FlutterMpvVideoPlugin {
     -MethodChannel channel
     -VideoOutputManager videoOutputManager
   }
@@ -2667,7 +2667,7 @@ classDiagram
     $deleteGlobalObjectRef(ref: long)
   }
 
-  class MediaKitAndroidHelper {
+  class FlutterMpvAndroidHelper {
     +newGlobalObjectRef(obj: Object): long
     +deleteGlobalObjectRef(ref: long)
     +setApplicationContext(context: Context)
@@ -2696,13 +2696,13 @@ _TODO: documentation._
 }%%
 classDiagram
 
-  MediaKitVideoPlugin "1" *-- "1" VideoOutputManager: Create VideoOutput(s) with VideoOutputManager for handle passed through platform channel
+  FlutterMpvVideoPlugin "1" *-- "1" VideoOutputManager: Create VideoOutput(s) with VideoOutputManager for handle passed through platform channel
   VideoOutputManager "1" *-- "*" VideoOutput: Takes PluginRegistrarWindows as reference
   VideoOutputManager "1" *-- "1" ThreadPool
   VideoOutput "*" o-- "1" ThreadPool: Post creation, resize & render etc. tasks involving EGL to ensure synchronous EGL/ANGLE usage across multiple VideoOutput(s)
   VideoOutput "1" *-- "1" ANGLESurfaceManager: Only for H/W accelerated rendering
 
-  class MediaKitVideoPlugin {
+  class FlutterMpvVideoPlugin {
     -flutter::PluginRegistrarWindows registrar_
     -std::unique_ptr<MethodChannel> channel_
     -std::unique_ptr<VideoOutputManager> video_output_manager_
@@ -2800,7 +2800,7 @@ classDiagram
 }%%
 classDiagram
 
-  MediaKitVideoPlugin "1" *-- "1" VideoOutputManager: Create VideoOutput(s) with VideoOutputManager for handle passed through platform channel
+  FlutterMpvVideoPlugin "1" *-- "1" VideoOutputManager: Create VideoOutput(s) with VideoOutputManager for handle passed through platform channel
   VideoOutputManager "1" *-- "*" VideoOutput: Takes FlTextureRegistrar as reference
   VideoOutput "1" *-- "1" TextureGL: For H/W rendering.
   TextureGL "1" o-- "1" VideoOutput: Take VideoOutput as reference
@@ -2809,7 +2809,7 @@ classDiagram
   TextureGL "1" <-- "1" FlTextureGL
   TextureSW "1" <-- "1" FlTexture
 
-  class MediaKitVideoPlugin {
+  class FlutterMpvVideoPlugin {
     -FlMethodChannel* channel
     -VideoOutputManager* video_output_manager
   }
@@ -2876,23 +2876,23 @@ flutter_mpv is entirely written in Dart. It uses dart:ffi to invoke native C API
 
 > ~~If you pass a function pointer from Dart to C code, you can invoke it fine. But, as soon as you invoke it from some other thread on the native side, Dart VM will instantly crash. This feature is important because most events take place on a background thread.~~
 
-~~However, I could easily do this within Dart because [libmpv](https://github.com/mpv-player/mpv/tree/master/libmpv) offers an "event polling"-like way to listen to events. I got awesome idea to spawn a background [`Isolate`](https://api.flutter.dev/flutter/dart-isolate/Isolate-class.html), where I run the event-loop. I get the memory address of each event and forward it outside the [`Isolate`](https://api.flutter.dev/flutter/dart-isolate/Isolate-class.html) with the help of [`ReceivePort`](https://api.dart.dev/stable/2.18.6/dart-isolate/ReceivePort-class.html), where I finally interpret it using more FFI code. I have explained this in detail within [the in-code comments of initializer.dart, where I had to perform a lot more trickery to get this to work](https://github.com/media-kit/media-kit/blob/master/media_kit/lib/src/libmpv/core/initializer.dart).~~
+~~However, I could easily do this within Dart because [libmpv](https://github.com/mpv-player/mpv/tree/master/libmpv) offers an "event polling"-like way to listen to events. I got awesome idea to spawn a background [`Isolate`](https://api.flutter.dev/flutter/dart-isolate/Isolate-class.html), where I run the event-loop. I get the memory address of each event and forward it outside the [`Isolate`](https://api.flutter.dev/flutter/dart-isolate/Isolate-class.html) with the help of [`ReceivePort`](https://api.dart.dev/stable/2.18.6/dart-isolate/ReceivePort-class.html), where I finally interpret it using more FFI code. I have explained this in detail within [the in-code comments of initializer.dart, where I had to perform a lot more trickery to get this to work](https://github.com/media-kit/media-kit/blob/master/flutter_mpv/lib/src/libmpv/core/initializer.dart).~~
 
-~~**Thus, invoking native methods & handling of events etc. could be done within 100% Dart using FFI.** This is enough for audio playback & supports both Flutter SDK & Dart VM. Although event handling works entirely within Dart. Later, it was discovered that going beyond certain number of simultaneous instances caused a deadlock ([dart-lang/sdk#51254](https://github.com/dart-lang/sdk/issues/51254) & [dart-lang/sdk#51261](https://github.com/dart-lang/sdk/issues/51261)), making UI entirely freezed along-side any other Dart code in execution. To deal with this, a new package [package:media_kit_native_event_loop](#packagemedia_kit_native_event_loop) is created. Adding [package:media_kit_native_event_loop](#packagemedia_kit_native_event_loop) to `pubspec.yaml` automatically resolves this issue without any chagnes to code!~~
+~~**Thus, invoking native methods & handling of events etc. could be done within 100% Dart using FFI.** This is enough for audio playback & supports both Flutter SDK & Dart VM. Although event handling works entirely within Dart. Later, it was discovered that going beyond certain number of simultaneous instances caused a deadlock ([dart-lang/sdk#51254](https://github.com/dart-lang/sdk/issues/51254) & [dart-lang/sdk#51261](https://github.com/dart-lang/sdk/issues/51261)), making UI entirely freezed along-side any other Dart code in execution. To deal with this, a new package [package:flutter_mpv_native_event_loop](#packageflutter_mpv_native_event_loop) is created. Adding [package:flutter_mpv_native_event_loop](#packageflutter_mpv_native_event_loop) to `pubspec.yaml` automatically resolves this issue without any chagnes to code!~~
 
 **Update:** The above issue is resolved in Dart SDK 3.1.0. [`NativeCallable`](https://api.flutter.dev/flutter/dart-ffi/NativeCallable-class.html) can now be used to make async C callbacks.
 
-However, no such "event-polling" like API is possible for video rendering. So, I best idea seemed to create a new package `media_kit_video` for specifically offering platform-specific video embedding implementation which internally handles Flutter's Texture Registry API & libmpv's OpenGL rendering API. This package only consumes the `mpv_handle*` (which can be shared as primitive `int` value easily) of the instance (created with flutter_mpv through FFI) to setup a new viewport. Detailed implementation is discussed below.
+However, no such "event-polling" like API is possible for video rendering. So, I best idea seemed to create a new package `flutter_mpv_video` for specifically offering platform-specific video embedding implementation which internally handles Flutter's Texture Registry API & libmpv's OpenGL rendering API. This package only consumes the `mpv_handle*` (which can be shared as primitive `int` value easily) of the instance (created with flutter_mpv through FFI) to setup a new viewport. Detailed implementation is discussed below.
 
-### package:media_kit_native_event_loop
+### package:flutter_mpv_native_event_loop
 
-> Platform specific threaded event handling for media_kit. Enables support for higher number of concurrent instances.
+> Platform specific threaded event handling for flutter_mpv. Enables support for higher number of concurrent instances.
 
 The package contains a minimal C++ implementation which spawns a detach-ed [`std::thread`](https://en.cppreference.com/w/cpp/thread/thread). This runs the `mpv_wait_event` loop & forwads the events using [`postCObject`](https://api.dart.dev/stable/2.19.6/dart-ffi/NativeApi/postCObject.html), [`SendPort`](https://api.dart.dev/stable/2.19.6/dart-isolate/SendPort-class.html) & [`ReceivePort`](https://api.dart.dev/stable/2.19.6/dart-isolate/ReceivePort-class.html) to Dart VM. Necessary mutex synchronization also takes place.
 
 [`Isolate`](https://api.flutter.dev/flutter/dart-isolate/Isolate-class.html) based event loop is avoided once this package is added to the project.
 
-### package:media_kit_video
+### package:flutter_mpv_video
 
 #### Android
 
@@ -2906,7 +2906,7 @@ More details may be found at: https://mpv.io/manual/stable/#video-output-drivers
 
 Obtaining a global reference pointer to a Java object ([`android.view.Surface`](https://developer.android.com/reference/android/view/Surface) in our case) requires JNI. For this, a custom shared library is used, you can find it's implementation at [media-kit/media-kit-android-helper](https://github.com/media-kit/media-kit-android-helper). Since compilation of this would require NDK (& make process tedious), pre-built shared libraries is bundled for each architecture at the time of development/build.
 
-Since the `package:media_kit` is a Dart package (which works independent of Flutter), accessing assets was a challenging part. The mentioned shared libraries generated by [media-kit/media-kit-android-helper](https://github.com/media-kit/media-kit-android-helper) helps to [access assets bundled inside Android APK from Dart](https://github.com/alexmercerind/MediaKitAndroidHelper/blob/220cf95958aceb7e3678ba524da812f212524537/app/src/main/cpp/native-lib.cpp#L26-L115) (using FFI, without depending on Flutter).
+Since the `package:flutter_mpv` is a Dart package (which works independent of Flutter), accessing assets was a challenging part. The mentioned shared libraries generated by [media-kit/media-kit-android-helper](https://github.com/media-kit/media-kit-android-helper) helps to [access assets bundled inside Android APK from Dart](https://github.com.mohammed/FlutterMpvAndroidHelper/blob/220cf95958aceb7e3678ba524da812f212524537/app/src/main/cpp/native-lib.cpp#L26-L115) (using FFI, without depending on Flutter).
 
 #### iOS
 
@@ -2925,7 +2925,7 @@ Possible improvements :
 - Render directly to METAL texture:
   - Use ANGLE to not depend on the host OpenGL implementation, deprecated by Apple.
   - Use a future METAL API natively developed by mpv.
-- Share the METAL texture between `media_kit_video` and Flutter, without using a pixel buffer.
+- Share the METAL texture between `flutter_mpv_video` and Flutter, without using a pixel buffer.
 
 -->
 
@@ -2950,7 +2950,7 @@ This hardware-accelerated video output requires DirectX 11 or higher. Most Windo
 
 </details>
 
-You may visit [experimentation repository](https://github.com/alexmercerind/flutter-windows-OpenGLES) to see a minimal example showing OpenGL ES usage in Flutter Windows.
+You may visit [experimentation repository](https://github.com.mohammed/flutter-windows-OpenGLES) to see a minimal example showing OpenGL ES usage in Flutter Windows.
 
 #### GNU/Linux
 

@@ -1,4 +1,4 @@
-// This file is a part of media_kit
+// This file is a part of flutter_mpv
 // (https://github.com/media-kit/media-kit).
 //
 // Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
@@ -6,7 +6,7 @@
 // Use of this source code is governed by MIT license that can be found in the
 // LICENSE file.
 
-#include "include/media_kit_video/texture_gl.h"
+#include "include/flutter_mpv_video/texture_gl.h"
 
 #include <epoxy/gl.h>
 #include <epoxy/egl.h>

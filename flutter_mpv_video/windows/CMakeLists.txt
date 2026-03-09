@@ -1,4 +1,4 @@
-# This file is a part of media_kit (https://github.com/media-kit/media-kit).
+# This file is a part of flutter_mpv (https://github.com/media-kit/media-kit).
 #
 # Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 # All rights reserved.
@@ -6,13 +6,13 @@
 
 cmake_minimum_required(VERSION 3.14)
 
-set(PROJECT_NAME "media_kit_video")
+set(PROJECT_NAME "flutter_mpv_video")
 set(CMAKE_CXX_STANDARD 17)
 project(${PROJECT_NAME} LANGUAGES CXX)
 
-set(PLUGIN_NAME "media_kit_video_plugin")
+set(PLUGIN_NAME "flutter_mpv_video_plugin")
 
-# This is shipped as part of package:media_kit_libs_*** package(s).
+# This is shipped as part of package:flutter_mpv_libs_*** package(s).
 # Must be built before this target.
 set(LIBMPV_SRC "${CMAKE_BINARY_DIR}/libmpv")
 set(ANGLE_SRC "${CMAKE_BINARY_DIR}/ANGLE")
@@ -29,8 +29,8 @@ if(MEDIA_KIT_LIBS_AVAILABLE)
   add_library(
     ${PLUGIN_NAME} SHARED
     "angle_surface_manager.cc"
-    "media_kit_video_plugin_c_api.cc"
-    "media_kit_video_plugin.cc"
+    "flutter_mpv_video_plugin_c_api.cc"
+    "flutter_mpv_video_plugin.cc"
     "video_output_manager.cc"
     "video_output.cc"
     "utils.cc"
@@ -64,11 +64,11 @@ if(MEDIA_KIT_LIBS_AVAILABLE)
     "${ANGLE_SRC}/lib/libGLESv2.dll.lib"
   )
 else()
-  message(NOTICE "media_kit: WARNING: package:media_kit_libs_*** not found.")
+  message(NOTICE "flutter_mpv: WARNING: package:flutter_mpv_libs_*** not found.")
 
   add_library(
     ${PLUGIN_NAME} SHARED
-    "media_kit_video_plugin_c_api.cc"
+    "flutter_mpv_video_plugin_c_api.cc"
     ${PLUGIN_SOURCES}
   )
 
@@ -83,7 +83,7 @@ else()
     ${PLUGIN_NAME} PRIVATE
     FLUTTER_PLUGIN_IMPL
 
-    # Add macro to indicate that libmpv & ANGLE from package:media_kit_libs_*** are not found.
+    # Add macro to indicate that libmpv & ANGLE from package:flutter_mpv_libs_*** are not found.
     "MEDIA_KIT_LIBS_NOT_FOUND=1"
   )
 
@@ -100,7 +100,7 @@ else()
 endif()
 
 set(
-  media_kit_video_bundled_libraries
+  flutter_mpv_video_bundled_libraries
   ""
   PARENT_SCOPE
 )

@@ -48,7 +48,7 @@ abstract class AndroidAssetLoader {
   static String _copyAssetToFilesDir(String asset) {
     final lib = DynamicLibrary.open('libmediakitandroidhelper.so');
     final fn = lib.lookupFunction<FnCXX, FnDart>(
-      'MediaKitAndroidHelperCopyAssetToFilesDir',
+      'FlutterMpvAndroidHelperCopyAssetToFilesDir',
     );
     final name = asset.toNativeUtf8();
     final result = List.generate(4096, (index) => ' ').join('').toNativeUtf8();

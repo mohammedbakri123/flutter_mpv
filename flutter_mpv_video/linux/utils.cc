@@ -1,4 +1,4 @@
-// // This file is a part of media_kit
+// // This file is a part of flutter_mpv
 // // (https://github.com/media-kit/media-kit).
 // //
 // // Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
@@ -7,7 +7,7 @@
 // the
 // // LICENSE file.
 
-#include "include/media_kit_video/utils.h"
+#include "include/flutter_mpv_video/utils.h"
 
 void utils_enter_native_fullscreen(GtkWidget* window) {
   gtk_window_fullscreen(GTK_WINDOW(window));

@@ -28,7 +28,7 @@ import 'package:flutter_mpv/src/models/audio_params.dart';
 import 'package:flutter_mpv/src/models/video_params.dart';
 import 'package:flutter_mpv/src/models/playlist_mode.dart';
 
-/// Initializes the web backend for package:media_kit.
+/// Initializes the web backend for package:flutter_mpv.
 void webEnsureInitialized({String? libmpv}) {}
 
 /// {@template web_player}
@@ -1660,10 +1660,10 @@ class WebPlayer extends PlatformPlayer {
   final Lock lock = Lock();
 
   /// JavaScript object attribute used to store various [VideoElement] instances in [js.context].
-  static const kInstances = '\$com.alexmercerind.media_kit.instances';
+  static const kInstances = '\$com.mohammed.flutter_mpv.instances';
 
   /// JavaScript object attribute used to store the instance count of [Player] in [js.context].
-  static const kInstanceCount = '\$com.alexmercerind.media_kit.instance_count';
+  static const kInstanceCount = '\$com.mohammed.flutter_mpv.instance_count';
 
   /// Whether the [WebPlayer] is initialized for unit-testing.
   @visibleForTesting

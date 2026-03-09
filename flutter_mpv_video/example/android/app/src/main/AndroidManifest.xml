@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.alexmercerind.media_kit_video_example">
+    package="com.mohammed.flutter_mpv_video_example">
     <application
-        android:label="media_kit_video_example"
+        android:label="flutter_mpv_video_example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

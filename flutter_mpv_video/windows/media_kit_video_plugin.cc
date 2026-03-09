@@ -1,26 +1,26 @@
-// This file is a part of media_kit
+// This file is a part of flutter_mpv
 // (https://github.com/media-kit/media-kit).
 //
 // Copyright © 2021 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 // All rights reserved.
 // Use of this source code is governed by MIT license that can be found in the
 // LICENSE file.
-#include "media_kit_video_plugin.h"
+#include "flutter_mpv_video_plugin.h"
 #include "utils.h"
 
 #include <Windows.h>
 
-namespace media_kit_video {
+namespace flutter_mpv_video {
 
-MediaKitVideoPlugin* MediaKitVideoPlugin::instance_ = nullptr;
+FlutterMpvVideoPlugin* FlutterMpvVideoPlugin::instance_ = nullptr;
 
-void MediaKitVideoPlugin::RegisterWithRegistrar(
+void FlutterMpvVideoPlugin::RegisterWithRegistrar(
     flutter::PluginRegistrarWindows* registrar) {
-  auto plugin = std::make_unique<MediaKitVideoPlugin>(registrar);
+  auto plugin = std::make_unique<FlutterMpvVideoPlugin>(registrar);
   registrar->AddPlugin(std::move(plugin));
 }
 
-MediaKitVideoPlugin::MediaKitVideoPlugin(
+FlutterMpvVideoPlugin::FlutterMpvVideoPlugin(
     flutter::PluginRegistrarWindows* registrar)
     : registrar_(registrar),
       video_output_manager_(std::make_unique<VideoOutputManager>(registrar)) {
@@ -32,14 +32,14 @@ MediaKitVideoPlugin::MediaKitVideoPlugin(
                          reinterpret_cast<LONG_PTR>(WindowProcDelegate)));
 
   channel_ = std::make_unique<flutter::MethodChannel<flutter::EncodableValue>>(
-      registrar->messenger(), "com.alexmercerind/media_kit_video",
+      registrar->messenger(), "com.mohammed/flutter_mpv_video",
       &flutter::StandardMethodCodec::GetInstance());
   channel_->SetMethodCallHandler([&](const auto& call, auto result) {
     HandleMethodCall(call, std::move(result));
   });
 }
 
-MediaKitVideoPlugin::~MediaKitVideoPlugin() {
+FlutterMpvVideoPlugin::~FlutterMpvVideoPlugin() {
   if (flutter_window_ && original_window_proc_) {
     ::SetWindowLongPtr(flutter_window_, GWLP_WNDPROC,
                        reinterpret_cast<LONG_PTR>(original_window_proc_));
@@ -49,7 +49,7 @@ MediaKitVideoPlugin::~MediaKitVideoPlugin() {
   }
 }
 
-void MediaKitVideoPlugin::RunOnMainThread(std::function<void()> task) {
+void FlutterMpvVideoPlugin::RunOnMainThread(std::function<void()> task) {
   if (!flutter_window_) {
     return;
   }
@@ -62,7 +62,7 @@ void MediaKitVideoPlugin::RunOnMainThread(std::function<void()> task) {
   ::PostMessage(flutter_window_, kMainThreadTaskMessage, 0, 0);
 }
 
-LRESULT CALLBACK MediaKitVideoPlugin::WindowProcDelegate(HWND hwnd,
+LRESULT CALLBACK FlutterMpvVideoPlugin::WindowProcDelegate(HWND hwnd,
                                                          UINT message,
                                                          WPARAM wParam,
                                                          LPARAM lParam) {
@@ -79,7 +79,7 @@ LRESULT CALLBACK MediaKitVideoPlugin::WindowProcDelegate(HWND hwnd,
   return ::DefWindowProc(hwnd, message, wParam, lParam);
 }
 
-void MediaKitVideoPlugin::ProcessMainThreadTasks() {
+void FlutterMpvVideoPlugin::ProcessMainThreadTasks() {
   std::queue<std::function<void()>> tasks_to_execute;
 
   {
@@ -98,7 +98,7 @@ void MediaKitVideoPlugin::ProcessMainThreadTasks() {
   }
 }
 
-void MediaKitVideoPlugin::HandleMethodCall(
+void FlutterMpvVideoPlugin::HandleMethodCall(
     const flutter::MethodCall<flutter::EncodableValue>& method_call,
     std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result) {
   if (method_call.method_name().compare("VideoOutputManager.Create") == 0) {
@@ -214,4 +214,4 @@ void MediaKitVideoPlugin::HandleMethodCall(
   }
 }
 
-}  // namespace media_kit_video
+}  // namespace flutter_mpv_video

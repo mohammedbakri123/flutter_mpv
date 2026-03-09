@@ -1,4 +1,4 @@
-# [package:media_kit](https://github.com/media-kit/media-kit)
+# [package:flutter_mpv](https://github.com/media-kit/media-kit)
 
 #### A cross-platform video player & audio player for Flutter & Dart.
 
@@ -32,29 +32,29 @@
 
 ## Installation
 
-[package:media_kit](https://github.com/media-kit/media-kit) is split into multiple packages to improve modularity & reduce bundle size.
+[package:flutter_mpv](https://github.com/media-kit/media-kit) is split into multiple packages to improve modularity & reduce bundle size.
 
 #### For apps that need video playback:
 
 ```yaml
 dependencies:
-  media_kit: ^1.2.6 # Primary package.
-  media_kit_video: ^2.0.1 # For video rendering.
-  media_kit_libs_video: ^1.0.7 # Native video dependencies.
+  flutter_mpv: ^1.2.6 # Primary package.
+  flutter_mpv_video: ^2.0.1 # For video rendering.
+  flutter_mpv_libs_video: ^1.0.7 # Native video dependencies.
 ```
 
 #### For apps that need audio playback:
 
 ```yaml
 dependencies:
-  media_kit: ^1.2.6 # Primary package.
-  media_kit_libs_audio: ^1.0.7 # Native audio dependencies.
+  flutter_mpv: ^1.2.6 # Primary package.
+  flutter_mpv_libs_audio: ^1.0.7 # Native audio dependencies.
 ```
 
 **Notes:**
 
 - The video libraries should be selected if both video & audio support is needed.
-- The `media_kit_libs_video` & `media_kit_libs_audio` packages should not be mixed.
+- The `flutter_mpv_libs_video` & `flutter_mpv_libs_audio` packages should not be mixed.
 - The performance in ["Release" mode](https://docs.flutter.dev/testing/build-modes#release) is substantially higher than in ["Debug" mode](https://docs.flutter.dev/testing/build-modes#debug).
 - [Enable --split-per-abi](https://docs.flutter.dev/deployment/android#what-is-a-fat-apk) or [use app bundle (instead of APK)](https://docs.flutter.dev/deployment/android#when-should-i-build-app-bundles-versus-apks) on Android.
 
@@ -62,11 +62,11 @@ dependencies:
 
 | Platform  | Video | Audio | Notes                              | Demo                                                                                                                        |
 | --------- | ----- | ----- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Android   | ✅    | ✅    | Android 5.0 or above.              | [Download](https://github.com/media-kit/media-kit/releases/download/media_kit-v1.1.10/media_kit_test_android-arm64-v8a.apk) |
-| iOS       | ✅    | ✅    | iOS 9 or above.                    | [Download](https://github.com/media-kit/media-kit/releases/download/media_kit-v1.1.10/media_kit_test_ios_arm64.7z)          |
-| macOS     | ✅    | ✅    | macOS 10.9 or above.               | [Download](https://github.com/media-kit/media-kit/releases/download/media_kit-v1.1.10/media_kit_test_macos_universal.7z)    |
-| Windows   | ✅    | ✅    | Windows 7 or above.                | [Download](https://github.com/media-kit/media-kit/releases/download/media_kit-v1.1.10/media_kit_test_win32_x64.7z)          |
-| GNU/Linux | ✅    | ✅    | Any modern GNU/Linux distribution. | [Download](https://github.com/media-kit/media-kit/releases/download/media_kit-v1.1.10/media_kit_test_linux_x64.7z)          |
+| Android   | ✅    | ✅    | Android 5.0 or above.              | [Download](https://github.com/media-kit/media-kit/releases/download/flutter_mpv-v1.1.10/flutter_mpv_test_android-arm64-v8a.apk) |
+| iOS       | ✅    | ✅    | iOS 9 or above.                    | [Download](https://github.com/media-kit/media-kit/releases/download/flutter_mpv-v1.1.10/flutter_mpv_test_ios_arm64.7z)          |
+| macOS     | ✅    | ✅    | macOS 10.9 or above.               | [Download](https://github.com/media-kit/media-kit/releases/download/flutter_mpv-v1.1.10/flutter_mpv_test_macos_universal.7z)    |
+| Windows   | ✅    | ✅    | Windows 7 or above.                | [Download](https://github.com/media-kit/media-kit/releases/download/flutter_mpv-v1.1.10/flutter_mpv_test_win32_x64.7z)          |
+| GNU/Linux | ✅    | ✅    | Any modern GNU/Linux distribution. | [Download](https://github.com/media-kit/media-kit/releases/download/flutter_mpv-v1.1.10/flutter_mpv_test_linux_x64.7z)          |
 | Web       | ✅    | ✅    | Any modern web browser.            | [Visit](https://media-kit.github.io/media-kit/)                                                                             |
 
 <table>
@@ -141,18 +141,18 @@ A quick usage example.
 
 ```dart
 // Make sure to add following packages to pubspec.yaml:
-// * media_kit
-// * media_kit_video
-// * media_kit_libs_video
+// * flutter_mpv
+// * flutter_mpv_video
+// * flutter_mpv_libs_video
 import 'package:flutter/material.dart';
 
 import 'package:flutter_mpv/flutter_mpv.dart';                  // Provides [Player], [Media], [Playlist] etc.
-import 'package:media_kit_video/media_kit_video.dart';          // Provides [VideoController] & [Video] etc.
+import 'package:flutter_mpv_video/flutter_mpv_video.dart';          // Provides [VideoController] & [Video] etc.
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // Necessary initialization for package:media_kit.
-  MediaKit.ensureInitialized();
+  // Necessary initialization for package:flutter_mpv.
+  FlutterMpv.ensureInitialized();
   runApp(
     const MaterialApp(
       home: MyScreen(),
@@ -203,7 +203,7 @@ class MyScreenState extends State<MyScreen> {
 
 ## Guide
 
-A usage guide for [package:media_kit](https://github.com/media-kit/media-kit).
+A usage guide for [package:flutter_mpv](https://github.com/media-kit/media-kit).
 
 **Tip:** Use <kbd>Ctrl</kbd> + <kbd>F</kbd> to quickly search for things.
 
@@ -235,15 +235,15 @@ A usage guide for [package:media_kit](https://github.com/media-kit/media-kit).
 
 ### Initialization
 
-`MediaKit.ensureInitialized` must be called before using the package:
+`FlutterMpv.ensureInitialized` must be called before using the package:
 
 ```dart
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // Make sure to add the required packages to pubspec.yaml:
   // * https://github.com/media-kit/media-kit#installation
-  // * https://pub.dev/packages/media_kit#installation
-  MediaKit.ensureInitialized();
+  // * https://pub.dev/packages/flutter_mpv#installation
+  FlutterMpv.ensureInitialized();
   runApp(const MyApp());
 }
 ```
@@ -264,7 +264,7 @@ Additional options may be provided using the `configuration` argument in the con
 final Player player = Player(
   configuration: PlayerConfiguration(
     // Supply your options:
-    title: 'My awesome package:media_kit application',
+    title: 'My awesome package:flutter_mpv application',
     ready: () {
       print('The initialization is complete.');
     },
@@ -730,7 +730,7 @@ final VideoController player = VideoController(
     width: 640,                            // default: null
     height: 480,                           // default: null
     // The in-code comments is best place to know more about these options:
-    // https://github.com/media-kit/media-kit/blob/main/media_kit_video/lib/src/video_controller/video_controller.dart
+    // https://github.com/media-kit/media-kit/blob/main/flutter_mpv_video/lib/src/video_controller/video_controller.dart
   ),
 );
 ```
@@ -851,7 +851,7 @@ await player.setAudioTrack(
 
 ### Video controls
 
-[`package:media_kit`](https://github.com/media-kit/media-kit) provides highly-customizable pre-built video controls for usage.
+[`package:flutter_mpv`](https://github.com/media-kit/media-kit) provides highly-customizable pre-built video controls for usage.
 
 Apart from theming, layout can be customized, position of buttons can be modified, custom buttons can be created etc. Necessary features like fullscreen, keyboard shortcuts & swipe-based controls are also supported by default.
 
@@ -1097,15 +1097,15 @@ CupertinoVideoControlsTheme(
 
 ### Next steps
 
-This guide follows a tutorial-like structure & covers nearly all features that [package:media_kit](https://github.com/media-kit/media-kit) offers. However, it is _not complete_ by any means. You are free to improve this page & add more documentation, which newcomers may find helpful. The following places can help you learn more:
+This guide follows a tutorial-like structure & covers nearly all features that [package:flutter_mpv](https://github.com/media-kit/media-kit) offers. However, it is _not complete_ by any means. You are free to improve this page & add more documentation, which newcomers may find helpful. The following places can help you learn more:
 
-- [API reference](https://pub.dev/documentation/media_kit/latest/media_kit/media_kit-library.html) can be helpful for diving into deeper specifics.
-- [source-code of the demo application](https://github.com/media-kit/media-kit/tree/main/media_kit_test/lib/tests) offers some complete code samples.
+- [API reference](https://pub.dev/documentation/flutter_mpv/latest/flutter_mpv/flutter_mpv-library.html) can be helpful for diving into deeper specifics.
+- [source-code of the demo application](https://github.com/media-kit/media-kit/tree/main/flutter_mpv_test/lib/tests) offers some complete code samples.
 - In-code comments & docstrings happen to be the most updated source of knowledge.
 
 ## Goals
 
-[package:media_kit](https://github.com/media-kit/media-kit) is a library for Flutter & Dart which **provides video & audio playback**.
+[package:flutter_mpv](https://github.com/media-kit/media-kit) is a library for Flutter & Dart which **provides video & audio playback**.
 
 - **Strong:** Supports _most_ video & audio codecs.
 - **Performant:**
@@ -1629,9 +1629,9 @@ N/A
 During the build phase, the following warnings are not critical and cannot be silenced:
 
 ```log
-#import "Headers/media_kit_video-Swift.h"
+#import "Headers/flutter_mpv_video-Swift.h"
         ^
-/path/to/media_kit/media_kit_test/build/macos/Build/Products/Debug/media_kit_video/media_kit_video.framework/Headers/media_kit_video-Swift.h:270:31: warning: 'objc_ownership' only applies to Objective-C object or block pointer types; type here is 'CVPixelBufferRef' (aka 'struct __CVBuffer *')
+/path/to/flutter_mpv/flutter_mpv_test/build/macos/Build/Products/Debug/flutter_mpv_video/flutter_mpv_video.framework/Headers/flutter_mpv_video-Swift.h:270:31: warning: 'objc_ownership' only applies to Objective-C object or block pointer types; type here is 'CVPixelBufferRef' (aka 'struct __CVBuffer *')
 - (CVPixelBufferRef _Nullable __unsafe_unretained)copyPixelBuffer SWIFT_WARN_UNUSED_RESULT;
 ```
 
@@ -1668,7 +1668,7 @@ There are other ways to bundle these within your app package e.g. within Snap or
 
 You should consider replacing the default memory allocator with [mimalloc](https://github.com/microsoft/mimalloc) for [avoiding memory leaks](https://github.com/media-kit/media-kit/issues/68).
 
-This is as simple as [adding one line to `linux/CMakeLists.txt`](https://github.com/media-kit/media-kit/blob/d02a97ce70b316207db024401fb99e3f4509a250/media_kit_test/linux/CMakeLists.txt#L92-L94):
+This is as simple as [adding one line to `linux/CMakeLists.txt`](https://github.com/media-kit/media-kit/blob/d02a97ce70b316207db024401fb99e3f4509a250/flutter_mpv_test/linux/CMakeLists.txt#L92-L94):
 
 ```cmake
 target_link_libraries(${BINARY_NAME} PRIVATE ${MIMALLOC_LIB})

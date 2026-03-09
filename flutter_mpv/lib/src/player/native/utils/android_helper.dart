@@ -56,35 +56,35 @@ abstract class AndroidHelper {
           );
         } catch (_) {}
         try {
-          _MediaKitAndroidHelperGetJavaVM =
+          _FlutterMpvAndroidHelperGetJavaVM =
               libmediakitandroidhelper?.lookupFunction<
-                  MediaKitAndroidHelperGetJavaVMCXX,
-                  MediaKitAndroidHelperGetJavaVMDart>(
-            'MediaKitAndroidHelperGetJavaVM',
+                  FlutterMpvAndroidHelperGetJavaVMCXX,
+                  FlutterMpvAndroidHelperGetJavaVMDart>(
+            'FlutterMpvAndroidHelperGetJavaVM',
           );
         } catch (_) {}
         try {
-          MediaKitAndroidHelperGetFilesDir =
+          FlutterMpvAndroidHelperGetFilesDir =
               libmediakitandroidhelper?.lookupFunction<
-                  MediaKitAndroidHelperGetFilesDirCXX,
-                  MediaKitAndroidHelperGetFilesDirDart>(
-            'MediaKitAndroidHelperGetFilesDir',
+                  FlutterMpvAndroidHelperGetFilesDirCXX,
+                  FlutterMpvAndroidHelperGetFilesDirDart>(
+            'FlutterMpvAndroidHelperGetFilesDir',
           );
         } catch (_) {}
         try {
-          _MediaKitAndroidHelperIsEmulator =
+          _FlutterMpvAndroidHelperIsEmulator =
               libmediakitandroidhelper?.lookupFunction<
-                  MediaKitAndroidHelperIsEmulatorCXX,
-                  MediaKitAndroidHelperIsEmulatorDart>(
-            'MediaKitAndroidHelperIsEmulator',
+                  FlutterMpvAndroidHelperIsEmulatorCXX,
+                  FlutterMpvAndroidHelperIsEmulatorDart>(
+            'FlutterMpvAndroidHelperIsEmulator',
           );
         } catch (_) {}
         try {
-          _MediaKitAndroidHelperGetAPILevel =
+          _FlutterMpvAndroidHelperGetAPILevel =
               libmediakitandroidhelper?.lookupFunction<
-                  MediaKitAndroidHelperGetAPILevelCXX,
-                  MediaKitAndroidHelperGetAPILevelDart>(
-            'MediaKitAndroidHelperGetAPILevel',
+                  FlutterMpvAndroidHelperGetAPILevelCXX,
+                  FlutterMpvAndroidHelperGetAPILevelDart>(
+            'FlutterMpvAndroidHelperGetAPILevel',
           );
         } catch (_) {}
 
@@ -93,9 +93,9 @@ abstract class AndroidHelper {
             'Cannot load mpv_lavc_set_java_vm (libmpv.so) or av_jni_set_java_vm (libavcodec.so).',
           );
         }
-        if (_MediaKitAndroidHelperGetJavaVM == null) {
+        if (_FlutterMpvAndroidHelperGetJavaVM == null) {
           throw UnsupportedError(
-            'Cannot load MediaKitAndroidHelperGetJavaVM (libmediakitandroidhelper.so).',
+            'Cannot load FlutterMpvAndroidHelperGetJavaVM (libmediakitandroidhelper.so).',
           );
         }
 
@@ -103,7 +103,7 @@ abstract class AndroidHelper {
         while (true) {
           // Invoke av_jni_set_java_vm to set reference to JavaVM*.
           // It is important to call av_jni_set_java_vm so that libavcodec can access JNI environment & thus, mediacodec APIs.
-          vm = _MediaKitAndroidHelperGetJavaVM?.call();
+          vm = _FlutterMpvAndroidHelperGetJavaVM?.call();
           if (vm != null) {
             if (vm != nullptr) {
               // FFmpeg may be statically linked with libmpv, in that case libavcodec.so will not be available.
@@ -125,7 +125,7 @@ abstract class AndroidHelper {
 
   static String? get filesDir {
     if (Platform.isAndroid) {
-      final filesDir = MediaKitAndroidHelperGetFilesDir?.call();
+      final filesDir = FlutterMpvAndroidHelperGetFilesDir?.call();
       if (filesDir != null) {
         if (filesDir != nullptr) {
           return filesDir.toDartString();
@@ -137,7 +137,7 @@ abstract class AndroidHelper {
 
   static bool get isEmulator {
     if (Platform.isAndroid) {
-      return _MediaKitAndroidHelperIsEmulator?.call() == 1;
+      return _FlutterMpvAndroidHelperIsEmulator?.call() == 1;
     }
     return false;
   }
@@ -151,18 +151,18 @@ abstract class AndroidHelper {
 
   static int get APILevel {
     if (Platform.isAndroid) {
-      return _MediaKitAndroidHelperGetAPILevel?.call() ?? -1;
+      return _FlutterMpvAndroidHelperGetAPILevel?.call() ?? -1;
     }
     return -1;
   }
 
   static av_jni_set_java_vmDart? _av_jni_set_java_vm;
   static mpv_lavc_set_java_vmDart? _mpv_lavc_set_java_vm;
-  static MediaKitAndroidHelperGetJavaVMDart? _MediaKitAndroidHelperGetJavaVM;
-  static MediaKitAndroidHelperGetFilesDirDart? MediaKitAndroidHelperGetFilesDir;
-  static MediaKitAndroidHelperIsEmulatorDart? _MediaKitAndroidHelperIsEmulator;
-  static MediaKitAndroidHelperGetAPILevelDart?
-      _MediaKitAndroidHelperGetAPILevel;
+  static FlutterMpvAndroidHelperGetJavaVMDart? _FlutterMpvAndroidHelperGetJavaVM;
+  static FlutterMpvAndroidHelperGetFilesDirDart? FlutterMpvAndroidHelperGetFilesDir;
+  static FlutterMpvAndroidHelperIsEmulatorDart? _FlutterMpvAndroidHelperIsEmulator;
+  static FlutterMpvAndroidHelperGetAPILevelDart?
+      _FlutterMpvAndroidHelperGetAPILevel;
 }
 
 typedef av_jni_set_java_vmCXX = Int32 Function(Pointer<Void> vm);
@@ -171,14 +171,14 @@ typedef av_jni_set_java_vmDart = int Function(Pointer<Void> vm);
 typedef mpv_lavc_set_java_vmCXX = Int32 Function(Pointer<Void> vm);
 typedef mpv_lavc_set_java_vmDart = int Function(Pointer<Void> vm);
 
-typedef MediaKitAndroidHelperGetJavaVMCXX = Pointer<Void> Function();
-typedef MediaKitAndroidHelperGetJavaVMDart = Pointer<Void> Function();
+typedef FlutterMpvAndroidHelperGetJavaVMCXX = Pointer<Void> Function();
+typedef FlutterMpvAndroidHelperGetJavaVMDart = Pointer<Void> Function();
 
-typedef MediaKitAndroidHelperGetFilesDirCXX = Pointer<Utf8> Function();
-typedef MediaKitAndroidHelperGetFilesDirDart = Pointer<Utf8> Function();
+typedef FlutterMpvAndroidHelperGetFilesDirCXX = Pointer<Utf8> Function();
+typedef FlutterMpvAndroidHelperGetFilesDirDart = Pointer<Utf8> Function();
 
-typedef MediaKitAndroidHelperIsEmulatorCXX = Int8 Function();
-typedef MediaKitAndroidHelperIsEmulatorDart = int Function();
+typedef FlutterMpvAndroidHelperIsEmulatorCXX = Int8 Function();
+typedef FlutterMpvAndroidHelperIsEmulatorDart = int Function();
 
-typedef MediaKitAndroidHelperGetAPILevelCXX = Int32 Function();
-typedef MediaKitAndroidHelperGetAPILevelDart = int Function();
+typedef FlutterMpvAndroidHelperGetAPILevelCXX = Int32 Function();
+typedef FlutterMpvAndroidHelperGetAPILevelDart = int Function();

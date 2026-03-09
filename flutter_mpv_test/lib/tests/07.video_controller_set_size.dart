@@ -40,7 +40,7 @@ class _VideoControllerSetSizeScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('package:media_kit'),
+        title: const Text('package:flutter_mpv'),
       ),
       body: Stack(
         alignment: Alignment.bottomRight,

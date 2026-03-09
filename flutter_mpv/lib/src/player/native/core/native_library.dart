@@ -20,7 +20,7 @@ abstract class NativeLibrary {
   static String get path {
     if (_resolved == null) {
       throw Exception(
-        'FlutterMpv.ensureInitialized must be called before using any API from package:media_kit.',
+        'FlutterMpv.ensureInitialized must be called before using any API from package:flutter_mpv.',
       );
     }
     return _resolved!;

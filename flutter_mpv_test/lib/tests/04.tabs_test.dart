@@ -17,7 +17,7 @@ class TabsTest extends StatelessWidget {
       length: count,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('package:media_kit'),
+          title: const Text('package:flutter_mpv'),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(1.8 * kToolbarHeight),
             child: Column(

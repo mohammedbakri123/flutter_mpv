@@ -1,4 +1,4 @@
-package:media_kit bundles package:ffi v1.2.1 for internal native interop.
+package:flutter_mpv bundles package:ffi v1.2.1 for internal native interop.
 
 This has been done to improve stability & performance on Microsoft Windows.
 PR: https://github.com/dart-lang/ffi/pull/144 seems to make some changes to how memory is allocated by FFI on Microsoft Windows.

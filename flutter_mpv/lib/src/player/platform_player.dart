@@ -421,13 +421,13 @@ abstract class PlatformPlayer {
 
   // --------------------------------------------------
 
-  /// [bool] for signaling [VideoController] (from `package:media_kit_video`) initialization.
+  /// [bool] for signaling [VideoController] (from `package:flutter_mpv_video`) initialization.
   bool isVideoControllerAttached = false;
 
-  /// [Completer] for signaling [VideoController] (from `package:media_kit_video`) initialization.
+  /// [Completer] for signaling [VideoController] (from `package:flutter_mpv_video`) initialization.
   final Completer<void> videoControllerCompleter = Completer<void>();
 
-  /// [Future<void>] to wait for [VideoController] (from `package:media_kit_video`) initialization.
+  /// [Future<void>] to wait for [VideoController] (from `package:flutter_mpv_video`) initialization.
   Future<void> get waitForVideoControllerInitializationIfAttached {
     if (isVideoControllerAttached) {
       return videoControllerCompleter.future;
@@ -872,7 +872,7 @@ class PlayerConfiguration {
     this.vo = 'null',
     this.osc = false,
     this.pitch = false,
-    this.title = 'package:media_kit',
+    this.title = 'package:flutter_mpv',
     this.ready,
     this.muted = false,
     this.async = true,
@@ -916,7 +916,7 @@ enum MPVLogLevel {
   /// Critical/aborting errors.
   /* fatal, */
 
-  // package:media_kit internally consumes logs of level error.
+  // package:flutter_mpv internally consumes logs of level error.
 
   /// Simple errors.
   error,

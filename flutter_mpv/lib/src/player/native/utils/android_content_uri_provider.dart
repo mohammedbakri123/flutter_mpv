@@ -67,7 +67,7 @@ abstract class AndroidContentUriProvider {
     final lib = DynamicLibrary.open('libmediakitandroidhelper.so');
     final fn =
         lib.lookupFunction<OpenFileDescriptorCXX, OpenFileDescriptorDart>(
-      'MediaKitAndroidHelperOpenFileDescriptor',
+      'FlutterMpvAndroidHelperOpenFileDescriptor',
     );
     final name = uri.toNativeUtf8();
     final fileDescriptor = fn.call(name.cast());
@@ -79,7 +79,7 @@ abstract class AndroidContentUriProvider {
     final lib = DynamicLibrary.open('libmediakitandroidhelper.so');
     final fn =
         lib.lookupFunction<CloseFileDescriptorCXX, CloseFileDescriptorDart>(
-      'MediaKitAndroidHelperCloseFileDescriptor',
+      'FlutterMpvAndroidHelperCloseFileDescriptor',
     );
     fn.call(fileDescriptor);
   }

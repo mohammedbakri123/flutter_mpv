@@ -6,12 +6,12 @@
 
 #include "generated_plugin_registrant.h"
 
-#include <flutter_mpv_video/media_kit_video_plugin_c_api.h>
-#include <media_kit_libs_windows_video/media_kit_libs_windows_video_plugin_c_api.h>
+#include <flutter_mpv_video/flutter_mpv_video_plugin_c_api.h>
+#include <flutter_mpv_libs_windows_video/flutter_mpv_libs_windows_video_plugin_c_api.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
-  MediaKitVideoPluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("MediaKitVideoPluginCApi"));
-  MediaKitLibsWindowsVideoPluginCApiRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("MediaKitLibsWindowsVideoPluginCApi"));
+  FlutterMpvVideoPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FlutterMpvVideoPluginCApi"));
+  FlutterMpvLibsWindowsVideoPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FlutterMpvLibsWindowsVideoPluginCApi"));
 }
