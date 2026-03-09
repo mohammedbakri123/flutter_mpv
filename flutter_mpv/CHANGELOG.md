@@ -1,3 +1,11 @@
+## 1.2.8
+
+- doc: fix missing advanced settings in README
+
+## 1.2.7
+
+- doc: update README and repository URLs
+
 ## 1.2.6
 
 - fix(windows): long file path support

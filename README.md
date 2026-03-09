@@ -12,17 +12,17 @@ flutter_mpv is split into multiple packages to improve modularity & reduce bundl
 
 ```yaml
 dependencies:
-  flutter_mpv: ^1.2.6 # Primary package.
-  flutter_mpv_video: ^2.0.1 # For video rendering.
-  flutter_mpv_libs_video: ^1.0.7 # Native video dependencies.
+  flutter_mpv: ^1.2.9 # Primary package.
+  flutter_mpv_video: ^2.0.3 # For video rendering.
+  flutter_mpv_libs_video: ^1.0.10 # Native video dependencies.
 ```
 
 #### For apps that need audio playback:
 
 ```yaml
 dependencies:
-  flutter_mpv: ^1.2.6 # Primary package.
-  flutter_mpv_libs_audio: ^1.0.7 # Native audio dependencies.
+  flutter_mpv: ^1.2.9 # Primary package.
+  flutter_mpv_libs_audio: ^1.0.10 # Native audio dependencies.
 ```
 
 **Notes:**
@@ -1051,7 +1051,7 @@ class MyApp extends StatelessWidget {
         bufferSize: 64 * 1024 * 1024,
       ),
     );
-    
+
     final controller = VideoController(player);
     // ... rest of your code
   }
@@ -1060,15 +1060,15 @@ class MyApp extends StatelessWidget {
 
 ### Available Presets
 
-| Preset | Best For | Performance | Quality | Battery Impact |
-|--------|----------|-------------|---------|----------------|
-| `VideoPerformancePresets.powerSaver` | Older devices, battery saving, thermal throttling | ⭐⭐⭐⭐⭐ | ⭐⭐ | Low |
-| `VideoPerformancePresets.balanced` | General purpose, most apps | ⭐⭐⭐⭐ | ⭐⭐⭐ | Medium |
-| `VideoPerformancePresets.instantSeeking` | Local files, scrubbing, preview timelines | ⭐⭐⭐⭐⭐ | ⭐⭐ | Medium |
-| `VideoPerformancePresets.quality` | High-end devices, sharper local playback | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | High |
-| `VideoPerformancePresets.smoothMotion` | Sports, action, 24fps movie smoothing | ⭐⭐ | ⭐⭐⭐⭐ | Very High |
-| `VideoPerformancePresets.streaming` | Online video streaming | ⭐⭐⭐⭐ | ⭐⭐⭐ | Medium |
-| `VideoPerformancePresets.softwareDecoding` | Debugging, compatibility issues | ⭐⭐ | ⭐⭐ | High |
+| Preset                                     | Best For                                          | Performance | Quality    | Battery Impact |
+| ------------------------------------------ | ------------------------------------------------- | ----------- | ---------- | -------------- |
+| `VideoPerformancePresets.powerSaver`       | Older devices, battery saving, thermal throttling | ⭐⭐⭐⭐⭐  | ⭐⭐       | Low            |
+| `VideoPerformancePresets.balanced`         | General purpose, most apps                        | ⭐⭐⭐⭐    | ⭐⭐⭐     | Medium         |
+| `VideoPerformancePresets.instantSeeking`   | Local files, scrubbing, preview timelines         | ⭐⭐⭐⭐⭐  | ⭐⭐       | Medium         |
+| `VideoPerformancePresets.quality`          | High-end devices, sharper local playback          | ⭐⭐⭐      | ⭐⭐⭐⭐⭐ | High           |
+| `VideoPerformancePresets.smoothMotion`     | Sports, action, 24fps movie smoothing             | ⭐⭐        | ⭐⭐⭐⭐   | Very High      |
+| `VideoPerformancePresets.streaming`        | Online video streaming                            | ⭐⭐⭐⭐    | ⭐⭐⭐     | Medium         |
+| `VideoPerformancePresets.softwareDecoding` | Debugging, compatibility issues                   | ⭐⭐        | ⭐⭐       | High           |
 
 ### Video Performance Configuration
 
@@ -1084,21 +1084,21 @@ final player = Player(
       hardwareDecoding: 'auto',
       frameDropping: 'decoder',
       fastDecoding: 'no',
-      
+
       // Synchronization
       videoSync: 'audio',
       hrSeek: 'yes',
       fastSeek: 'no',
-      
+
       // Scaling
       scaler: 'bicubic',
       downScaler: 'bicubic',
       interpolation: false,
-      
+
       // Rendering
       deinterlacing: 'auto',
       gpuApi: 'auto',
-      
+
       // Cache
       optimizeForLocalFiles: true,
       cacheSecs: 60,
@@ -1116,16 +1116,16 @@ final player = Player(
 
 Controls the hardware acceleration method for video decoding.
 
-| Value | Description | When to Use |
-|-------|-------------|-------------|
-| `'auto'` | Try hardware, fallback to software | **Recommended for most cases** |
-| `'auto-copy'` | Auto with surface upload | When using custom video rendering |
-| `'yes'` | Force hardware decoding | When you're sure HW is available |
-| `'no'` | Force software decoding | Debugging, compatibility issues |
-| `'mediacodec'` | Android MediaCodec | Android-specific optimization |
-| `'videotoolbox'` | iOS/macOS VideoToolbox | Apple devices |
-| `'d3d11va'` | Windows Direct3D 11 | Windows devices |
-| `'vaapi'` | Linux VAAPI | Linux devices |
+| Value            | Description                        | When to Use                       |
+| ---------------- | ---------------------------------- | --------------------------------- |
+| `'auto'`         | Try hardware, fallback to software | **Recommended for most cases**    |
+| `'auto-copy'`    | Auto with surface upload           | When using custom video rendering |
+| `'yes'`          | Force hardware decoding            | When you're sure HW is available  |
+| `'no'`           | Force software decoding            | Debugging, compatibility issues   |
+| `'mediacodec'`   | Android MediaCodec                 | Android-specific optimization     |
+| `'videotoolbox'` | iOS/macOS VideoToolbox             | Apple devices                     |
+| `'d3d11va'`      | Windows Direct3D 11                | Windows devices                   |
+| `'vaapi'`        | Linux VAAPI                        | Linux devices                     |
 
 **Default:** `null` (auto-detect)
 
@@ -1148,6 +1148,7 @@ Number of threads used for video decoding.
 - **Default:** `null` (auto-detect based on CPU cores)
 
 **Guidelines:**
+
 - `1-2`: Low-end devices, audio-only playback
 - `2-4`: Most devices, standard HD playback (recommended)
 - `4-8`: High-end devices, 4K playback
@@ -1166,12 +1167,12 @@ VideoPerformanceConfiguration(
 
 Controls when frames can be dropped to maintain audio/video synchronization.
 
-| Value | Description | Use Case |
-|-------|-------------|----------|
-| `'no'` | Never drop frames | Quality-critical, may stutter |
-| `'decoder'` | Drop during decoding only | **Default, balanced** |
-| `'vo'` | Drop during video output only | Rarely used |
-| `'decoder+vo'` | Drop in both stages | Smooth playback on slow devices |
+| Value          | Description                   | Use Case                        |
+| -------------- | ----------------------------- | ------------------------------- |
+| `'no'`         | Never drop frames             | Quality-critical, may stutter   |
+| `'decoder'`    | Drop during decoding only     | **Default, balanced**           |
+| `'vo'`         | Drop during video output only | Rarely used                     |
+| `'decoder+vo'` | Drop in both stages           | Smooth playback on slow devices |
 
 **Default:** `'decoder'`
 
@@ -1211,6 +1212,7 @@ VideoPerformanceConfiguration(
 Advanced FFmpeg decoder options as comma-separated key/value pairs.
 
 **Common Options:**
+
 - `'threads=4'`: Set thread count
 - `'flags=low_delay'`: Low delay mode
 - `'skip_loop_filter=all'`: Skip loop filter (faster, lower quality)
@@ -1229,6 +1231,7 @@ VideoPerformanceConfiguration(
 Restricts hardware decoding to specific codecs.
 
 **Options:**
+
 - `'all'`: All codecs (**default**)
 - `'h264,hevc'`: H.264 and HEVC/H.265 only
 - `'h264'`: H.264 only
@@ -1249,13 +1252,13 @@ VideoPerformanceConfiguration(
 
 Controls how video frames are synchronized to audio.
 
-| Value | Description | Quality | Performance | Best For |
-|-------|-------------|---------|-------------|----------|
-| `'audio'` | Sync to audio clock | Good | ⭐⭐⭐⭐⭐ | **Default, most compatible** |
-| `'display'` | Sync to display refresh | Better | ⭐⭐⭐⭐ | Standard displays |
-| `'display-resample'` | Resample to display rate | Best | ⭐⭐⭐ | High-end devices, smooth motion |
-| `'display-vdrop'` | Display with frame drop | Good | ⭐⭐⭐⭐ | When frames need dropping |
-| `'mem-sync'` | Memory-based sync | Good | ⭐⭐⭐⭐ | Specialized use cases |
+| Value                | Description              | Quality | Performance | Best For                        |
+| -------------------- | ------------------------ | ------- | ----------- | ------------------------------- |
+| `'audio'`            | Sync to audio clock      | Good    | ⭐⭐⭐⭐⭐  | **Default, most compatible**    |
+| `'display'`          | Sync to display refresh  | Better  | ⭐⭐⭐⭐    | Standard displays               |
+| `'display-resample'` | Resample to display rate | Best    | ⭐⭐⭐      | High-end devices, smooth motion |
+| `'display-vdrop'`    | Display with frame drop  | Good    | ⭐⭐⭐⭐    | When frames need dropping       |
+| `'mem-sync'`         | Memory-based sync        | Good    | ⭐⭐⭐⭐    | Specialized use cases           |
 
 **Default:** `'audio'`
 
@@ -1273,11 +1276,11 @@ VideoPerformanceConfiguration(
 
 Enables high-resolution seeking for precise position control.
 
-| Value | Description |
-|-------|-------------|
-| `'no'` | Fast, less accurate seeking |
-| `'yes'` | **Default**, precise seeking |
-| `'absolute'` | Absolute timestamp seeking |
+| Value        | Description                  |
+| ------------ | ---------------------------- |
+| `'no'`       | Fast, less accurate seeking  |
+| `'yes'`      | **Default**, precise seeking |
+| `'absolute'` | Absolute timestamp seeking   |
 
 **Default:** `'yes'`
 
@@ -1337,13 +1340,13 @@ VideoPerformanceConfiguration(
 
 Video scaling algorithm used for **upscaling** (making video larger).
 
-| Algorithm | Quality | Speed | Best For |
-|-----------|---------|-------|----------|
-| `'bilinear'` | Low | ⭐⭐⭐⭐⭐ | Low-end devices, fastest |
-| `'bicubic'` | Medium | ⭐⭐⭐⭐ | **Default, balanced** |
-| `'lanczos'` | High | ⭐⭐⭐ | High-quality playback |
-| `'spline36'` | Very High | ⭐⭐ | Professional quality |
-| `'ewa_lanczos'` | Highest | ⭐ | Best quality, slowest |
+| Algorithm       | Quality   | Speed      | Best For                 |
+| --------------- | --------- | ---------- | ------------------------ |
+| `'bilinear'`    | Low       | ⭐⭐⭐⭐⭐ | Low-end devices, fastest |
+| `'bicubic'`     | Medium    | ⭐⭐⭐⭐   | **Default, balanced**    |
+| `'lanczos'`     | High      | ⭐⭐⭐     | High-quality playback    |
+| `'spline36'`    | Very High | ⭐⭐       | Professional quality     |
+| `'ewa_lanczos'` | Highest   | ⭐         | Best quality, slowest    |
 
 **Default:** `'bicubic'`
 
@@ -1387,6 +1390,7 @@ Enables frame interpolation to match video framerate to display refresh rate.
 - `false`: **Default**, no interpolation
 
 **Requirements:**
+
 - Requires `videoSync: 'display-resample'` or similar
 - Increases CPU/GPU usage significantly
 - May cause artifacts in fast-motion scenes
@@ -1409,10 +1413,10 @@ VideoPerformanceConfiguration(
 
 Controls how interlaced video content is handled.
 
-| Value | Description |
-|-------|-------------|
-| `'no'` | Disable deinterlacing |
-| `'yes'` | Always deinterlace |
+| Value    | Description                                |
+| -------- | ------------------------------------------ |
+| `'no'`   | Disable deinterlacing                      |
+| `'yes'`  | Always deinterlace                         |
 | `'auto'` | Deinterlace only when needed (**default**) |
 
 **Default:** `'auto'`
@@ -1431,12 +1435,12 @@ VideoPerformanceConfiguration(
 
 Forces a specific graphics API for rendering.
 
-| Value | Platform | Description |
-|-------|----------|-------------|
-| `'auto'` | All | Auto-detect (**default**) |
-| `'opengl'` | All | Most compatible |
+| Value      | Platform       | Description                           |
+| ---------- | -------------- | ------------------------------------- |
+| `'auto'`   | All            | Auto-detect (**default**)             |
+| `'opengl'` | All            | Most compatible                       |
 | `'vulkan'` | Modern devices | Best performance on supported devices |
-| `'d3d11'` | Windows | Direct3D 11 |
+| `'d3d11'`  | Windows        | Direct3D 11                           |
 
 **Default:** `'auto'`
 
@@ -1509,12 +1513,14 @@ VideoPerformanceConfiguration(
 Optimizes playback for local file access vs. network streaming.
 
 When `true` (**default**):
+
 - ✅ Disables network readahead
 - ✅ Increases back buffer for fast seeking
 - ✅ Reduces initial buffering time
 - ✅ Optimizes cache for local storage
 
 When `false`:
+
 - Better for network/streaming content
 - Larger network buffers
 
@@ -1542,6 +1548,7 @@ Duration of content to cache in seconds.
 - **Default:** `60`
 
 **Guidelines:**
+
 - `10-30`: Short videos, low memory devices
 - `60`: **Default**, balanced
 - `120-300`: Long videos, good network, frequent seeking
@@ -1566,16 +1573,16 @@ final player = Player(
       // Best quality decoding
       hardwareDecoding: 'auto',
       frameDropping: 'no',
-      
+
       // Smooth synchronization
       videoSync: 'display-resample',
       hrSeek: 'yes',
       fastSeek: 'no',
-      
+
       // High-quality scaling
       scaler: 'lanczos',
       downScaler: 'lanczos',
-      
+
       // Optimized for local files
       optimizeForLocalFiles: true,
       cacheSecs: 120,
@@ -1594,16 +1601,16 @@ final player = Player(
       // Balanced decoding
       hardwareDecoding: 'auto',
       frameDropping: 'decoder',
-      
+
       // Fast seeking for scrubbing
       hrSeek: 'yes',
       hrSeekFramedrop: 'yes',
       fastSeek: 'yes',
-      
+
       // Optimized for streaming
       optimizeForLocalFiles: false,
       cacheSecs: 30,
-      
+
       // Lower latency
       videoLatencyHacks: 'yes',
     ),
@@ -1623,14 +1630,14 @@ final player = Player(
       frameDropping: 'decoder+vo',
       fastDecoding: 'yes',
       decoderThreads: 2,
-      
+
       // Fast scaling
       scaler: 'bilinear',
       downScaler: 'bilinear',
-      
+
       // Standard sync
       videoSync: 'audio',
-      
+
       // Minimal cache
       cacheSecs: 30,
     ),
@@ -1703,6 +1710,7 @@ final player = Player(
 #### Common Issues and Solutions
 
 **Issue: Video stuttering or frame drops**
+
 ```dart
 // Solution: Allow more frame dropping
 VideoPerformanceConfiguration(
@@ -1712,6 +1720,7 @@ VideoPerformanceConfiguration(
 ```
 
 **Issue: High battery consumption**
+
 ```dart
 // Solution: Use more efficient settings
 VideoPerformanceConfiguration(
@@ -1723,6 +1732,7 @@ VideoPerformanceConfiguration(
 ```
 
 **Issue: Seeking is too slow**
+
 ```dart
 // Solution: Enable fast seeking
 VideoPerformanceConfiguration(
@@ -1733,6 +1743,7 @@ VideoPerformanceConfiguration(
 ```
 
 **Issue: Poor video quality**
+
 ```dart
 // Solution: Prioritize quality over performance
 VideoPerformanceConfiguration(
@@ -1744,6 +1755,7 @@ VideoPerformanceConfiguration(
 ```
 
 **Issue: Compatibility problems on old devices**
+
 ```dart
 // Solution: Use software decoding
 VideoPerformanceConfiguration(
@@ -1764,7 +1776,7 @@ VideoPerformanceConfiguration(
 
 ### Next steps
 
-This guide follows a tutorial-like structure & covers nearly all features that flutter_mpv offers. However, it is _not complete_ by any means. You are free to improve this page & add more documentation, which newcomers may find helpful. The following places can help you learn more:
+This guide follows a tutorial-like structure & covers nearly all features that flutter*mpv offers. However, it is \_not complete* by any means. You are free to improve this page & add more documentation, which newcomers may find helpful. The following places can help you learn more:
 
 - [API reference](https://pub.dev/documentation/flutter_mpv/latest/flutter_mpv/flutter_mpv-library.html) can be helpful for diving into deeper specifics.
 - [source-code of the demo application](https://github.com/media-kit/media-kit/tree/main/flutter_mpv_test/lib/tests) offers some complete code samples.
@@ -2964,10 +2976,10 @@ Video & audio playback is handled by embedding [HTML `<video>` element](https://
 
 See the [`examples/`](examples) directory for complete working examples:
 
-| Example | Description | Complexity | Best For |
-|---------|-------------|------------|----------|
+| Example                                                         | Description                                     | Complexity | Best For                  |
+| --------------------------------------------------------------- | ----------------------------------------------- | ---------- | ------------------------- |
 | [**advanced_player_example**](examples/advanced_player_example) | Full player with 12 presets & advanced settings | ⭐⭐⭐⭐⭐ | Production apps, learning |
-| [**flutter_mpv_test**](flutter_mpv_test) | Minimal feature tests | ⭐⭐ | Quick testing, debugging |
+| [**flutter_mpv_test**](flutter_mpv_test)                        | Minimal feature tests                           | ⭐⭐       | Quick testing, debugging  |
 
 ### Quick Start with Examples
 

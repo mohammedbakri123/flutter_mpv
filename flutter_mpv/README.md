@@ -1,54 +1,28 @@
-# [package:flutter_mpv](https://github.com/media-kit/media-kit)
+# flutter_mpv
 
-#### A cross-platform video player & audio player for Flutter & Dart.
+#### A cross-platform video player & audio player for Flutter & Dart with advanced performance controls.
 
-[![](https://img.shields.io/discord/1079685977523617792?color=33cd57&label=Discord&logo=discord&logoColor=discord)](https://discord.gg/h7qf2R9n57) [![Github Actions](https://github.com/media-kit/media-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/media-kit/media-kit/actions/workflows/ci.yml)
-
-<hr>
-
-<strong>Sponsored with 💖 by</strong>
-
-<a href="https://getstream.io/chat/sdk/flutter/?utm_source=alexmercerind_dart&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=alexmercerind_December2022_FlutterSDK_klmh22" target="_blank">
-  <img alt="Stream Chat" width="200" height="auto" src="https://user-images.githubusercontent.com/28951144/204903022-bbaa49ca-74c2-4a8f-a05d-af8314bfd2cc.svg">
-</a>
-<br></br>
-<strong>
-  <a href="https://getstream.io/chat/sdk/flutter/?utm_source=alexmercerind_dart&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=alexmercerind_December2022_FlutterSDK_klmh22" target="_blank">
-  Try the Flutter Chat tutorial
-  </a>
-</strong>
-
-<br></br>
-
-<a href="https://ottomatic.io/" target="_blank">
-  <img alt="Stream Chat" width="200" height="auto" src="https://user-images.githubusercontent.com/28951144/228648844-f2a59ab1-12cd-4fee-bc8d-b2d332033c45.svg">
-</a>
-<br></br>
-<strong>
-  <a href="https://ottomatic.io/" target="_blank">
-  Clever Apps for Film Professionals
-  </a>
-</strong>
+**This is a fork of [flutter_mpv](https://github.com/media-kit/media-kit) with additional video performance configuration options.**
 
 ## Installation
 
-[package:flutter_mpv](https://github.com/media-kit/media-kit) is split into multiple packages to improve modularity & reduce bundle size.
+flutter_mpv is split into multiple packages to improve modularity & reduce bundle size.
 
 #### For apps that need video playback:
 
 ```yaml
 dependencies:
-  flutter_mpv: ^1.2.6 # Primary package.
-  flutter_mpv_video: ^2.0.1 # For video rendering.
-  flutter_mpv_libs_video: ^1.0.7 # Native video dependencies.
+  flutter_mpv: ^1.2.9 # Primary package.
+  flutter_mpv_video: ^2.0.3 # For video rendering.
+  flutter_mpv_libs_video: ^1.0.10 # Native video dependencies.
 ```
 
 #### For apps that need audio playback:
 
 ```yaml
 dependencies:
-  flutter_mpv: ^1.2.6 # Primary package.
-  flutter_mpv_libs_audio: ^1.0.7 # Native audio dependencies.
+  flutter_mpv: ^1.2.9 # Primary package.
+  flutter_mpv_libs_audio: ^1.0.10 # Native audio dependencies.
 ```
 
 **Notes:**
@@ -60,66 +34,14 @@ dependencies:
 
 ## Platforms
 
-| Platform  | Video | Audio | Notes                              | Demo                                                                                                                        |
-| --------- | ----- | ----- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Android   | ✅    | ✅    | Android 5.0 or above.              | [Download](https://github.com/media-kit/media-kit/releases/download/flutter_mpv-v1.1.10/flutter_mpv_test_android-arm64-v8a.apk) |
-| iOS       | ✅    | ✅    | iOS 9 or above.                    | [Download](https://github.com/media-kit/media-kit/releases/download/flutter_mpv-v1.1.10/flutter_mpv_test_ios_arm64.7z)          |
-| macOS     | ✅    | ✅    | macOS 10.9 or above.               | [Download](https://github.com/media-kit/media-kit/releases/download/flutter_mpv-v1.1.10/flutter_mpv_test_macos_universal.7z)    |
-| Windows   | ✅    | ✅    | Windows 7 or above.                | [Download](https://github.com/media-kit/media-kit/releases/download/flutter_mpv-v1.1.10/flutter_mpv_test_win32_x64.7z)          |
-| GNU/Linux | ✅    | ✅    | Any modern GNU/Linux distribution. | [Download](https://github.com/media-kit/media-kit/releases/download/flutter_mpv-v1.1.10/flutter_mpv_test_linux_x64.7z)          |
-| Web       | ✅    | ✅    | Any modern web browser.            | [Visit](https://media-kit.github.io/media-kit/)                                                                             |
-
-<table>
-  <tr>
-    <td>
-      Android
-    </td>
-    <td>
-      iOS
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="https://github.com/media-kit/media-kit/assets/28951144/cf93a1fd-e1d8-4d1c-8bd5-cc393cef1ce9" height="400" alt="Android"></img>
-      <img src="https://github.com/media-kit/media-kit/assets/28951144/aea1f480-51e2-452a-b53c-c0e27f71f0d8" height="400" alt="Android"></img>
-    </td>
-    <td>
-      <img src="https://github.com/media-kit/media-kit/assets/28951144/e8ce64cb-1ea9-4a3e-bc9c-db620abf88c9" height="400" alt="iOS"></img>
-      <img src="https://github.com/media-kit/media-kit/assets/28951144/d7159df2-1df1-46d3-84f8-238e2a66bfbc" height="400" alt="iOS"></img>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      macOS
-    </td>
-    <td>
-      Windows
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="https://github.com/media-kit/media-kit/assets/28951144/fca8dbbf-4262-431f-a04a-f3aa6afb2911" height="200" alt="macOS"></img>
-    </td>
-    <td>
-      <img src="https://github.com/media-kit/media-kit/assets/28951144/742b0016-da58-42de-9880-ecaa0604c2b2" height="200" alt="Windows"></img>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      GNU/Linux
-    </td>
-    <td>
-      Web
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <img src="https://github.com/media-kit/media-kit/assets/28951144/8cd63750-6746-4c75-bc4e-cca5e4c61890" height="200" alt="GNU/Linux"></img>
-    </td>
-    <td>
-      <img src="https://github.com/media-kit/media-kit/assets/28951144/feb9fdf2-095f-43db-96af-f7782985238d" height="200" alt="Web"></img>
-    </td>
-</table>
+| Platform  | Video | Audio | Notes                              |
+| --------- | ----- | ----- | ---------------------------------- |
+| Android   | ✅    | ✅    | Android 5.0 or above.              |
+| iOS       | ✅    | ✅    | iOS 9 or above.                    |
+| macOS     | ✅    | ✅    | macOS 10.9 or above.               |
+| Windows   | ✅    | ✅    | Windows 7 or above.                |
+| GNU/Linux | ✅    | ✅    | Any modern GNU/Linux distribution. |
+| Web       | ✅    | ✅    | Any modern web browser.            |
 
 - ✅ Video playback
 - ✅ Audio playback
@@ -140,18 +62,18 @@ dependencies:
 A quick usage example.
 
 ```dart
+import 'package:flutter/material.dart';
+
 // Make sure to add following packages to pubspec.yaml:
 // * flutter_mpv
 // * flutter_mpv_video
 // * flutter_mpv_libs_video
-import 'package:flutter/material.dart';
-
-import 'package:flutter_mpv/flutter_mpv.dart';                  // Provides [Player], [Media], [Playlist] etc.
+import 'package:flutter_mpv/flutter_mpv.dart';                      // Provides [Player], [Media], [Playlist] etc.
 import 'package:flutter_mpv_video/flutter_mpv_video.dart';          // Provides [VideoController] & [Video] etc.
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // Necessary initialization for package:flutter_mpv.
+  // Necessary initialization for flutter_mpv.
   FlutterMpv.ensureInitialized();
   runApp(
     const MaterialApp(
@@ -199,11 +121,11 @@ class MyScreenState extends State<MyScreen> {
 }
 ```
 
-**Note:** You may need to add required [permissions](#permissions) to your project.
+**Note:** You may need to add required [permissions](#permissions) to your project (only if required).
 
 ## Guide
 
-A usage guide for [package:flutter_mpv](https://github.com/media-kit/media-kit).
+A usage guide for flutter_mpv.
 
 **Tip:** Use <kbd>Ctrl</kbd> + <kbd>F</kbd> to quickly search for things.
 
@@ -214,13 +136,14 @@ A usage guide for [package:flutter_mpv](https://github.com/media-kit/media-kit).
 - [Dispose a `Player`](#dispose-a-player)
 - [Open a `Media` or `Playlist`](#open-a-media-or-playlist)
 - [Play, pause or play/pause](#play-pause-or-playpause)
+- [Stop](#stop)
 - [Seek](#seek)
 - [Loop or repeat](#loop-or-repeat)
 - [Set volume, rate or pitch](#set-volume-rate-or-pitch)
 - [Handle playback events](#handle-playback-events)
 - [Shuffle the queue](#shuffle-the-queue)
 - [Use HTTP headers](#use-http-headers)
-- [Use `extras` to store additional data with `Media`](use-extras-store-additional-data-with-media)
+- [Use `extras` to store additional data with `Media`](#use-extras-store-additional-data-with-media)
 - [Go to next, previous or any other position in queue](#go-to-next-previous-or-any-other-position-in-queue)
 - [Modify `Player`'s queue](#modify-players-queue)
 - [Select video, audio or subtitle track](#select-video-audio-or-subtitle-track)
@@ -231,6 +154,10 @@ A usage guide for [package:flutter_mpv](https://github.com/media-kit/media-kit).
 - [Load external subtitle track](#load-external-subtitle-track)
 - [Load external audio track](#load-external-audio-track)
 - [Video controls](#video-controls)
+- [Advanced Settings](#advanced-settings)
+- [Video Performance Configuration](#video-performance-configuration)
+- [Video Performance Presets](#video-performance-presets)
+- [Examples](#examples)
 - [Next steps](#next-steps)
 
 ### Initialization
@@ -241,14 +168,15 @@ A usage guide for [package:flutter_mpv](https://github.com/media-kit/media-kit).
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   // Make sure to add the required packages to pubspec.yaml:
-  // * https://github.com/media-kit/media-kit#installation
-  // * https://pub.dev/packages/flutter_mpv#installation
+  // * See Installation section
   FlutterMpv.ensureInitialized();
   runApp(const MyApp());
 }
 ```
 
 The method also has some optional arguments to customize the global behavior. To handle any initialization errors, this may be surrounded by `try`/`catch`.
+
+**Note:** For backward compatibility, `FlutterMpv.ensureInitialized()` still works but is deprecated. Use `FlutterMpv.ensureInitialized()` instead.
 
 ### Create a `Player`
 
@@ -264,7 +192,7 @@ Additional options may be provided using the `configuration` argument in the con
 final Player player = Player(
   configuration: PlayerConfiguration(
     // Supply your options:
-    title: 'My awesome package:flutter_mpv application',
+    title: 'My awesome flutter_mpv application',
     ready: () {
       print('The initialization is complete.');
     },
@@ -463,6 +391,7 @@ The following state(s) are available as events:
 | `Stream<bool>`              | `buffering`    | Whether buffering or not.                                                                                |
 | `Stream<Duration>`          | `buffer`       | Current buffer position. This indicates how much of the stream has been decoded & cached by the demuxer. |
 | `Stream<PlaylistMode>`      | `playlistMode` | Current playlist mode.                                                                                   |
+| `Stream<bool>`              | `shuffle`      | Whether playlist is shuffled or not.                                                                     |
 | `Stream<AudioParams>`       | `audioParams`  | Audio parameters of the currently playing media source e.g. sample rate, channels, etc.                  |
 | `Stream<VideoParams>`       | `videoParams`  | Video parameters of the currently playing media source e.g. width, height, rotation etc.                 |
 | `Stream<double?>`           | `audioBitrate` | Audio bitrate of the currently playing media source.                                                     |
@@ -722,7 +651,7 @@ The video playback uses [hardware acceleration](https://en.wikipedia.org/wiki/Ha
 Additional options may be provided using the `configuration` argument in the constructor. In general situations, you will never require this.
 
 ```dart
-final VideoController player = VideoController(
+final VideoController controller = VideoController(
   player,
   configuration: const VideoControllerConfiguration(
     // Supply your options:
@@ -730,7 +659,7 @@ final VideoController player = VideoController(
     width: 640,                            // default: null
     height: 480,                           // default: null
     // The in-code comments is best place to know more about these options:
-    // https://github.com/media-kit/media-kit/blob/main/flutter_mpv_video/lib/src/video_controller/video_controller.dart
+    // See: flutter_mpv_video package source code
   ),
 );
 ```
@@ -851,7 +780,7 @@ await player.setAudioTrack(
 
 ### Video controls
 
-[`package:flutter_mpv`](https://github.com/media-kit/media-kit) provides highly-customizable pre-built video controls for usage.
+`flutter_mpv` provides highly-customizable pre-built video controls for usage.
 
 Apart from theming, layout can be customized, position of buttons can be modified, custom buttons can be created etc. Necessary features like fullscreen, keyboard shortcuts & swipe-based controls are also supported by default.
 
@@ -1095,9 +1024,759 @@ CupertinoVideoControlsTheme(
 - Theming:
   - No theming applicable.
 
+## Advanced Settings
+
+flutter_mpv provides extensive control over video decoding and rendering performance through the `VideoPerformanceConfiguration` class. This allows you to fine-tune playback for specific use cases, device capabilities, or quality requirements.
+
+### Quick Start: Using Presets (Recommended)
+
+For most use cases, **using predefined presets is the easiest and recommended approach**. Presets are optimized configurations tested for common scenarios:
+
+```dart
+import 'package:flutter_mpv/flutter_mpv.dart';
+import 'package:flutter_mpv_video/flutter_mpv_video.dart';
+
+void main() {
+  FlutterMpv.ensureInitialized();
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Use a preset for common scenarios
+    final player = Player(
+      configuration: PlayerConfiguration(
+        videoPerformance: VideoPerformancePresets.balanced, // Best for most cases
+        bufferSize: 64 * 1024 * 1024,
+      ),
+    );
+
+    final controller = VideoController(player);
+    // ... rest of your code
+  }
+}
+```
+
+### Available Presets
+
+| Preset                                     | Best For                                          | Performance | Quality    | Battery Impact |
+| ------------------------------------------ | ------------------------------------------------- | ----------- | ---------- | -------------- |
+| `VideoPerformancePresets.powerSaver`       | Older devices, battery saving, thermal throttling | ⭐⭐⭐⭐⭐  | ⭐⭐       | Low            |
+| `VideoPerformancePresets.balanced`         | General purpose, most apps                        | ⭐⭐⭐⭐    | ⭐⭐⭐     | Medium         |
+| `VideoPerformancePresets.instantSeeking`   | Local files, scrubbing, preview timelines         | ⭐⭐⭐⭐⭐  | ⭐⭐       | Medium         |
+| `VideoPerformancePresets.quality`          | High-end devices, sharper local playback          | ⭐⭐⭐      | ⭐⭐⭐⭐⭐ | High           |
+| `VideoPerformancePresets.smoothMotion`     | Sports, action, 24fps movie smoothing             | ⭐⭐        | ⭐⭐⭐⭐   | Very High      |
+| `VideoPerformancePresets.streaming`        | Online video streaming                            | ⭐⭐⭐⭐    | ⭐⭐⭐     | Medium         |
+| `VideoPerformancePresets.softwareDecoding` | Debugging, compatibility issues                   | ⭐⭐        | ⭐⭐       | High           |
+
+### Video Performance Configuration
+
+For advanced users who need fine-grained control, `VideoPerformanceConfiguration` provides detailed options for video decoding, rendering, and performance tuning.
+
+#### Basic Usage
+
+```dart
+final player = Player(
+  configuration: PlayerConfiguration(
+    videoPerformance: VideoPerformanceConfiguration(
+      // Decoding
+      hardwareDecoding: 'auto',
+      frameDropping: 'decoder',
+      fastDecoding: 'no',
+
+      // Synchronization
+      videoSync: 'audio',
+      hrSeek: 'yes',
+      fastSeek: 'no',
+
+      // Scaling
+      scaler: 'bicubic',
+      downScaler: 'bicubic',
+      interpolation: false,
+
+      // Rendering
+      deinterlacing: 'auto',
+      gpuApi: 'auto',
+
+      // Cache
+      optimizeForLocalFiles: true,
+      cacheSecs: 60,
+    ),
+    bufferSize: 64 * 1024 * 1024,
+  ),
+);
+```
+
+#### Configuration Options Reference
+
+##### 🔓 Decoding Settings
+
+**`hardwareDecoding`** (String?)
+
+Controls the hardware acceleration method for video decoding.
+
+| Value            | Description                        | When to Use                       |
+| ---------------- | ---------------------------------- | --------------------------------- |
+| `'auto'`         | Try hardware, fallback to software | **Recommended for most cases**    |
+| `'auto-copy'`    | Auto with surface upload           | When using custom video rendering |
+| `'yes'`          | Force hardware decoding            | When you're sure HW is available  |
+| `'no'`           | Force software decoding            | Debugging, compatibility issues   |
+| `'mediacodec'`   | Android MediaCodec                 | Android-specific optimization     |
+| `'videotoolbox'` | iOS/macOS VideoToolbox             | Apple devices                     |
+| `'d3d11va'`      | Windows Direct3D 11                | Windows devices                   |
+| `'vaapi'`        | Linux VAAPI                        | Linux devices                     |
+
+**Default:** `null` (auto-detect)
+
+**Performance Impact:** Hardware decoding can reduce CPU usage by 50-80% and improve battery life.
+
+```dart
+// Example: Force software decoding for debugging
+VideoPerformanceConfiguration(
+  hardwareDecoding: 'no',
+)
+```
+
+---
+
+**`decoderThreads`** (int?)
+
+Number of threads used for video decoding.
+
+- **Range:** 1-16
+- **Default:** `null` (auto-detect based on CPU cores)
+
+**Guidelines:**
+
+- `1-2`: Low-end devices, audio-only playback
+- `2-4`: Most devices, standard HD playback (recommended)
+- `4-8`: High-end devices, 4K playback
+- `8+`: Professional workstations, 8K playback
+
+```dart
+// Example: Limit threads for battery saving
+VideoPerformanceConfiguration(
+  decoderThreads: 2,
+)
+```
+
+---
+
+**`frameDropping`** (String?)
+
+Controls when frames can be dropped to maintain audio/video synchronization.
+
+| Value          | Description                   | Use Case                        |
+| -------------- | ----------------------------- | ------------------------------- |
+| `'no'`         | Never drop frames             | Quality-critical, may stutter   |
+| `'decoder'`    | Drop during decoding only     | **Default, balanced**           |
+| `'vo'`         | Drop during video output only | Rarely used                     |
+| `'decoder+vo'` | Drop in both stages           | Smooth playback on slow devices |
+
+**Default:** `'decoder'`
+
+```dart
+// Example: Maximum quality (may stutter on slow devices)
+VideoPerformanceConfiguration(
+  frameDropping: 'no',
+)
+
+// Example: Maximum smoothness (may drop frames)
+VideoPerformanceConfiguration(
+  frameDropping: 'decoder+vo',
+)
+```
+
+---
+
+**`fastDecoding`** (String?)
+
+Enables faster, lower-quality decoding for software decoders.
+
+- `'yes'`: Faster decoding, lower quality
+- `'no'`: Standard quality (**default**)
+
+**Use Case:** Enable on low-end devices when experiencing playback issues.
+
+```dart
+VideoPerformanceConfiguration(
+  fastDecoding: 'yes', // For low-end devices
+)
+```
+
+---
+
+**`decoderOptions`** (String?)
+
+Advanced FFmpeg decoder options as comma-separated key/value pairs.
+
+**Common Options:**
+
+- `'threads=4'`: Set thread count
+- `'flags=low_delay'`: Low delay mode
+- `'skip_loop_filter=all'`: Skip loop filter (faster, lower quality)
+
+```dart
+// Example: Custom FFmpeg options
+VideoPerformanceConfiguration(
+  decoderOptions: 'threads=4,flags=low_delay',
+)
+```
+
+---
+
+**`hwdecCodecs`** (String?)
+
+Restricts hardware decoding to specific codecs.
+
+**Options:**
+
+- `'all'`: All codecs (**default**)
+- `'h264,hevc'`: H.264 and HEVC/H.265 only
+- `'h264'`: H.264 only
+- `'vp9'`: VP9 only
+
+```dart
+// Example: Only use HW decoding for H.264 and HEVC
+VideoPerformanceConfiguration(
+  hwdecCodecs: 'h264,hevc',
+)
+```
+
+---
+
+##### 🔄 Synchronization Settings
+
+**`videoSync`** (String?)
+
+Controls how video frames are synchronized to audio.
+
+| Value                | Description              | Quality | Performance | Best For                        |
+| -------------------- | ------------------------ | ------- | ----------- | ------------------------------- |
+| `'audio'`            | Sync to audio clock      | Good    | ⭐⭐⭐⭐⭐  | **Default, most compatible**    |
+| `'display'`          | Sync to display refresh  | Better  | ⭐⭐⭐⭐    | Standard displays               |
+| `'display-resample'` | Resample to display rate | Best    | ⭐⭐⭐      | High-end devices, smooth motion |
+| `'display-vdrop'`    | Display with frame drop  | Good    | ⭐⭐⭐⭐    | When frames need dropping       |
+| `'mem-sync'`         | Memory-based sync        | Good    | ⭐⭐⭐⭐    | Specialized use cases           |
+
+**Default:** `'audio'`
+
+```dart
+// Example: Smoothest playback for high-end devices
+VideoPerformanceConfiguration(
+  videoSync: 'display-resample',
+  interpolation: true, // Works best with interpolation
+)
+```
+
+---
+
+**`hrSeek`** (String?)
+
+Enables high-resolution seeking for precise position control.
+
+| Value        | Description                  |
+| ------------ | ---------------------------- |
+| `'no'`       | Fast, less accurate seeking  |
+| `'yes'`      | **Default**, precise seeking |
+| `'absolute'` | Absolute timestamp seeking   |
+
+**Default:** `'yes'`
+
+**Tip:** Set to `'no'` for faster seeking in long videos where frame-perfect accuracy isn't needed.
+
+```dart
+VideoPerformanceConfiguration(
+  hrSeek: 'yes', // Default, precise
+)
+```
+
+---
+
+**`hrSeekFramedrop`** (String?)
+
+Allows frame dropping during high-resolution seeking.
+
+- `'yes'`: Faster seeking (**default**)
+- `'no'`: Slower but smoother seeking
+
+**Default:** `'yes'`
+
+```dart
+// Enable for much faster seeking (recommended)
+VideoPerformanceConfiguration(
+  hrSeekFramedrop: 'yes',
+)
+```
+
+---
+
+**`fastSeek`** (String?)
+
+Enables keyframe-based seeking for dramatically faster seek operations.
+
+- `'yes'`: Jump to nearest keyframe (very fast)
+- `'no'`: Exact frame seeking (**default**, slower)
+
+**Default:** `'no'`
+
+**Performance:** Can improve seeking speed by 10x or more, but may not land on exact frame.
+
+```dart
+// Example: Enable for apps with frequent seeking
+VideoPerformanceConfiguration(
+  fastSeek: 'yes',
+  hrSeek: 'yes',
+  hrSeekFramedrop: 'yes',
+)
+```
+
+---
+
+##### 📐 Scaling Settings
+
+**`scaler`** (String?)
+
+Video scaling algorithm used for **upscaling** (making video larger).
+
+| Algorithm       | Quality   | Speed      | Best For                 |
+| --------------- | --------- | ---------- | ------------------------ |
+| `'bilinear'`    | Low       | ⭐⭐⭐⭐⭐ | Low-end devices, fastest |
+| `'bicubic'`     | Medium    | ⭐⭐⭐⭐   | **Default, balanced**    |
+| `'lanczos'`     | High      | ⭐⭐⭐     | High-quality playback    |
+| `'spline36'`    | Very High | ⭐⭐       | Professional quality     |
+| `'ewa_lanczos'` | Highest   | ⭐         | Best quality, slowest    |
+
+**Default:** `'bicubic'`
+
+```dart
+// Example: High quality upscaling
+VideoPerformanceConfiguration(
+  scaler: 'lanczos',
+)
+
+// Example: Maximum performance
+VideoPerformanceConfiguration(
+  scaler: 'bilinear',
+)
+```
+
+---
+
+**`downScaler`** (String?)
+
+Video scaling algorithm used for **downscaling** (making video smaller).
+
+Same options as `scaler`.
+
+**Default:** `'bicubic'`
+
+```dart
+// Example: Match upscaling algorithm
+VideoPerformanceConfiguration(
+  scaler: 'lanczos',
+  downScaler: 'lanczos',
+)
+```
+
+---
+
+**`interpolation`** (bool)
+
+Enables frame interpolation to match video framerate to display refresh rate.
+
+- `true`: Creates intermediate frames for smoother motion
+- `false`: **Default**, no interpolation
+
+**Requirements:**
+
+- Requires `videoSync: 'display-resample'` or similar
+- Increases CPU/GPU usage significantly
+- May cause artifacts in fast-motion scenes
+
+**Default:** `false`
+
+```dart
+// Example: Enable for ultra-smooth motion
+VideoPerformanceConfiguration(
+  interpolation: true,
+  videoSync: 'display-resample',
+)
+```
+
+---
+
+##### 🎨 Rendering Settings
+
+**`deinterlacing`** (String?)
+
+Controls how interlaced video content is handled.
+
+| Value    | Description                                |
+| -------- | ------------------------------------------ |
+| `'no'`   | Disable deinterlacing                      |
+| `'yes'`  | Always deinterlace                         |
+| `'auto'` | Deinterlace only when needed (**default**) |
+
+**Default:** `'auto'`
+
+**Note:** Most modern video is progressive (not interlaced), so `'auto'` is recommended.
+
+```dart
+VideoPerformanceConfiguration(
+  deinterlacing: 'auto', // Default, recommended
+)
+```
+
+---
+
+**`gpuApi`** (String?)
+
+Forces a specific graphics API for rendering.
+
+| Value      | Platform       | Description                           |
+| ---------- | -------------- | ------------------------------------- |
+| `'auto'`   | All            | Auto-detect (**default**)             |
+| `'opengl'` | All            | Most compatible                       |
+| `'vulkan'` | Modern devices | Best performance on supported devices |
+| `'d3d11'`  | Windows        | Direct3D 11                           |
+
+**Default:** `'auto'`
+
+```dart
+// Example: Force Vulkan for better performance
+VideoPerformanceConfiguration(
+  gpuApi: 'vulkan',
+)
+```
+
+---
+
+**`openglPbo`** (String?)
+
+Enables OpenGL Pixel Buffer Objects for faster texture uploads.
+
+- `'yes'`: **Default**, improved performance
+- `'no'`: Disable (debugging only)
+
+**Default:** `'yes'`
+
+```dart
+VideoPerformanceConfiguration(
+  openglPbo: 'yes', // Default, recommended
+)
+```
+
+---
+
+**`softwareDecodingDirectRendering`** (String?)
+
+Enables direct rendering for software decoding.
+
+- `'yes'`: **Default**, better performance
+- `'no'`: Disable (debugging only)
+
+**Default:** `'yes'`
+
+```dart
+VideoPerformanceConfiguration(
+  softwareDecodingDirectRendering: 'yes', // Default
+)
+```
+
+---
+
+**`videoLatencyHacks`** (String?)
+
+Enables various optimizations to reduce video latency.
+
+- `'yes'`: Lower latency, may reduce quality
+- `'no'`: **Default**, standard quality
+
+**Default:** `'no'`
+
+**Use Case:** Enable for live streaming or video calls where latency matters.
+
+```dart
+VideoPerformanceConfiguration(
+  videoLatencyHacks: 'yes', // For low-latency scenarios
+)
+```
+
+---
+
+##### 💾 Cache Settings
+
+**`optimizeForLocalFiles`** (bool)
+
+Optimizes playback for local file access vs. network streaming.
+
+When `true` (**default**):
+
+- ✅ Disables network readahead
+- ✅ Increases back buffer for fast seeking
+- ✅ Reduces initial buffering time
+- ✅ Optimizes cache for local storage
+
+When `false`:
+
+- Better for network/streaming content
+- Larger network buffers
+
+**Default:** `true`
+
+```dart
+// For local video player apps
+VideoPerformanceConfiguration(
+  optimizeForLocalFiles: true, // Default
+)
+
+// For streaming apps
+VideoPerformanceConfiguration(
+  optimizeForLocalFiles: false,
+)
+```
+
+---
+
+**`cacheSecs`** (int)
+
+Duration of content to cache in seconds.
+
+- **Range:** 10-300 seconds
+- **Default:** `60`
+
+**Guidelines:**
+
+- `10-30`: Short videos, low memory devices
+- `60`: **Default**, balanced
+- `120-300`: Long videos, good network, frequent seeking
+
+```dart
+// Example: Increase cache for better seeking
+VideoPerformanceConfiguration(
+  cacheSecs: 120,
+)
+```
+
+---
+
+### Complete Configuration Examples
+
+#### Example 1: High-Quality Local Video Player
+
+```dart
+final player = Player(
+  configuration: PlayerConfiguration(
+    videoPerformance: VideoPerformanceConfiguration(
+      // Best quality decoding
+      hardwareDecoding: 'auto',
+      frameDropping: 'no',
+
+      // Smooth synchronization
+      videoSync: 'display-resample',
+      hrSeek: 'yes',
+      fastSeek: 'no',
+
+      // High-quality scaling
+      scaler: 'lanczos',
+      downScaler: 'lanczos',
+
+      // Optimized for local files
+      optimizeForLocalFiles: true,
+      cacheSecs: 120,
+    ),
+    bufferSize: 128 * 1024 * 1024, // Larger buffer
+  ),
+);
+```
+
+#### Example 2: Streaming App (Low Latency)
+
+```dart
+final player = Player(
+  configuration: PlayerConfiguration(
+    videoPerformance: VideoPerformanceConfiguration(
+      // Balanced decoding
+      hardwareDecoding: 'auto',
+      frameDropping: 'decoder',
+
+      // Fast seeking for scrubbing
+      hrSeek: 'yes',
+      hrSeekFramedrop: 'yes',
+      fastSeek: 'yes',
+
+      // Optimized for streaming
+      optimizeForLocalFiles: false,
+      cacheSecs: 30,
+
+      // Lower latency
+      videoLatencyHacks: 'yes',
+    ),
+    bufferSize: 32 * 1024 * 1024, // Smaller buffer for lower latency
+  ),
+);
+```
+
+#### Example 3: Low-End Device Optimization
+
+```dart
+final player = Player(
+  configuration: PlayerConfiguration(
+    videoPerformance: VideoPerformanceConfiguration(
+      // Performance-focused
+      hardwareDecoding: 'auto',
+      frameDropping: 'decoder+vo',
+      fastDecoding: 'yes',
+      decoderThreads: 2,
+
+      // Fast scaling
+      scaler: 'bilinear',
+      downScaler: 'bilinear',
+
+      // Standard sync
+      videoSync: 'audio',
+
+      // Minimal cache
+      cacheSecs: 30,
+    ),
+    bufferSize: 16 * 1024 * 1024,
+  ),
+);
+```
+
+### Persisting Settings
+
+You can persist advanced settings using `SharedPreferences` or similar storage solutions. Here's a complete example:
+
+```dart
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_mpv/flutter_mpv.dart';
+
+class AppSettings {
+  static late final SharedPreferences prefs;
+
+  static Future<void> init() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  // Hardware decoding setting
+  static String get hwdec => prefs.getString('hwdec') ?? 'auto';
+  static set hwdec(String value) => prefs.setString('hwdec', value);
+
+  // Scaler setting
+  static String get scaler => prefs.getString('scaler') ?? 'bicubic';
+  static set scaler(String value) => prefs.setString('scaler', value);
+
+  // Video sync setting
+  static String get videoSync => prefs.getString('video_sync') ?? 'audio';
+  static set videoSync(String value) => prefs.setString('video_sync', value);
+
+  // Cache duration
+  static int get cacheSecs => prefs.getInt('cache_secs') ?? 60;
+  static set cacheSecs(int value) => prefs.setInt('cache_secs', value);
+
+  // Reset to defaults
+  static Future<void> reset() async {
+    await prefs.clear();
+  }
+}
+
+// Usage in your app initialization:
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppSettings.init();
+  FlutterMpv.ensureInitialized();
+  runApp(const MyApp());
+}
+
+// Then use in Player configuration:
+final player = Player(
+  configuration: PlayerConfiguration(
+    videoPerformance: VideoPerformanceConfiguration(
+      hardwareDecoding: AppSettings.hwdec,
+      scaler: AppSettings.scaler,
+      videoSync: AppSettings.videoSync,
+      cacheSecs: AppSettings.cacheSecs,
+    ),
+    bufferSize: 64 * 1024 * 1024,
+  ),
+);
+```
+
+### Troubleshooting Guide
+
+#### Common Issues and Solutions
+
+**Issue: Video stuttering or frame drops**
+
+```dart
+// Solution: Allow more frame dropping
+VideoPerformanceConfiguration(
+  frameDropping: 'decoder+vo',
+  fastDecoding: 'yes',
+)
+```
+
+**Issue: High battery consumption**
+
+```dart
+// Solution: Use more efficient settings
+VideoPerformanceConfiguration(
+  hardwareDecoding: 'auto', // Ensure HW decoding is enabled
+  scaler: 'bilinear',
+  decoderThreads: 2,
+  interpolation: false,
+)
+```
+
+**Issue: Seeking is too slow**
+
+```dart
+// Solution: Enable fast seeking
+VideoPerformanceConfiguration(
+  fastSeek: 'yes',
+  hrSeekFramedrop: 'yes',
+  cacheSecs: 120, // Increase cache for better seeking
+)
+```
+
+**Issue: Poor video quality**
+
+```dart
+// Solution: Prioritize quality over performance
+VideoPerformanceConfiguration(
+  frameDropping: 'no',
+  scaler: 'lanczos',
+  downScaler: 'lanczos',
+  videoSync: 'display-resample',
+)
+```
+
+**Issue: Compatibility problems on old devices**
+
+```dart
+// Solution: Use software decoding
+VideoPerformanceConfiguration(
+  hardwareDecoding: 'no',
+  fastDecoding: 'yes',
+  scaler: 'bilinear',
+)
+```
+
+### Performance Tips
+
+1. **Start with presets**: Use `VideoPerformancePresets.balanced` as a baseline
+2. **Test on target devices**: Performance varies significantly across devices
+3. **Monitor battery impact**: High-quality settings drain battery faster
+4. **Consider your use case**: Streaming vs. local playback need different optimizations
+5. **Provide user settings**: Allow users to adjust quality vs. performance
+6. **Profile before optimizing**: Use Flutter DevTools to identify bottlenecks
+
 ### Next steps
 
-This guide follows a tutorial-like structure & covers nearly all features that [package:flutter_mpv](https://github.com/media-kit/media-kit) offers. However, it is _not complete_ by any means. You are free to improve this page & add more documentation, which newcomers may find helpful. The following places can help you learn more:
+This guide follows a tutorial-like structure & covers nearly all features that flutter*mpv offers. However, it is \_not complete* by any means. You are free to improve this page & add more documentation, which newcomers may find helpful. The following places can help you learn more:
 
 - [API reference](https://pub.dev/documentation/flutter_mpv/latest/flutter_mpv/flutter_mpv-library.html) can be helpful for diving into deeper specifics.
 - [source-code of the demo application](https://github.com/media-kit/media-kit/tree/main/flutter_mpv_test/lib/tests) offers some complete code samples.
@@ -1105,13 +1784,14 @@ This guide follows a tutorial-like structure & covers nearly all features that [
 
 ## Goals
 
-[package:flutter_mpv](https://github.com/media-kit/media-kit) is a library for Flutter & Dart which **provides video & audio playback**.
+flutter_mpv is a library for Flutter & Dart which **provides video & audio playback**.
 
 - **Strong:** Supports _most_ video & audio codecs.
 - **Performant:**
   - Handles multiple FHD videos flawlessly.
   - Rendering is GPU-powered (hardware accelerated).
   - 4K / 8K 60 FPS is supported.
+  - Advanced video performance configuration for fine-tuned control.
 - **Stable:** Implementation is well-tested & used across number of intensive media playback related apps.
 - **Feature Proof:** A simple usage API while offering a large number of features to target multitude of apps.
 - **Modular:** Project is split into a number of packages for reducing bundle size.
@@ -1692,6 +2372,647 @@ sudo apt install libmimalloc-dev libmimalloc2.0
 ### Web
 
 On the web, **libmpv is not used**. Video & audio playback is handled by embedding [HTML `<video>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video). The format support depends upon the web browser. It happens to be extremely limited as compared to native platforms.
+
+## Architecture
+
+### package:flutter_mpv
+
+_Click on the zoom button on top-right or pinch inside._
+
+```mermaid
+%%{
+  init: {
+    'themeVariables': {
+      'fontFamily': 'BlinkMacSystemFont, Segoe UI, Noto Sans, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji'
+    }
+  }
+}%%
+classDiagram
+
+  Player *-- PlatformPlayer
+  PlatformPlayer <|-- NativePlayer
+  PlatformPlayer <|-- WebPlayer
+  PlatformPlayer *-- PlayerState
+  PlatformPlayer *-- PlayerStream
+  PlatformPlayer o-- PlayerConfiguration
+
+  NativePlayer <.. NativeLibrary
+  NativePlayer <.. Initializer
+
+  Playable <.. Media
+  Playable <.. Playlist
+
+  class Initializer {
+    +create(path: String, callback: Function, options: Map<String, String>): Future<Pointer<mpv_handle>>
+    +dispose(handle: Pointer<mpv_handle>)
+  }
+
+  class Playable {
+  }
+
+  class AudioDevice {
+  }
+
+  class Media {
+    +String uri
+    +dynamic extras
+  }
+
+  class Playlist {
+    +List<Media> medias
+    +index index
+  }
+
+  class PlayerStream {
+    +Stream<Playlist> playlist
+    +Stream<bool> playing
+    +Stream<bool> completed
+    +Stream<Duration> position
+    +Stream<Duration> duration
+    +Stream<Duration> buffer
+    +Stream<double> volume
+    +Stream<double> rate
+    +Stream<double> pitch
+    +Stream<bool> buffering
+    +Stream<Duration> buffer
+    +Stream<AudioParams> audioParams
+    +Stream<VideoParams> videoParams
+    +Stream<double?> audioBitrate
+    +Stream<AudioDevice> audioDevice
+    +Stream<List<AudioDevice>> audioDevices
+    +Stream<Track> track
+    +Stream<Tracks> tracks
+    +Stream<int> width
+    +Stream<int> height
+    +Stream<List<String>> subtitle
+    +Stream<PlayerLog> log
+    +Stream<String> error
+  }
+
+  class PlayerState {
+    +Playlist playlist
+    +bool playing
+    +bool completed
+    +Duration position
+    +Duration duration
+    +Duration buffer
+    +double volume
+    +double rate
+    +double pitch
+    +bool buffering
+    +Duration buffer
+    +AudioParams audioParams
+    +VideoParams videoParams
+    +double? audioBitrate
+    +AudioDevice audioDevice
+    +List<AudioDevice audioDevices
+    +Track track
+    +Tracks tracks
+    +int width
+    +int height
+    +List<String> subtitle
+  }
+
+  class Player {
+    +PlatformPlayer? platform
+
+    +«get» PlayerState state
+    +«get» PlayerStream stream
+
+    +dispose()
+    +open(playable: Playable)
+    +play()
+    +stop()
+    +pause()
+    +playOrPause()
+    +add(media: Media)
+    +remove(index: int)
+    +next()
+    +previous()
+    +jump(index: int)
+    +move(from: int, to: int)
+    +seek(duration: Duration)
+    +setPlaylistMode(playlistMode: PlaylistMode)
+    +setVolume(volume: double)
+    +setRate(rate: double)
+    +setPitch(pitch: double)
+    +setShuffle(bool: double)
+    +setAudioDevice(device: AudioDevice)
+    +setVideoTrack(track: VideoTrack)
+    +setAudioTrack(track: AudioTrack)
+    +setSubtitleTrack(track: SubtitleTrack)
+    +screenshot(): Uint8List
+  }
+
+  class PlatformPlayer {
+    +PlayerState state
+    +PlayerStream stream
+    +PlayerConfiguration configuration
+
+    +dispose()*
+    +open(playable: Playable)*
+    +play()*
+    +stop()*
+    +pause()*
+    +playOrPause()*
+    +add(media: Media)*
+    +remove(index: int)*
+    +next()*
+    +previous()*
+    +jump(index: int)*
+    +move(from: int, to: int)*
+    +seek(duration: Duration)*
+    +setPlaylistMode(playlistMode: PlaylistMode)*
+    +setVolume(volume: double)*
+    +setRate(rate: double)*
+    +setPitch(pitch: double)*
+    +setShuffle(bool: double)*
+    +setAudioDevice(device: AudioDevice)*
+    +setVideoTrack(track: VideoTrack)*
+    +setAudioTrack(track: AudioTrack)*
+    +setSubtitleTrack(track: SubtitleTrack)*
+    +screenshot(): Uint8List*
+
+    +«get» handle: Future<int>*
+
+    #StreamController<Playlist> playlistController
+    #StreamController<bool> playingController
+    #StreamController<bool> completedController
+    #StreamController<Duration> positionController
+    #StreamController<Duration> durationController
+    #StreamController<Duration> bufferController
+    #StreamController<double> volumeController
+    #StreamController<double> rateController
+    #StreamController<double> pitchController
+    #StreamController<bool> bufferingController
+    #StreamController<PlayerLog> logController
+    #StreamController<PlayerError> errorController
+    #StreamController<AudioParams> audioParamsController
+    #StreamController<double?> audioBitrateController
+    #StreamController<AudioDevice> audioDeviceController
+    #StreamController<List<AudioDevice>> audioDevicesController
+    #StreamController<Track> trackController
+    #StreamController<Tracks> tracksController
+    #StreamController<int> widthController
+    #StreamController<int> heightController
+  }
+
+  class NativePlayer {
+    +dispose()
+    +open(playable: Playable)
+    +play()
+    +stop()
+    +pause()
+    +playOrPause()
+    +add(media: Media)
+    +remove(index: int)
+    +next()
+    +previous()
+    +jump(index: int)
+    +move(from: int, to: int)
+    +seek(duration: Duration)
+    +setPlaylistMode(playlistMode: PlaylistMode)
+    +setVolume(volume: double)
+    +setRate(rate: double)
+    +setPitch(pitch: double)
+    +setShuffle(bool: double)
+    +setAudioDevice(device: AudioDevice)
+    +setVideoTrack(track: VideoTrack)
+    +setAudioTrack(track: AudioTrack)
+    +setSubtitleTrack(track: SubtitleTrack)
+    +screenshot(): Uint8List
+
+    +«get» handle: Future<int>
+  }
+
+  class WebPlayer {
+    +dispose()
+    +open(playable: Playable)
+    +play()
+    +stop()
+    +pause()
+    +playOrPause()
+    +add(media: Media)
+    +remove(index: int)
+    +next()
+    +previous()
+    +jump(index: int)
+    +move(from: int, to: int)
+    +seek(duration: Duration)
+    +setPlaylistMode(playlistMode: PlaylistMode)
+    +setVolume(volume: double)
+    +setRate(rate: double)
+    +setPitch(pitch: double)
+    +setShuffle(bool: double)
+    +setAudioDevice(device: AudioDevice)
+    +setVideoTrack(track: VideoTrack)
+    +setAudioTrack(track: AudioTrack)
+    +setSubtitleTrack(track: SubtitleTrack)
+    +screenshot(): Uint8List
+
+    +«get» handle: Future<int>
+  }
+
+  class NativeLibrary {
+    +find()$ String?
+  }
+```
+
+### package:flutter_mpv_video
+
+_Click on the zoom button on top-right or pinch inside._
+
+#### Android
+
+```mermaid
+%%{
+  init: {
+    'themeVariables': {
+      'fontFamily': 'BlinkMacSystemFont, Segoe UI, Noto Sans, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji'
+    }
+  }
+}%%
+classDiagram
+
+  FlutterMpvVideoPlugin "1" *-- "1" VideoOutputManager: Create VideoOutput(s) with VideoOutputManager for handle passed through platform channel
+  VideoOutputManager "1" *-- "*" VideoOutput: Create VideoOutput(s) to send back id & wid for render. Dispose to release.
+  VideoOutput <.. FlutterMpvAndroidHelper: Create & dispose JNI global object reference to android.view.Surface (for --wid)
+
+  class FlutterMpvVideoPlugin {
+    -MethodChannel channel
+    -VideoOutputManager videoOutputManager
+  }
+
+  class VideoOutputManager {
+    -HashMap<Long, VideoOutput> videoOutputs
+    -TextureRegistry textureRegistryReference
+    -Object lock
+
+    +create(handle: long, textureUpdateCallback: TextureUpdateCallback)
+    +dispose(handle: long)
+    +setSurfaceSize(handle: long, width: int, height: int): long
+  }
+
+  class VideoOutput {
+    $Method newGlobalObjectRef
+    $Method deleteGlobalObjectRef
+    $Handler handler
+
+    -long id
+    -long wid
+
+    -TextureUpdateCallback textureUpdateCallback
+    -TextureRegistry.SurfaceProducer surfaceProducer
+
+    -long handle
+    -MethodChannel channelReference
+    -TextureRegistry textureRegistryReference
+
+    +dispose()
+    +setSurfaceSize(width: int, height: int)
+    +setSurfaceSize(width: int, height: int, force: boolean)
+    -setSurfaceTextureSize(width: int, height: int)
+    +onSurfaceCreated()
+    +onSurfaceDestroyed()
+
+    $newGlobalObjectRef(object: Object): long
+    $deleteGlobalObjectRef(ref: long)
+  }
+
+  class FlutterMpvAndroidHelper {
+    +newGlobalObjectRef(obj: Object): long
+    +deleteGlobalObjectRef(ref: long)
+    +setApplicationContext(context: Context)
+    +copyAssetToExternalFilesDir(assetName: String): String
+  }
+
+```
+
+#### iOS
+
+_TODO: documentation._
+
+#### macOS
+
+_TODO: documentation._
+
+#### Windows
+
+```mermaid
+%%{
+  init: {
+    'themeVariables': {
+      'fontFamily': 'BlinkMacSystemFont, Segoe UI, Noto Sans, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji'
+    }
+  }
+}%%
+classDiagram
+
+  FlutterMpvVideoPlugin "1" *-- "1" VideoOutputManager: Create VideoOutput(s) with VideoOutputManager for handle passed through platform channel
+  VideoOutputManager "1" *-- "*" VideoOutput: Takes PluginRegistrarWindows as reference
+  VideoOutputManager "1" *-- "1" ThreadPool
+  VideoOutput "*" o-- "1" ThreadPool: Post creation, resize & render etc. tasks involving EGL to ensure synchronous EGL/ANGLE usage across multiple VideoOutput(s)
+  VideoOutput "1" *-- "1" ANGLESurfaceManager: Only for H/W accelerated rendering
+
+  class FlutterMpvVideoPlugin {
+    -flutter::PluginRegistrarWindows registrar_
+    -std::unique_ptr<MethodChannel> channel_
+    -std::unique_ptr<VideoOutputManager> video_output_manager_
+    -HandleMethodCall(method_call, result);
+  }
+
+  class ThreadPool {
+    +Post(function: std::function)
+  }
+
+  class VideoOutputManager {
+    +Create(handle: int, width: optional<int>, height: optional<int>, texture_update_callback: std::function)
+    +Dispose(handle: int)
+
+    -std::mutex mutex_
+    -std::unique_ptr<ThreadPool> thread_pool_
+    -flutter::PluginRegistrarWindows registrar_
+    -std::unordered_map<int64_t, std::unique_ptr<VideoOutput>> video_outputs_
+  }
+
+  class VideoOutput {
+    +«get» texture_id: int64_t
+    +«get» width: int64_t
+    +«get» height: int64_t
+    -mpv_handle* handle_
+    -mpv_render_context* render_context_
+    -std::optional<int64_t> width_
+    -std::optional<int64_t> height_
+    -bool enable_hardware_acceleration_
+    -int64_t texture_id_
+    -flutter::PluginRegistrarWindows registrar_
+    -ThreadPool* thread_pool_ref_
+    -bool destroyed_
+    -std::mutex textures_mutex_
+    -std::unordered_map<int64_t, std::unique_ptr<flutter::TextureVariant>> texture_variants_
+    -std::unique_ptr<ANGLESurfaceManager> surface_manager_ HW
+    -std::unordered_map<int64_t, std::unique_ptr<FlutterDesktopGpuSurfaceDescriptor>> textures_ HW
+    -std::unique_ptr<uint8_t[]> pixel_buffer_ SW
+    -std::unordered_map<int64_t, std::unique_ptr<FlutterDesktopPixelBuffer>> pixel_buffer_textures_ SW
+    -std::function texture_update_callback_
+
+    +SetTextureUpdateCallback(callback: std::function<void(int64_t, int64_t, int64_t)>)
+    +SetSize(width: std::optional<int64_t>, height: std::optional<int64_t>)
+    -NotifyRender()
+    -Render()
+    -CheckAndResize()
+    -Resize(required_width: int64_t, required_height: int64_t)
+    -GetVideoWidth(): int64_t
+    -GetVideoHeight(): int64_t
+  }
+
+  class ANGLESurfaceManager {
+    +«get» width: int32_t
+    +«get» height: int32_t
+    +«get» handle: HANDLE
+
+    +HandleResize(width: int32_t, height: int32_t)
+    +Draw(draw_callback: std::function<void()>)
+    +Read()
+    +MakeCurrent(value: bool)
+    -CreateEGLDisplay()
+    -SwapBuffers()
+    -Create()
+    -CleanUp(release_context: bool)
+    -CreateD3DTexture()
+    -CreateEGLDisplay()
+    -CreateAndBindEGLSurface()
+
+    -IDXGIAdapter* adapter_
+    -int32_t width_
+    -int32_t height_
+    -HANDLE internal_handle_
+    -HANDLE handle_
+    -HANDLE mutex_
+    -ID3D11Device* d3d_11_device_
+    -ID3D11DeviceContext* d3d_11_device_context_
+    -Microsoft::WRL::ComPtr<ID3D11Texture2D> internal_d3d_11_texture_2D_
+    -Microsoft::WRL::ComPtr<IDXGISwapChain> d3d_11_texture_2D_
+    -EGLSurface surface_
+    -EGLDisplay display_
+    -EGLContext context_
+    -EGLConfig config_
+  }
+```
+
+#### GNU/Linux
+
+```mermaid
+%%{
+  init: {
+    'themeVariables': {
+      'fontFamily': 'BlinkMacSystemFont, Segoe UI, Noto Sans, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji'
+    }
+  }
+}%%
+classDiagram
+
+  FlutterMpvVideoPlugin "1" *-- "1" VideoOutputManager: Create VideoOutput(s) with VideoOutputManager for handle passed through platform channel
+  VideoOutputManager "1" *-- "*" VideoOutput: Takes FlTextureRegistrar as reference
+  VideoOutput "1" *-- "1" TextureGL: For H/W rendering.
+  TextureGL "1" o-- "1" VideoOutput: Take VideoOutput as reference
+  VideoOutput "1" *-- "1" TextureSW: For S/W rendering.
+  TextureSW "1" o-- "1" VideoOutput: Take VideoOutput as reference
+  TextureGL "1" <-- "1" FlTextureGL
+  TextureSW "1" <-- "1" FlTexture
+
+  class FlutterMpvVideoPlugin {
+    -FlMethodChannel* channel
+    -VideoOutputManager* video_output_manager
+  }
+
+  class VideoOutputManager {
+    -GHashTable* video_outputs
+    -FlTextureRegistrar* texture_registrar
+    +video_output_manager_create(self: VideoOutputManager*, handle: gint64, width: gint64, height: gint64, texture_update_callback: TextureUpdateCallback, texture_update_callback_context: gpointer)
+    +video_output_manager_dispose(self: VideoOutputManager*, handle: gint64)
+  }
+
+  class VideoOutput {
+    -TextureGL* texture_gl
+    -GdkGLContext* context_gl
+    -mpv_handle* handle
+    -mpv_render_context* render_context
+    -gint64 width
+    -gint64 height
+    -TextureUpdateCallback texture_update_callback
+    -gpointer texture_update_callback_context
+    -FlTextureRegistrar* texture_registrar
+    +video_output_set_texture_update_callback(self: VideoOutput*, texture_update_callback: TextureUpdateCallback, texture_update_callback_context: gpointer)
+    +video_output_get_render_context(self: VideoOutput*): mpv_render_context*
+    +video_output_get_width(self: VideoOutput*): gint64
+    +video_output_get_height(self: VideoOutput*): gint64
+    +video_output_get_texture_id(self: VideoOutput*): gint64
+    +video_output_notify_texture_update(self: VideoOutput*);
+  }
+
+  class TextureGL {
+    -guint32 name
+    -guint32 fbo
+    -guint32 current_width
+    -guint32 current_height
+    -VideoOutput* video_output
+    texture_gl_populate_texture(texture: FlTextureGL*, target: guint32*, name: guint32*, width: guint32*, height: guint32*, error: GError**): gboolean
+  }
+
+  class TextureSW {
+    -guint32 current_width
+    -guint32 current_height
+    -VideoOutput* video_output
+    texture_sw_copy_pixels(texture: FlPixelBufferTexture*, buffer: const uint8_t**, width: uint32_t*, height: uint32_t*, error: GError**): gboolean
+  }
+```
+
+#### Web
+
+_TODO: documentation._
+
+## Implementation
+
+[libmpv](https://github.com/mpv-player/mpv/tree/master/libmpv) is used for leveraging audio & video playback. It _seems_ the best possible option since supports a wide variety of audio & video formats, provides hardware acceleration & bundle size is also minimal (select only required decoders etc. in FFmpeg/mpv).
+
+Another major advantage is that large part of implementation (80%+) is shared across platforms using FFI. This makes the behavior of package very-very similar on all supported platforms & makes maintenance easier (since there is less code & most of it within Dart).
+
+Alternative backends may be implemented in future to meet certain demands (& project architecture makes it possible).
+
+### flutter_mpv
+
+flutter_mpv is entirely written in Dart. It uses dart:ffi to invoke native C API of libmpv through it's shared libraries. All the callback management, event-`Stream`s, other methods to control playback of audio/video are implemented in Dart with the help of FFI. Event management i.e. `position`, `duration`, `bitrate`, `audioParams` `Stream`s are important to render changes in the UI.
+
+~~A [big limitation with FFI in Dart SDK](https://github.com/dart-lang/sdk/issues/37022) has been that it does not support async callbacks from another thread. Learn more about this at: [dart/sdk#37022](https://github.com/dart-lang/sdk/issues/37022). Following situation will explain better:~~
+
+> ~~If you pass a function pointer from Dart to C code, you can invoke it fine. But, as soon as you invoke it from some other thread on the native side, Dart VM will instantly crash. This feature is important because most events take place on a background thread.~~
+
+~~However, I could easily do this within Dart because [libmpv](https://github.com/mpv-player/mpv/tree/master/libmpv) offers an "event polling"-like way to listen to events. I got awesome idea to spawn a background [`Isolate`](https://api.flutter.dev/flutter/dart-isolate/Isolate-class.html), where I run the event-loop. I get the memory address of each event and forward it outside the [`Isolate`](https://api.flutter.dev/flutter/dart-isolate/Isolate-class.html) with the help of [`ReceivePort`](https://api.dart.dev/stable/2.18.6/dart-isolate/ReceivePort-class.html), where I finally interpret it using more FFI code. I have explained this in detail within [the in-code comments of initializer.dart, where I had to perform a lot more trickery to get this to work](https://github.com/media-kit/media-kit/blob/master/flutter_mpv/lib/src/libmpv/core/initializer.dart).~~
+
+~~**Thus, invoking native methods & handling of events etc. could be done within 100% Dart using FFI.** This is enough for audio playback & supports both Flutter SDK & Dart VM. Although event handling works entirely within Dart. Later, it was discovered that going beyond certain number of simultaneous instances caused a deadlock ([dart-lang/sdk#51254](https://github.com/dart-lang/sdk/issues/51254) & [dart-lang/sdk#51261](https://github.com/dart-lang/sdk/issues/51261)), making UI entirely freezed along-side any other Dart code in execution. To deal with this, a new package [package:flutter_mpv_native_event_loop](#packageflutter_mpv_native_event_loop) is created. Adding [package:flutter_mpv_native_event_loop](#packageflutter_mpv_native_event_loop) to `pubspec.yaml` automatically resolves this issue without any chagnes to code!~~
+
+**Update:** The above issue is resolved in Dart SDK 3.1.0. [`NativeCallable`](https://api.flutter.dev/flutter/dart-ffi/NativeCallable-class.html) can now be used to make async C callbacks.
+
+However, no such "event-polling" like API is possible for video rendering. So, I best idea seemed to create a new package `flutter_mpv_video` for specifically offering platform-specific video embedding implementation which internally handles Flutter's Texture Registry API & libmpv's OpenGL rendering API. This package only consumes the `mpv_handle*` (which can be shared as primitive `int` value easily) of the instance (created with flutter_mpv through FFI) to setup a new viewport. Detailed implementation is discussed below.
+
+### package:flutter_mpv_native_event_loop
+
+> Platform specific threaded event handling for flutter_mpv. Enables support for higher number of concurrent instances.
+
+The package contains a minimal C++ implementation which spawns a detach-ed [`std::thread`](https://en.cppreference.com/w/cpp/thread/thread). This runs the `mpv_wait_event` loop & forwads the events using [`postCObject`](https://api.dart.dev/stable/2.19.6/dart-ffi/NativeApi/postCObject.html), [`SendPort`](https://api.dart.dev/stable/2.19.6/dart-isolate/SendPort-class.html) & [`ReceivePort`](https://api.dart.dev/stable/2.19.6/dart-isolate/ReceivePort-class.html) to Dart VM. Necessary mutex synchronization also takes place.
+
+[`Isolate`](https://api.flutter.dev/flutter/dart-isolate/Isolate-class.html) based event loop is avoided once this package is added to the project.
+
+### package:flutter_mpv_video
+
+#### Android
+
+On Android, [texture registry API](https://api.flutter.dev/javadoc/io/flutter/view/TextureRegistry.html) is based on [`android.graphics.SurfaceTexture`](https://developer.android.com/reference/android/graphics/SurfaceTexture.html?is-external=true).
+
+[libmpv](https://github.com/mpv-player/mpv/tree/master/libmpv) can render directly onto an [`android.view.Surface`](https://developer.android.com/reference/android/view/Surface) after setting [`--wid`](https://mpv.io/manual/stable/#options-wid). Creation of a new [`android.view.Surface`](https://developer.android.com/reference/android/view/Surface) requires reference to an existing [`android.graphics.SurfaceTexture`](https://developer.android.com/reference/android/graphics/SurfaceTexture.html?is-external=true), [which can be consumed from the texture entry created by Flutter itself](<https://api.flutter.dev/javadoc/io/flutter/view/TextureRegistry.SurfaceTextureEntry.html#surfaceTexture()>).
+
+This requires `--hwdec=mediacodec` for hardware decoding, along with `--vo=mediacodec_embed` and `--wid=(intptr_t)(*android.view.Surface)`.
+
+More details may be found at: https://mpv.io/manual/stable/#video-output-drivers-mediacodec-embed
+
+Obtaining a global reference pointer to a Java object ([`android.view.Surface`](https://developer.android.com/reference/android/view/Surface) in our case) requires JNI. For this, a custom shared library is used, you can find it's implementation at [media-kit/media-kit-android-helper](https://github.com/media-kit/media-kit-android-helper). Since compilation of this would require NDK (& make process tedious), pre-built shared libraries is bundled for each architecture at the time of development/build.
+
+Since the `package:flutter_mpv` is a Dart package (which works independent of Flutter), accessing assets was a challenging part. The mentioned shared libraries generated by [media-kit/media-kit-android-helper](https://github.com/media-kit/media-kit-android-helper) helps to [access assets bundled inside Android APK from Dart](https://github.com.mohammed/FlutterMpvAndroidHelper/blob/220cf95958aceb7e3678ba524da812f212524537/app/src/main/cpp/native-lib.cpp#L26-L115) (using FFI, without depending on Flutter).
+
+#### iOS
+
+iOS shares much of it's implementation with macOS. Only difference is that OpenGL ES is used instead of OpenGL.
+
+#### macOS
+
+On macOS the current implementation is based on [libmpv](https://github.com/mpv-player/mpv/tree/master/libmpv) and can be summarized as follows:
+
+1. H/W video decoding: mpv option `hwdec` is set to `auto`, does not depend on a pixel buffer.
+2. OpenGL rendering to an OpenGL texture backed by a pixel buffer, which makes it interoperable with METAL ([CVPixelBuffer](https://developer.apple.com/documentation/corevideo/cvpixelbuffer-q2e))
+
+<!--
+
+Possible improvements :
+- Render directly to METAL texture:
+  - Use ANGLE to not depend on the host OpenGL implementation, deprecated by Apple.
+  - Use a future METAL API natively developed by mpv.
+- Share the METAL texture between `flutter_mpv_video` and Flutter, without using a pixel buffer.
+
+-->
+
+#### Windows
+
+- [libmpv](https://github.com/mpv-player/mpv/tree/master/libmpv) gives access to C API for rendering hardware-accelerated video output using OpenGL.
+  - See:
+    - [render.h](https://github.com/mpv-player/mpv/blob/master/libmpv/render.h)
+    - [render_gl.h](https://github.com/mpv-player/mpv/blob/master/libmpv/render_gl.h)
+- Flutter recently added ability for Windows to [render Direct3D `ID3D11Texture2D` textures](https://github.com/flutter/engine/pull/26840).
+
+The two APIs above are hardware accelerated i.e. GPU backed buffers are used. **This is performant approach, easily capable for rendering 4K 60 FPS videos**, rest depends on the hardware. Since [libmpv](https://github.com/mpv-player/mpv/tree/master/libmpv) API is OpenGL based & the Texture API in Flutter is Direct3D based, [ANGLE (Almost Native Graphics Layer Engine)](https://github.com/google/angle) is used for interop, which translates the OpenGL ES 2.0 calls into Direct3D.
+
+This hardware-accelerated video output requires DirectX 11 or higher. Most Windows systems with either integrated or discrete GPUs should support this already. On systems where Direct3D fails to load due to missing graphics drivers or unsupported feature-level or DirectX version etc. a fallback pixel-buffer based software renderer is used. This means that video is rendered by CPU & every frame is copied back to the RAM. This will cause some redundant load on the CPU, result in decreased battery life & may not play higher resolution videos properly. However, it works well.
+
+<details>
+
+<summary> Windows 7 & 8.x also work correctly. </summary>
+
+![0](https://user-images.githubusercontent.com/28951144/212947036-4a2430d6-729e-47d7-a356-c8cc8534a1aa.jpg)
+![1](https://user-images.githubusercontent.com/28951144/212947046-cc8d441c-96f8-4437-9f59-b4613ca73f2a.jpg)
+
+</details>
+
+You may visit [experimentation repository](https://github.com.mohammed/flutter-windows-OpenGLES) to see a minimal example showing OpenGL ES usage in Flutter Windows.
+
+#### GNU/Linux
+
+On Flutter Linux, [both OpenGL (H/W) & pixel buffer (S/W) APIs](https://github.com/flutter/engine/pull/24916) are available for rendering on [`Texture` widget](https://api.flutter.dev/flutter/widgets/Texture-class.html).
+
+#### Web
+
+Video & audio playback is handled by embedding [HTML `<video>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video).
+
+## Examples
+
+See the [`examples/`](examples) directory for complete working examples:
+
+| Example                                                         | Description                                     | Complexity | Best For                  |
+| --------------------------------------------------------------- | ----------------------------------------------- | ---------- | ------------------------- |
+| [**advanced_player_example**](examples/advanced_player_example) | Full player with 12 presets & advanced settings | ⭐⭐⭐⭐⭐ | Production apps, learning |
+| [**flutter_mpv_test**](flutter_mpv_test)                        | Minimal feature tests                           | ⭐⭐       | Quick testing, debugging  |
+
+### Quick Start with Examples
+
+```bash
+# Navigate to example
+cd examples/advanced_player_example
+
+# Install dependencies
+flutter pub get
+
+# Run on your device
+flutter run
+```
+
+**Note:** The example uses `pubspec_overrides.yaml` to reference local packages during development. When copying to your own project, remove this file and use published versions from pub.dev.
+
+### advanced_player_example Features
+
+- 🎯 **3 Player Modes**: Basic, Presets, and Advanced
+- 🎨 **12 Performance Presets**: From "Low-End Device" to "Reference Quality"
+- ⚙️ **Advanced Settings**: Fine-tune 20+ video parameters
+- 💾 **Settings Persistence**: Saves preferences via SharedPreferences
+- 📱 **Material Design**: Beautiful, responsive UI
+
+### Learning Path
+
+1. **Start with `flutter_mpv_test`** - Understand basic API
+2. **Try `advanced_player_example`** - Learn advanced configuration
+3. **Build your own player** - Combine learnings
+
+For more details, see the [Examples README](examples/README.md).
+
+---
 
 ## License
 

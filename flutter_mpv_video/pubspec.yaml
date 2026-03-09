@@ -2,7 +2,7 @@ name: flutter_mpv_video
 description: Native implementation for video playback in flutter_mpv.
 homepage: https://github.com/mohammed/flutter_mpv
 repository: https://github.com/mohammed/flutter_mpv
-version: 2.0.1
+version: 2.0.3
 topics:
   - video
   - video-player
@@ -18,8 +18,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_mpv:
-    any
+  flutter_mpv: ^1.2.8
 
   synchronized: ^3.1.0
   wakelock_plus: ^1.1.6

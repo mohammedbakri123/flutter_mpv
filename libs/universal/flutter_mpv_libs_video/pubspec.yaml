@@ -1,6 +1,6 @@
 name: flutter_mpv_libs_video
 description: package:flutter_mpv video playback native libraries for all platforms.
-version: 1.0.9
+version: 1.0.10
 homepage: https://github.com/mohammed/flutter_mpv.git
 repository: https://github.com/mohammed/flutter_mpv.git
 

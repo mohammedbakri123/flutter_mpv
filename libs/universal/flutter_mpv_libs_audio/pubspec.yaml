@@ -1,6 +1,6 @@
 name: flutter_mpv_libs_audio
 description: package:flutter_mpv audio (only) playback native libraries for all platforms.
-version: 1.0.8
+version: 1.0.9
 homepage: https://github.com/mohammed/flutter_mpv.git
 repository: https://github.com/mohammed/flutter_mpv.git
 

@@ -1,3 +1,11 @@
+## 2.0.3
+
+- chore: depend on flutter_mpv ^1.2.8
+
+## 2.0.2
+
+- chore: pin flutter_mpv dependency to ^1.2.6
+
 ## 2.0.1
 
 - fix: flutter 3.38.x crash
