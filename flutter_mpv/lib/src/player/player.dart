@@ -32,7 +32,7 @@ import 'package:flutter_mpv/src/player/platform_player.dart';
 /// Call [dispose] to free the allocated resources back to the system.
 ///
 /// ```dart
-/// import 'package:flutter_mpv/media_kit.dart';
+/// import 'package:flutter_mpv/flutter_mpv.dart';
 ///
 /// FlutterMpv.ensureInitialized();
 ///

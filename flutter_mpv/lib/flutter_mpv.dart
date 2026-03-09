@@ -6,7 +6,7 @@
 
 // ignore_for_file: camel_case_types
 
-export 'package:flutter_mpv/src/media_kit.dart';
+export 'package:flutter_mpv/src/flutter_mpv.dart';
 
 export 'package:flutter_mpv/src/models/audio_device.dart';
 export 'package:flutter_mpv/src/models/audio_params.dart';
@@ -26,5 +26,6 @@ export 'package:flutter_mpv/src/player/platform_player.dart';
 export 'package:flutter_mpv/src/player/video_performance_presets.dart';
 export 'package:flutter_mpv/src/player/player.dart';
 
-export 'package:flutter_mpv/src/player/native/player/player.dart' show NativePlayer;
+export 'package:flutter_mpv/src/player/native/player/player.dart'
+    show NativePlayer;
 export 'package:flutter_mpv/src/player/web/player/player.dart' show WebPlayer;

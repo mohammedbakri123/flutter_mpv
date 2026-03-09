@@ -1062,15 +1062,13 @@ class MyApp extends StatelessWidget {
 
 | Preset | Best For | Performance | Quality | Battery Impact |
 |--------|----------|-------------|---------|----------------|
-| `VideoPerformancePresets.balanced` | General purpose, most apps | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | Medium |
-| `VideoPerformancePresets.highQuality` | High-end devices, quality-focused apps | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | High |
-| `VideoPerformancePresets.lowEndDevice` | Older devices, budget phones | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | Low |
-| `VideoPerformancePresets.fastSeeking` | Apps with frequent seeking | ⭐⭐⭐⭐ | ⭐⭐⭐ | Medium |
-| `VideoPerformancePresets.streaming` | Online video streaming | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | Medium |
-| `VideoPerformancePresets.smoothMotion` | Sports, action videos | ⭐⭐⭐ | ⭐⭐⭐⭐ | High |
-| `VideoPerformancePresets.softwareDecoding` | Debugging, compatibility issues | ⭐⭐ | ⭐⭐⭐ | High |
-| `VideoPerformancePresets.qualityFirst` | Professional video apps | ⭐⭐ | ⭐⭐⭐⭐⭐ | Very High |
-| `VideoPerformancePresets.animation` | Anime, cartoons, animated content | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | Medium |
+| `VideoPerformancePresets.powerSaver` | Older devices, battery saving, thermal throttling | ⭐⭐⭐⭐⭐ | ⭐⭐ | Low |
+| `VideoPerformancePresets.balanced` | General purpose, most apps | ⭐⭐⭐⭐ | ⭐⭐⭐ | Medium |
+| `VideoPerformancePresets.instantSeeking` | Local files, scrubbing, preview timelines | ⭐⭐⭐⭐⭐ | ⭐⭐ | Medium |
+| `VideoPerformancePresets.quality` | High-end devices, sharper local playback | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | High |
+| `VideoPerformancePresets.smoothMotion` | Sports, action, 24fps movie smoothing | ⭐⭐ | ⭐⭐⭐⭐ | Very High |
+| `VideoPerformancePresets.streaming` | Online video streaming | ⭐⭐⭐⭐ | ⭐⭐⭐ | Medium |
+| `VideoPerformancePresets.softwareDecoding` | Debugging, compatibility issues | ⭐⭐ | ⭐⭐ | High |
 
 ### Video Performance Configuration
 

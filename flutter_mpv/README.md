@@ -146,7 +146,7 @@ A quick usage example.
 // * media_kit_libs_video
 import 'package:flutter/material.dart';
 
-import 'package:media_kit/media_kit.dart';                      // Provides [Player], [Media], [Playlist] etc.
+import 'package:flutter_mpv/flutter_mpv.dart';                  // Provides [Player], [Media], [Playlist] etc.
 import 'package:media_kit_video/media_kit_video.dart';          // Provides [VideoController] & [Video] etc.
 
 void main() {

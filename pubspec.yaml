@@ -1,4 +1,4 @@
-name: media_kit_workspace
+name: flutter_mpv_workspace
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

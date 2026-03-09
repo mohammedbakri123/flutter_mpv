@@ -15,7 +15,7 @@ import 'package:flutter_mpv/src/models/audio_params.dart';
 import 'package:flutter_mpv/src/models/video_params.dart';
 import 'package:flutter_mpv/src/models/playlist_mode.dart';
 
-import 'package:flutter_mpv/src/media_kit.dart';
+import 'package:flutter_mpv/src/flutter_mpv.dart';
 import 'package:flutter_mpv/src/player/player.dart';
 import 'package:flutter_mpv/src/player/platform_player.dart';
 import 'package:flutter_mpv/src/player/web/player/player.dart';
@@ -25,7 +25,7 @@ import '../../common/sources.dart';
 
 void main() {
   setUp(() async {
-    MediaKit.ensureInitialized();
+    FlutterMpv.ensureInitialized();
 
     await sources.prepare();
 

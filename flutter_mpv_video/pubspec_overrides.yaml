@@ -1,4 +1,4 @@
 # melos_managed_dependency_overrides: flutter_mpv
 dependency_overrides:
   flutter_mpv:
-    path: ../media_kit
+    path: ../flutter_mpv

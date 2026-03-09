@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
 
   flutter_mpv:
-    path: ../media_kit
+    path: ../flutter_mpv
   flutter_mpv_video:
     path: ../flutter_mpv_video
   media_kit_libs_video:
