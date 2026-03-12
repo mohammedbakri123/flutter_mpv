@@ -100,6 +100,7 @@ import 'package:flutter_mpv/src/player/platform_player.dart';
 ///       hardwareDecoding: 'auto',    // Enable hardware decoding
 ///       scaler: 'bicubic',           // Better quality scaling
 ///       frameDropping: 'decoder',    // Balanced frame dropping
+///       instantSeeking: true,        // Fast local scrubbing with this config
 ///     ),
 ///   ),
 /// );

@@ -742,6 +742,20 @@ class VideoPerformanceConfiguration {
   /// See: https://mpv.io/manual/master/#options-hr-seek
   final String? fastSeek;
 
+  /// Enable instant-seeking behavior on top of the current configuration.
+  ///
+  /// This mode is intended for local scrubbing, thumbnails, previews, and
+  /// repeated seek jumps. It applies a small set of seek-focused overrides
+  /// without forcing you to replace the rest of your playback preset.
+  ///
+  /// Typical changes include:
+  /// - preferring keyframe seeking over precise seek
+  /// - allowing framedrop while seeking
+  /// - increasing back-buffering for repeated jumps
+  ///
+  /// Default: `false`
+  final bool instantSeeking;
+
   /// {@macro video_performance_configuration}
   const VideoPerformanceConfiguration({
     this.hardwareDecoding,
@@ -771,6 +785,7 @@ class VideoPerformanceConfiguration {
     this.hwdecCodecs,
     this.hrSeekFramedrop,
     this.fastSeek,
+    this.instantSeeking = false,
   });
 }
 

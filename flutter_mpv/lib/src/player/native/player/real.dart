@@ -2569,6 +2569,20 @@ class NativePlayer extends PlatformPlayer {
         if (video.fastSeek != null && video.hrSeek == null) {
           properties['hr-seek'] = video.fastSeek! == 'yes' ? 'no' : 'yes';
         }
+
+        if (video.instantSeeking) {
+          properties.addAll({
+            'hr-seek': 'no',
+            'hr-seek-framedrop': 'yes',
+            'seek-to-file-pos': 'yes',
+            'index-mode': 'both',
+            'cache': 'yes',
+            if (video.optimizeForLocalFiles) 'demuxer-readahead-secs': '0',
+            if (video.demuxerMaxBackBytes == null)
+              'demuxer-max-back-bytes': '${configuration.bufferSize * 2}',
+            if (video.cacheBack == null) 'cache-back': '256M',
+          });
+        }
       }
 
       if (test) {

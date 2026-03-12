@@ -89,6 +89,9 @@ class VideoPerformancePresets {
   /// This preset is built for scrubbing, previews, and repeated jumps.
   /// It favors responsiveness over image quality and seek precision.
   ///
+  /// If you want the same behavior with another preset, prefer setting
+  /// `instantSeeking: true` in your own [VideoPerformanceConfiguration].
+  ///
   /// Features:
   /// - Hardware decoding (auto)
   /// - Aggressive frame dropping during seek
@@ -112,12 +115,10 @@ class VideoPerformancePresets {
     cache: 'yes',
     cacheSecs: 8,
     cacheBack: '256M',
-    hrSeek: 'no',
-    hrSeekFramedrop: 'yes',
-    fastSeek: 'yes',
     fastDecoding: 'yes',
     openglPbo: 'yes',
     videoLatencyHacks: 'yes',
+    instantSeeking: true,
   );
 
   /// Quality-first playback for capable devices.
