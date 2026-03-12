@@ -55,38 +55,18 @@ abstract class AndroidHelper {
             'av_jni_set_java_vm',
           );
         } catch (_) {}
-        try {
-          _FlutterMpvAndroidHelperGetJavaVM =
-              libmediakitandroidhelper?.lookupFunction<
-                  FlutterMpvAndroidHelperGetJavaVMCXX,
-                  FlutterMpvAndroidHelperGetJavaVMDart>(
-            'FlutterMpvAndroidHelperGetJavaVM',
-          );
-        } catch (_) {}
-        try {
-          FlutterMpvAndroidHelperGetFilesDir =
-              libmediakitandroidhelper?.lookupFunction<
-                  FlutterMpvAndroidHelperGetFilesDirCXX,
-                  FlutterMpvAndroidHelperGetFilesDirDart>(
-            'FlutterMpvAndroidHelperGetFilesDir',
-          );
-        } catch (_) {}
-        try {
-          _FlutterMpvAndroidHelperIsEmulator =
-              libmediakitandroidhelper?.lookupFunction<
-                  FlutterMpvAndroidHelperIsEmulatorCXX,
-                  FlutterMpvAndroidHelperIsEmulatorDart>(
-            'FlutterMpvAndroidHelperIsEmulator',
-          );
-        } catch (_) {}
-        try {
-          _FlutterMpvAndroidHelperGetAPILevel =
-              libmediakitandroidhelper?.lookupFunction<
-                  FlutterMpvAndroidHelperGetAPILevelCXX,
-                  FlutterMpvAndroidHelperGetAPILevelDart>(
-            'FlutterMpvAndroidHelperGetAPILevel',
-          );
-        } catch (_) {}
+        _FlutterMpvAndroidHelperGetJavaVM = _lookupJavaVm(
+          libmediakitandroidhelper,
+        );
+        FlutterMpvAndroidHelperGetFilesDir = _lookupFilesDir(
+          libmediakitandroidhelper,
+        );
+        _FlutterMpvAndroidHelperIsEmulator = _lookupIsEmulator(
+          libmediakitandroidhelper,
+        );
+        _FlutterMpvAndroidHelperGetAPILevel = _lookupApiLevel(
+          libmediakitandroidhelper,
+        );
 
         if ((_mpv_lavc_set_java_vm ?? _av_jni_set_java_vm) == null) {
           throw UnsupportedError(
@@ -158,11 +138,78 @@ abstract class AndroidHelper {
 
   static av_jni_set_java_vmDart? _av_jni_set_java_vm;
   static mpv_lavc_set_java_vmDart? _mpv_lavc_set_java_vm;
-  static FlutterMpvAndroidHelperGetJavaVMDart? _FlutterMpvAndroidHelperGetJavaVM;
-  static FlutterMpvAndroidHelperGetFilesDirDart? FlutterMpvAndroidHelperGetFilesDir;
-  static FlutterMpvAndroidHelperIsEmulatorDart? _FlutterMpvAndroidHelperIsEmulator;
+  static FlutterMpvAndroidHelperGetJavaVMDart?
+      _FlutterMpvAndroidHelperGetJavaVM;
+  static FlutterMpvAndroidHelperGetFilesDirDart?
+      FlutterMpvAndroidHelperGetFilesDir;
+  static FlutterMpvAndroidHelperIsEmulatorDart?
+      _FlutterMpvAndroidHelperIsEmulator;
   static FlutterMpvAndroidHelperGetAPILevelDart?
       _FlutterMpvAndroidHelperGetAPILevel;
+
+  static FlutterMpvAndroidHelperGetJavaVMDart? _lookupJavaVm(
+    DynamicLibrary? library,
+  ) {
+    if (library == null) return null;
+    for (final symbol in const [
+      'FlutterMpvAndroidHelperGetJavaVM',
+      'MediaKitAndroidHelperGetJavaVM',
+    ]) {
+      try {
+        return library.lookupFunction<FlutterMpvAndroidHelperGetJavaVMCXX,
+            FlutterMpvAndroidHelperGetJavaVMDart>(symbol);
+      } catch (_) {}
+    }
+    return null;
+  }
+
+  static FlutterMpvAndroidHelperGetFilesDirDart? _lookupFilesDir(
+    DynamicLibrary? library,
+  ) {
+    if (library == null) return null;
+    for (final symbol in const [
+      'FlutterMpvAndroidHelperGetFilesDir',
+      'MediaKitAndroidHelperGetFilesDir',
+    ]) {
+      try {
+        return library.lookupFunction<FlutterMpvAndroidHelperGetFilesDirCXX,
+            FlutterMpvAndroidHelperGetFilesDirDart>(symbol);
+      } catch (_) {}
+    }
+    return null;
+  }
+
+  static FlutterMpvAndroidHelperIsEmulatorDart? _lookupIsEmulator(
+    DynamicLibrary? library,
+  ) {
+    if (library == null) return null;
+    for (final symbol in const [
+      'FlutterMpvAndroidHelperIsEmulator',
+      'MediaKitAndroidHelperIsEmulator',
+    ]) {
+      try {
+        return library.lookupFunction<FlutterMpvAndroidHelperIsEmulatorCXX,
+            FlutterMpvAndroidHelperIsEmulatorDart>(symbol);
+      } catch (_) {}
+    }
+    return null;
+  }
+
+  static FlutterMpvAndroidHelperGetAPILevelDart? _lookupApiLevel(
+    DynamicLibrary? library,
+  ) {
+    if (library == null) return null;
+    for (final symbol in const [
+      'FlutterMpvAndroidHelperGetAPILevel',
+      'MediaKitAndroidHelperGetAPILevel',
+    ]) {
+      try {
+        return library.lookupFunction<FlutterMpvAndroidHelperGetAPILevelCXX,
+            FlutterMpvAndroidHelperGetAPILevelDart>(symbol);
+      } catch (_) {}
+    }
+    return null;
+  }
 }
 
 typedef av_jni_set_java_vmCXX = Int32 Function(Pointer<Void> vm);

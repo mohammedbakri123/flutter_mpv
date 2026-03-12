@@ -1,3 +1,7 @@
+## 1.2.10
+
+- fix(android): support both MediaKitAndroidHelper and FlutterMpvAndroidHelper native symbol names
+
 ## 1.2.8
 
 - doc: fix missing advanced settings in README

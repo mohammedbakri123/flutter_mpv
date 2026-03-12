@@ -7,43 +7,34 @@
  */
 package com.mohammed.mediakitandroidhelper;
 
-import android.net.Uri;
 import android.content.Context;
 import androidx.annotation.Keep;
 
-import java.io.FileNotFoundException;
+import com.alexmercerind.mediakitandroidhelper.MediaKitAndroidHelper;
 
 @Keep
 public class FlutterMpvAndroidHelper {
-    static {
-        System.loadLibrary("mediakitandroidhelper");
+    public static long newGlobalObjectRef(Object obj) {
+        return MediaKitAndroidHelper.newGlobalObjectRef(obj);
     }
 
-    // Store android.content.Context for access in openFileDescriptor.
-    private static Context applicationContext = null;
+    public static void deleteGlobalObjectRef(long ref) {
+        MediaKitAndroidHelper.deleteGlobalObjectRef(ref);
+    }
 
-    public static native long newGlobalObjectRef(Object obj);
-
-    public static native void deleteGlobalObjectRef(long ref);
-
-    public static native String copyAssetToFilesDir(String assetName);
-
-    private static native void setApplicationContextNative(Context context);
+    public static String copyAssetToFilesDir(String assetName) {
+        return MediaKitAndroidHelper.copyAssetToFilesDir(assetName);
+    }
 
     public static void setApplicationContextJava(Context context) {
-        applicationContext = context;
-        setApplicationContextNative(context);
+        MediaKitAndroidHelper.setApplicationContextJava(context);
     }
 
-    public static native int openFileDescriptorNative(String uri);
+    public static int openFileDescriptorNative(String uri) {
+        return MediaKitAndroidHelper.openFileDescriptorNative(uri);
+    }
 
     public static int openFileDescriptorJava(String uri) {
-        try {
-            final Uri object = Uri.parse(uri);
-            return applicationContext.getContentResolver().openFileDescriptor(object, "r").detachFd();
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return -1;
-        }
+        return MediaKitAndroidHelper.openFileDescriptorJava(uri);
     }
 }

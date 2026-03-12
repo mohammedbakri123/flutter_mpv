@@ -1,3 +1,7 @@
+## 1.3.10
+
+- fix(android): add helper compatibility wrapper for published helper binaries
+
 ## 1.3.9
 
 - build: bump dependencies

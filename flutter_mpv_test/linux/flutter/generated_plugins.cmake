@@ -3,8 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  flutter_mpv_video
   flutter_mpv_libs_linux
+  flutter_mpv_video
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
