@@ -1,3 +1,7 @@
+## 1.2.11
+
+- feat(video): add `instantSeeking` mode so seek behavior can be combined with other performance settings
+
 ## 1.2.10
 
 - fix(android): support both MediaKitAndroidHelper and FlutterMpvAndroidHelper native symbol names

@@ -62,16 +62,10 @@ class AndroidVideoController extends PlatformVideoController {
           // ORDER IS IMPORTANT.
           'android-surface-size': androidSurfaceSizeValue,
           'wid': widValue,
+          'vid': vidValue,
           'vo': voValue,
-          // It is important to re-initialize --vid in-case of --vo=mediacodec_embed.
-          // Not doing so causes error "Could not open codec." & video never gets rendered.
-          if (configuration.vo == 'mediacodec_embed') 'vid': vidValue,
         },
       );
-      // Instead of seeking to the start (Duration.zero), seek to the current playback position
-      // without jumping the user to the start of the media.
-      final currentPosition = player.state.position;
-      await player.seek(currentPosition);
     });
   }
 
@@ -121,10 +115,6 @@ class AndroidVideoController extends PlatformVideoController {
           width.toDouble(),
           height.toDouble(),
         );
-
-        if (!waitUntilFirstFrameRenderedCompleter.isCompleted) {
-          waitUntilFirstFrameRenderedCompleter.complete();
-        }
       }),
     );
   }
@@ -191,30 +181,6 @@ class AndroidVideoController extends PlatformVideoController {
       },
     );
 
-    // Wait for the surface to be created and wid to be available
-    // This is critical for video rendering on Android
-    if (controller.wid.value == null || controller.wid.value == 0) {
-      final completer = Completer<void>();
-      void widListener() {
-        if (controller.wid.value != null && controller.wid.value != 0) {
-          controller.wid.removeListener(widListener);
-          if (!completer.isCompleted) {
-            completer.complete();
-          }
-        }
-      }
-      controller.wid.addListener(widListener);
-      
-      // Timeout after 10 seconds
-      await completer.future.timeout(
-        const Duration(seconds: 10),
-        onTimeout: () {
-          debugPrint('flutter_mpv: Timeout waiting for surface creation');
-          controller.wid.removeListener(widListener);
-        },
-      );
-    }
-
     await controller.setProperties(
       {
         // It is necessary to set vo=null here to avoid SIGSEGV, --wid must be assigned before vo=gpu is set.
@@ -271,53 +237,61 @@ class AndroidVideoController extends PlatformVideoController {
   static final _controllers = HashMap<int, AndroidVideoController>();
 
   /// [MethodChannel] for invoking platform specific native implementation.
-  static final _channel =
-      const MethodChannel('com.mohammed/flutter_mpv_video')
-        ..setMethodCallHandler(
-          (MethodCall call) async {
-            try {
-              debugPrint(call.method.toString());
-              debugPrint(call.arguments.toString());
-              switch (call.method) {
-                case 'VideoOutput.Resize':
-                  {
-                    // Notify about updated texture ID & [Rect].
-                    final int handle = call.arguments['handle'];
-                    final Rect rect = Rect.fromLTWH(
-                      call.arguments['rect']['left'] * 1.0,
-                      call.arguments['rect']['top'] * 1.0,
-                      call.arguments['rect']['width'] * 1.0,
-                      call.arguments['rect']['height'] * 1.0,
-                    );
-                    final int id = call.arguments['id'];
-                    final int wid = call.arguments['wid'];
-                    _controllers[handle]?.rect.value = rect;
-                    _controllers[handle]?.id.value = id;
-                    _controllers[handle]?.wid.value = wid;
-                    break;
-                  }
-                case 'VideoOutput.WaitUntilFirstFrameRenderedNotify':
-                  {
-                    // Notify about updated texture ID & [Rect].
-                    final int handle = call.arguments['handle'];
-                    debugPrint(handle.toString());
-                    // Notify about the first frame being rendered.
-                    final completer = _controllers[handle]
-                        ?.waitUntilFirstFrameRenderedCompleter;
-                    if (!(completer?.isCompleted ?? true)) {
-                      completer?.complete();
-                    }
-                    break;
-                  }
-                default:
-                  {
-                    break;
-                  }
+  static final _channel = const MethodChannel('com.mohammed/flutter_mpv_video')
+    ..setMethodCallHandler(
+      (MethodCall call) async {
+        try {
+          debugPrint(call.method.toString());
+          debugPrint(call.arguments.toString());
+          switch (call.method) {
+            case 'VideoOutput.Resize':
+              {
+                // Notify about updated texture ID & [Rect].
+                final int handle = call.arguments['handle'];
+                final Rect rect = Rect.fromLTWH(
+                  call.arguments['rect']['left'] * 1.0,
+                  call.arguments['rect']['top'] * 1.0,
+                  call.arguments['rect']['width'] * 1.0,
+                  call.arguments['rect']['height'] * 1.0,
+                );
+                final int id = call.arguments['id'];
+                final int wid = call.arguments['wid'];
+                _controllers[handle]?.rect.value = rect;
+                _controllers[handle]?.id.value = id;
+                _controllers[handle]?.wid.value = wid;
+                final controller = _controllers[handle];
+                if (controller != null &&
+                    wid != 0 &&
+                    rect.width > 0 &&
+                    rect.height > 0 &&
+                    !controller
+                        .waitUntilFirstFrameRenderedCompleter.isCompleted) {
+                  controller.waitUntilFirstFrameRenderedCompleter.complete();
+                }
+                break;
               }
-            } catch (exception, stacktrace) {
-              debugPrint(exception.toString());
-              debugPrint(stacktrace.toString());
-            }
-          },
-        );
+            case 'VideoOutput.WaitUntilFirstFrameRenderedNotify':
+              {
+                // Notify about updated texture ID & [Rect].
+                final int handle = call.arguments['handle'];
+                debugPrint(handle.toString());
+                // Notify about the first frame being rendered.
+                final completer =
+                    _controllers[handle]?.waitUntilFirstFrameRenderedCompleter;
+                if (!(completer?.isCompleted ?? true)) {
+                  completer?.complete();
+                }
+                break;
+              }
+            default:
+              {
+                break;
+              }
+          }
+        } catch (exception, stacktrace) {
+          debugPrint(exception.toString());
+          debugPrint(stacktrace.toString());
+        }
+      },
+    );
 }
