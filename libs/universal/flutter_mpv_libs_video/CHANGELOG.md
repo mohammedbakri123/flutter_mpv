@@ -1,3 +1,7 @@
+## 1.0.11
+
+- chore: update published repository metadata
+
 ## 1.0.10
 
 - Rename lib/media_kit_libs_video.dart to lib/flutter_mpv_libs_video.dart

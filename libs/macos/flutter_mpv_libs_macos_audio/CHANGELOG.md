@@ -1,3 +1,7 @@
+## 1.1.6
+
+- chore: update published repository metadata
+
 ## 1.1.5
 
 - build: bump dependencies

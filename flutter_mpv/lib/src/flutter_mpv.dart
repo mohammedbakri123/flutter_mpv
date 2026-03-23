@@ -46,7 +46,7 @@ abstract class FlutterMpv {
         'This indicates that one or more required dependencies could not be located.\n'
         '\n'
         'Refer to "Installation" section of the README for further details:\n'
-        'GitHub  : https://github.com/media-kit/media-kit#installation\n'
+        'GitHub  : https://github.com/mohammedbakri123/MPx-Player#installation\n'
         'pub.dev : https://pub.dev/packages/flutter_mpv#installation\n'
         '\n'
         'TIP: Copy-paste required packages from the above link to your pubspec.yaml.\n'

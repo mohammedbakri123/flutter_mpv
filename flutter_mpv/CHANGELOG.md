@@ -1,3 +1,8 @@
+## 1.2.12
+
+- fix(native): suppress noisy cache-status log messages from player logs
+- docs: update app integration guidance and repository metadata
+
 ## 1.2.11
 
 - feat(video): add `instantSeeking` mode so seek behavior can be combined with other performance settings

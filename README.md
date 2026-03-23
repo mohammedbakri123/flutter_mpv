@@ -2,9 +2,14 @@
 
 #### A cross-platform video player & audio player for Flutter & Dart with advanced performance controls.
 
-**This is a fork of [flutter_mpv](https://github.com/media-kit/media-kit) with additional video performance configuration options.**
+Production-ready `flutter_mpv` packages for apps that need mpv-based playback with extra video performance controls.
+
+- Repository: https://github.com/mohammedbakri123/MPx-Player
+- Published packages can be added directly from `pub.dev` to your app.
 
 ## Installation
+
+Add the published packages to your app's `pubspec.yaml`. No Git dependency or path override is required.
 
 flutter_mpv is split into multiple packages to improve modularity & reduce bundle size.
 
@@ -12,16 +17,16 @@ flutter_mpv is split into multiple packages to improve modularity & reduce bundl
 
 ```yaml
 dependencies:
-  flutter_mpv: ^1.2.9 # Primary package.
-  flutter_mpv_video: ^2.0.3 # For video rendering.
-  flutter_mpv_libs_video: ^1.0.10 # Native video dependencies.
+  flutter_mpv: ^1.2.12 # Primary package.
+  flutter_mpv_video: ^2.0.4 # For video rendering.
+  flutter_mpv_libs_video: ^1.0.11 # Native video dependencies.
 ```
 
 #### For apps that need audio playback:
 
 ```yaml
 dependencies:
-  flutter_mpv: ^1.2.9 # Primary package.
+  flutter_mpv: ^1.2.12 # Primary package.
   flutter_mpv_libs_audio: ^1.0.10 # Native audio dependencies.
 ```
 
@@ -29,6 +34,7 @@ dependencies:
 
 - The video libraries should be selected if both video & audio support is needed.
 - The `flutter_mpv_libs_video` & `flutter_mpv_libs_audio` packages should not be mixed.
+- After editing `pubspec.yaml`, run `flutter pub get` in your app.
 - The performance in ["Release" mode](https://docs.flutter.dev/testing/build-modes#release) is substantially higher than in ["Debug" mode](https://docs.flutter.dev/testing/build-modes#debug).
 - [Enable --split-per-abi](https://docs.flutter.dev/deployment/android#what-is-a-fat-apk) or [use app bundle (instead of APK)](https://docs.flutter.dev/deployment/android#when-should-i-build-app-bundles-versus-apks) on Android.
 
@@ -176,7 +182,7 @@ void main() {
 
 The method also has some optional arguments to customize the global behavior. To handle any initialization errors, this may be surrounded by `try`/`catch`.
 
-**Note:** For backward compatibility, `FlutterMpv.ensureInitialized()` still works but is deprecated. Use `FlutterMpv.ensureInitialized()` instead.
+**Note:** For backward compatibility, the deprecated `MediaKit` alias still exists, but `FlutterMpv.ensureInitialized()` is the recommended API.
 
 ### Create a `Player`
 
@@ -1779,7 +1785,7 @@ VideoPerformanceConfiguration(
 This guide follows a tutorial-like structure & covers nearly all features that flutter*mpv offers. However, it is \_not complete* by any means. You are free to improve this page & add more documentation, which newcomers may find helpful. The following places can help you learn more:
 
 - [API reference](https://pub.dev/documentation/flutter_mpv/latest/flutter_mpv/flutter_mpv-library.html) can be helpful for diving into deeper specifics.
-- [source-code of the demo application](https://github.com/media-kit/media-kit/tree/main/flutter_mpv_test/lib/tests) offers some complete code samples.
+- [source-code of the demo application](https://github.com/mohammedbakri123/MPx-Player/tree/main/flutter_mpv_test/lib/tests) offers some complete code samples.
 - In-code comments & docstrings happen to be the most updated source of knowledge.
 
 ## Goals
@@ -1809,7 +1815,7 @@ flutter_mpv is a library for Flutter & Dart which **provides video & audio playb
     - Avoids separate maintenance of native implementation for each platform.
   - Only video embedding code is platform-specific & part of separate package.
 
-You may see project's [architecture](https://github.com/media-kit/media-kit#architecture) & [implementation](https://github.com/media-kit/media-kit#implementation) details for further information.
+You may see the project's [architecture](https://github.com/mohammedbakri123/MPx-Player#architecture) & [implementation](https://github.com/mohammedbakri123/MPx-Player#implementation) details for further information.
 
 The project aims to meet demands of the community, this includes:
 

@@ -1,3 +1,7 @@
+## 1.3.11
+
+- chore: update published repository metadata
+
 ## 1.3.10
 
 - fix(android): add helper compatibility wrapper for published helper binaries

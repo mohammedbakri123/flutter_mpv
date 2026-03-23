@@ -1,3 +1,7 @@
+## 1.1.5
+
+- chore: update published repository metadata
+
 ## 1.1.4
 
 - fix: DTS support ([#437](https://github.com/media-kit/media-kit/issues/437))

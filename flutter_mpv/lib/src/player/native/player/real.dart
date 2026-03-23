@@ -2130,6 +2130,9 @@ class NativePlayer extends PlatformPlayer {
       final prefix = eventLogMessage.prefix.cast<Utf8>().toDartString().trim();
       final level = eventLogMessage.level.cast<Utf8>().toDartString().trim();
       final text = eventLogMessage.text.cast<Utf8>().toDartString().trim();
+      if (_isIgnoredLogMessage(text)) {
+        return;
+      }
       if (!logController.isClosed) {
         logController.add(
           PlayerLog(
@@ -2678,6 +2681,13 @@ class NativePlayer extends PlatformPlayer {
         ),
       );
     }
+  }
+
+  bool _isIgnoredLogMessage(String text) {
+    final normalized = text.trim().toLowerCase();
+    return normalized.startsWith('using cached') ||
+        normalized.startsWith('using cache') ||
+        normalized.startsWith('using catched');
   }
 
   int _asyncRequestNumber = 0;

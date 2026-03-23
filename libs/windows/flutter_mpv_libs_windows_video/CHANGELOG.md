@@ -1,3 +1,7 @@
+## 1.0.13
+
+- chore: update published repository metadata
+
 ## 1.0.12
 
 - feat: support ARM64

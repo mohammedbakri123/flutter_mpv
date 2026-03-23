@@ -1,8 +1,8 @@
 name: flutter_mpv_libs_windows_audio
 description: Windows package providing audio (only) native libraries for package:flutter_mpv.
-version: 1.0.10
-homepage: https://github.com/mohammed/flutter_mpv.git
-repository: https://github.com/mohammed/flutter_mpv.git
+version: 1.0.11
+homepage: https://github.com/mohammedbakri123/MPx-Player
+repository: https://github.com/mohammedbakri123/MPx-Player
 
 environment:
   sdk: ">=2.17.0 <4.0.0"

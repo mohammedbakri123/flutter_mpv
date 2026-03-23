@@ -1,3 +1,7 @@
+## 1.2.2
+
+- chore: update published repository metadata
+
 ## 1.2.1
 
  - **FIX**: correct minimum required CMake version.

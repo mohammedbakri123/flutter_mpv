@@ -1,3 +1,7 @@
+## 1.1.5
+
+- chore: update published repository metadata
+
 ## 1.1.4
 
 - feat: AV1 support ([#429](https://github.com/media-kit/media-kit/issues/429))

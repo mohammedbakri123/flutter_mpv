@@ -1,3 +1,8 @@
+## 2.0.4
+
+- chore: depend on flutter_mpv ^1.2.12
+- docs: update package README for published app integration
+
 ## 2.0.3
 
 - chore: depend on flutter_mpv ^1.2.8

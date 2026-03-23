@@ -1,8 +1,21 @@
-# [package:flutter_mpv_video](https://github.com/media-kit/media-kit)
+# flutter_mpv_video
 
-[![](https://img.shields.io/discord/1079685977523617792?color=33cd57&label=Discord&logo=discord&logoColor=discord)](https://discord.gg/h7qf2R9n57) [![Github Actions](https://github.com/media-kit/media-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/media-kit/media-kit/actions/workflows/ci.yml)
+Native video rendering package for `flutter_mpv`.
 
-Native implementation for video playback in [package:flutter_mpv](https://pub.dev/packages/flutter_mpv).
+- Repository: https://github.com/mohammedbakri123/MPx-Player
+- Package: https://pub.dev/packages/flutter_mpv_video
+- Use it together with `flutter_mpv` and `flutter_mpv_libs_video` in your app.
+
+## Installation
+
+```yaml
+dependencies:
+  flutter_mpv: ^1.2.12
+  flutter_mpv_video: ^2.0.4
+  flutter_mpv_libs_video: ^1.0.11
+```
+
+Then run `flutter pub get` and initialize `FlutterMpv` before creating a `Player`.
 
 ## License
 
